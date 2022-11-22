@@ -1,12 +1,19 @@
 package com.example.beehive
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 
 class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
+    lateinit var btnToLogin: Button
+     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //tes
+        btnToLogin = findViewById(R.id.btnToLogin)
+         btnToLogin.setOnClickListener {
+             val intent = Intent(this,LoginActivity::class.java)
+             startActivity(intent)
+         }
     }
 }

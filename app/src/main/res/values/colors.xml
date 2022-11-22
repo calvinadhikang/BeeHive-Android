@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+<!-- custom pallete  -->
+    <color name="textboxcolor">#A97EA383</color>
+    <color name="lightyellow">#F4EEA9</color>
+    <color name="darkyellow">#F0BB62</color>
+    <color name="lightgreen">#519259</color>
+    <color name="darkgreen">#064635</color>
 </resources>
