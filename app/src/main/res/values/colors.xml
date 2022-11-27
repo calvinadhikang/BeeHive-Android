@@ -10,8 +10,13 @@
 
 <!-- custom pallete  -->
     <color name="textboxcolor">#A97EA383</color>
-    <color name="lightyellow">#F4EEA9</color>
-    <color name="darkyellow">#F0BB62</color>
-    <color name="lightgreen">#519259</color>
+    <color name="primary">#519259</color>
+    <color name="secondary">#F0BB62</color>
+    <color name="accent">#F4EEA9</color>
+    <color name="neutral">#E8E1D9</color>
+    <color name="info">#3ABFF8</color>
+    <color name="success">#36D399</color>
+    <color name="warning">#FBBD23</color>
+    <color name="error">#F87272</color>
     <color name="darkgreen">#064635</color>
 </resources>

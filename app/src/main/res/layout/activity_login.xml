@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightyellow"
-    android:backgroundTint="@color/lightyellow"
+    android:background="@color/accent"
     tools:context=".LoginActivity">
 
     <EditText
@@ -90,7 +89,7 @@
         android:layout_height="54dp"
         android:layout_marginStart="52dp"
         android:layout_marginTop="580dp"
-        android:backgroundTint="@color/darkyellow"
+        android:backgroundTint="@color/secondary"
         android:text="Sign In!"
         android:textColor="#3C3535"
         app:layout_constraintStart_toStartOf="parent"
