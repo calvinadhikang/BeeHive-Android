@@ -27,10 +27,8 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lateinit var txtLinkToRegister: TextView
-        lateinit var btnLogin: Button
-        btnLogin = view.findViewById(R.id.btnLogin)
-        txtLinkToRegister = view.findViewById(R.id.txtLinkToRegister)
+        val btnLogin: Button = view.findViewById(R.id.btnLogin)
+        val txtLinkToRegister: TextView = view.findViewById(R.id.txtLinkToRegister)
         txtLinkToRegister.setOnClickListener{
             parentFragmentManager.beginTransaction()
                 .replace(R.id.frMain,RegisterFragment())
