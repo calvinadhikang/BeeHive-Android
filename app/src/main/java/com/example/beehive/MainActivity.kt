@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
          navbarBeforeLogin.setOnNavigationItemSelectedListener {
              return@setOnNavigationItemSelectedListener when(it.itemId){
                  R.id.menu_home->{
+                     swapToFrag(LandingPageFragment(), Bundle())
                      true
                  }
                  R.id.menu_search->{

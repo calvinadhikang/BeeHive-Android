@@ -19,4 +19,5 @@
     <color name="warning">#FBBD23</color>
     <color name="error">#F87272</color>
     <color name="darkgreen">#064635</color>
+    <color name="bg">#E8E8CC</color>
 </resources>
