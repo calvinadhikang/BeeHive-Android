@@ -26,18 +26,13 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        lateinit var txtLinkToLogin:TextView
-        lateinit var btnNextRegister:Button
-        lateinit var btnBackRegister:FloatingActionButton
-        lateinit var cbProceedContinue:CheckBox
-        lateinit var rbBeeworker:RadioButton
-        lateinit var rbFarmer:RadioButton
-        btnNextRegister = view.findViewById(R.id.btnNextRegister)
-        btnBackRegister = view.findViewById(R.id.btnBackRegister)
-        txtLinkToLogin = view.findViewById(R.id.txtLinkToLogin)
-        cbProceedContinue = view.findViewById(R.id.cbProceedContinue)
-        rbBeeworker = view.findViewById(R.id.rbBeeworker)
-        rbFarmer = view.findViewById(R.id.rbFarmer)
+        var btnNextRegister:Button = view.findViewById(R.id.btnNextRegister)
+        var btnBackRegister:FloatingActionButton = view.findViewById(R.id.btnBackRegister)
+        var txtLinkToLogin:TextView = view.findViewById(R.id.txtLinkToLogin)
+        var cbProceedContinue:CheckBox = view.findViewById(R.id.cbProceedContinue)
+        var rbBeeworker:RadioButton = view.findViewById(R.id.rbBeeworker)
+        var rbFarmer:RadioButton = view.findViewById(R.id.rbFarmer)
+        var txtEmailRegister:EditText = view.findViewById(R.id.txtEmailRegister)
 
         btnBackRegister.setOnClickListener{
             parentFragmentManager.beginTransaction()
@@ -50,9 +45,25 @@ class RegisterFragment : Fragment() {
                 .commit()
         }
         btnNextRegister.setOnClickListener {
+            var email:String = txtEmailRegister.text.toString()
+            var role:Int = 0
             if(cbProceedContinue.isChecked){
+                if(email==""){
+                    Toast.makeText(
+                        requireContext(),
+                        "Email harus diisi!", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                if(rbBeeworker.isChecked) role = 2
+                else if(rbFarmer.isChecked) role = 1
+                if(role==0){
+                    Toast.makeText(
+                        requireContext(),
+                        "Harus memilih role!", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.frMain,RegisterFinalFragment())
+                    .replace(R.id.frMain,RegisterFinalFragment(email,role))
                     .commit()
             }else{
                 Toast.makeText(requireContext(),
