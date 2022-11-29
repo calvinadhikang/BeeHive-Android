@@ -34,7 +34,7 @@ class DetailStingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail_sting, container, false)
+        return inflater.inflate(R.layout.fragment_detail_buy_sting, container, false)
     }
 
     companion object {
