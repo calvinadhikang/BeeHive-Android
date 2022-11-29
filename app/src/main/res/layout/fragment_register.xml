@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/accent"
+    android:background="@color/bg"
     tools:context=".RegisterFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -67,7 +67,7 @@
             android:background="@color/textboxcolor"
             android:ems="10"
             android:hint="Email"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:padding="12dp"
             android:textColor="#373434"
             app:layout_constraintStart_toStartOf="parent"
@@ -126,15 +126,15 @@
                 android:textColor="@color/black" />
         </RadioGroup>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <ImageButton
             android:id="@+id/btnBackRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:clickable="true"
             android:src="@drawable/back"
-            app:backgroundTint="@color/accent"
+            app:backgroundTint="@color/bg"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

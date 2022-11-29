@@ -16,7 +16,6 @@ import kotlinx.coroutines.Dispatchers
 class MainActivity : AppCompatActivity() {
     lateinit var navbarBeforeLogin: BottomNavigationView
     lateinit var frMain: FrameLayout
-    val WS_HOST = "https://mhs.sib.stts.edu/k3behive/api"
     lateinit var connectivityObserver: ConnectivityObserver //buat cek network aplikasi
     val coroutine = CoroutineScope(Dispatchers.IO)
      override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
          frMain = findViewById(R.id.frMain)
          navbarBeforeLogin = findViewById(R.id.navbarBeforeLogin)
          VolleyLog.DEBUG = true;
-         swapToFrag(UserBeforeLoginFragment(), Bundle())
+         swapToFrag(LandingPageFragment(), Bundle())
          navbarBeforeLogin.setOnNavigationItemSelectedListener {
              return@setOnNavigationItemSelectedListener when(it.itemId){
                  R.id.menu_home->{

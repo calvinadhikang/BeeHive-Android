@@ -14,16 +14,23 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.beehive.api_config.ApiConfiguration
+import com.example.beehive.api_config.UserDRO
+import com.example.beehive.data.UserRegisterDTO
 import com.google.android.material.datepicker.MaterialDatePicker.Builder.datePicker
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
 import java.nio.charset.Charset
+import java.util.*
 
 
 class RegisterFinalFragment(
     var email:String,
     var role:Int //1 farmer 2 beeworker
 ) : Fragment() {
+    var nameFrag:String = "RegisterFinalFragment"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -41,7 +48,7 @@ class RegisterFinalFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var txtLinkToLogin2:TextView = view.findViewById(R.id.txtLinkToLogin2)
-        var btnBackRegisterFinal:FloatingActionButton = view.findViewById(R.id.btnBackRegisterFinal)
+        var btnBackRegisterFinal:ImageButton = view.findViewById(R.id.btnBackRegisterFinal)
         var btnRegister:Button = view.findViewById(R.id.btnRegister)
         var txtPasswordRegister:EditText = view.findViewById(R.id.txtPasswordRegister)
         var txtConfirmPasswordRegister:EditText = view.findViewById(R.id.txtConfirmPasswordRegister)
@@ -63,12 +70,14 @@ class RegisterFinalFragment(
             var confirm:String = txtConfirmPasswordRegister.text.toString()
             var name:String = txtNameRegister.text.toString()
             val acti = activity as MainActivity
-            val WS_HOST:String = acti.WS_HOST
+            val WS_HOST:String = env.URL
             val day: Int = txtDateRegister.dayOfMonth
             val month: Int = txtDateRegister.month
             val year: Int = txtDateRegister.year
             //2001-02-26 13:43:43
             val dateFormat = "${year}-${month}-${day} 10:10:10"
+            var calendar:Calendar = Calendar.getInstance();
+            var yearNow:Int = calendar.get(Calendar.YEAR);
             if(password==""||confirm==""||name==""){
                 Toast.makeText(requireContext(),
                     "Ada field kosong!", Toast.LENGTH_SHORT).show()
@@ -79,72 +88,65 @@ class RegisterFinalFragment(
                     "Password dan konfirmasi harus sama!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-
+            if(password.length<8){
+                Toast.makeText(requireContext(),
+                        "Panjang password minimal 8 karakter!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if(yearNow-18 < year){
+                Toast.makeText(requireContext(),
+                    "Anda harus berusia minimal 18 tahun!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            var registerTryUser:UserRegisterDTO = UserRegisterDTO(
+                email,password,name,role,dateFormat
+            )
             try{
-                val requestBody = "email=${email}&password=${password}&name=${name}" +
-                        "&role=${role}&birthday=${dateFormat}"
-
-                val strReq = object: StringRequest(
-                    Method.POST,
-                    "$WS_HOST/register",
-                    Response.Listener {
-                        val obj: JSONObject = JSONObject(it)
-                        val objData: JSONObject = obj.getJSONObject("data")
-                        Log.i("REGISTERRESULT",obj.getString("message"))
-                        Toast.makeText(requireContext(),
-                            obj.getString("message"), Toast.LENGTH_SHORT).show()
-                    },
-                    Response.ErrorListener {
-                        Log.e("RESPONSEERROR",it.message.toString())
-//                        Toast.makeText(requireContext(), "Fetch Error for ${emails}", Toast.LENGTH_SHORT).show()
-                    }
-                ){
-                    override fun getBody(): ByteArray {
-                        return requestBody.toByteArray(Charset.defaultCharset())
-                    }
-
-                    override fun parseNetworkError(volleyError: VolleyError?): VolleyError {
-
-                        val responseBody = String(volleyError!!.networkResponse.data,
-                            charset("utf-8"))
-                        val data = JSONObject(responseBody)
-
-                        val errorCode:Int = volleyError!!.networkResponse.statusCode
-                        var message = data.getString("message")
-                        Log.e("errormessage",message)
-                        Looper.prepare()
-                        Toast.makeText(requireContext(),
-                            message, Toast.LENGTH_SHORT).show()
-                        return super.parseNetworkError(volleyError)
-                    }
-                    override fun parseNetworkResponse(response: NetworkResponse?): Response<String> {
-                        if(response!=null) {
-                            Log.d("STTSCODE", response.statusCode.toString())
-                            val responseBody = String(response.data,
-                                charset("utf-8"))
-                            val data = JSONObject(responseBody)
-                            var message = data.getString("message")
-                            var isSuccess = data.getBoolean("success")
-                            if(isSuccess){
-                                var datax = data.getJSONObject("data")
-//                                var exceptionEmail:String? = datax.getString("EMAIL")
-//                                var exceptionNama:String? = datax.getString("NAMA")
-                                if(response.statusCode==200){
-                                    Looper.prepare()
+                val client = ApiConfiguration.getApiService().register(userRegisterData = registerTryUser)
+                client.enqueue(object: Callback<UserDRO> {
+                    override fun onResponse(call: Call<UserDRO>, response: retrofit2.Response<UserDRO>){
+                        if(response.isSuccessful){
+                            val responseBody = response.body()
+                            if(responseBody!=null){
+                                if(responseBody.data!=null){
                                     Toast.makeText(requireContext(),
-                                        message, Toast.LENGTH_SHORT).show()
+                                        "Register Berhasil! Hello ${responseBody.data.NAMA}", Toast.LENGTH_SHORT).show()
                                     txtNameRegister.setText("")
-                                    txtConfirmPasswordRegister.setText("")
                                     txtPasswordRegister.setText("")
+                                    txtConfirmPasswordRegister.setText("")
+
+                                    parentFragmentManager.beginTransaction()
+                                        .replace(R.id.frMain,LoginFragment())
+                                        .commit()
                                 }
                             }
                         }
-                        return super.parseNetworkResponse(response)
+                        else{
+                            val statusCode:Int = response.code()
+                            Log.e(nameFrag, "Fail Access: $statusCode")
+                            if(statusCode==404){
+                                Toast.makeText(requireContext(),
+                                    "Email Sudah Digunakan", Toast.LENGTH_SHORT).show()
+                            }
+                            else if(statusCode==403){
+                                Toast.makeText(requireContext(),
+                                    "Panjang password minimal 8 karakter", Toast.LENGTH_SHORT).show()
+                            }
+                            else if(statusCode==403){
+                                Toast.makeText(requireContext(),
+                                    "Panjang password minimal 8 karakter", Toast.LENGTH_SHORT).show()
+                            }
+                            else if(statusCode==500){
+                                Toast.makeText(requireContext(),
+                                    "Register failed", Toast.LENGTH_SHORT).show()
+                            }
+                        }
                     }
-                }
-                val queue : RequestQueue = Volley.newRequestQueue(requireContext())
-                queue.add(strReq)
 
+                    override fun onFailure(call: Call<UserDRO>, t: Throwable) {
+                        Log.e(nameFrag, "onFailure: ${t.message}")
+                    }
+                })
             }catch (e:Error){
                 Log.e("NETWORKERROR",e.message.toString())
                 Toast.makeText(requireContext(),

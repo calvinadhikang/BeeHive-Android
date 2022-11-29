@@ -25,11 +25,9 @@ class UserBeforeLoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        lateinit var btnToLogin: Button
-        lateinit var btnToRegister: Button
         val acti = activity as MainActivity
-        btnToLogin = view.findViewById(R.id.btnToLogin)
-        btnToRegister = view.findViewById(R.id.btnToRegister)
+        var btnToLogin: Button = view.findViewById(R.id.btnToLogin)
+        var btnToRegister: Button = view.findViewById(R.id.btnToRegister)
         btnToLogin.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.frMain,LoginFragment())

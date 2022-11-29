@@ -20,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var txtLinkToRegister:TextView
     lateinit var btnLogin:Button
 
-    val WS_HOST = "https://mhs.sib.stts.edu/k3behive/api"
+    val WS_HOST = env.URL
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)

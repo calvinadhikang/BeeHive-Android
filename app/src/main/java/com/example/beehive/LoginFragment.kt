@@ -1,7 +1,6 @@
 package com.example.beehive
 
 import android.os.Bundle
-import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,21 +10,18 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.android.volley.NetworkResponse
-import com.android.volley.RequestQueue
-import com.android.volley.Response
-import com.android.volley.VolleyError
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
+import com.example.beehive.data.UserLoginDTO
+import com.example.beehive.api_config.ApiConfiguration
+import com.example.beehive.api_config.UserDRO
 import com.example.beehive.observerConnectivity.ConnectivityObserver
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import org.json.JSONObject
-import java.nio.charset.Charset
+import retrofit2.Call
+import retrofit2.Callback
 
 class LoginFragment : Fragment() {
-
+    var nameFrag:String = "LoginFragment"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -53,7 +49,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val acti = activity as MainActivity
-        val WS_HOST:String = acti.WS_HOST
+        val WS_HOST:String = env.URL
         val btnLogin: Button = view.findViewById(R.id.btnLogin)
         val txtLinkToRegister: TextView = view.findViewById(R.id.txtLinkToRegister)
         val txtPasswordLogin: EditText = view.findViewById(R.id.txtPasswordLogin)
@@ -64,81 +60,51 @@ class LoginFragment : Fragment() {
                 .commit()
         }
         btnLogin.setOnClickListener {
-            asynch()
-            try{
-                var emails: String = txtEmailLogin.text.toString()
-                var pass: String = txtPasswordLogin.text.toString()
-                if(emails==""||pass==""){
-                    Toast.makeText(requireContext(),
-                        "Semua input harus diisi", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-                val requestBody = "email=${emails}&password=${pass}"
+            var emails: String = txtEmailLogin.text.toString()
+            var pass: String = txtPasswordLogin.text.toString()
+            if(emails==""||pass==""){
+                Toast.makeText(requireContext(),
+                    "Semua input harus diisi", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            var loginTryUser: UserLoginDTO = UserLoginDTO(
+                emails,pass
+            )
+//            https://medium.com/swlh/simplest-post-request-on-android-kotlin-using-retrofit-e0a9db81f11a
+//            asynch()
+            try {
 
-                val strReq = object: StringRequest(
-                    Method.POST,
-                    "$WS_HOST/login",
-                    Response.Listener {
-                        val obj: JSONObject = JSONObject(it)
-                        val objData: JSONObject = obj.getJSONObject("data")
-                        Log.i("LOGINRESULT",obj.getString("message"))
-                        Toast.makeText(requireContext(),
-                            obj.getString("message"), Toast.LENGTH_SHORT).show()
-                    },
-                    Response.ErrorListener {
-                        Log.e("RESPONSEERROR",it.message.toString())
-//                        Toast.makeText(requireContext(), "Fetch Error for ${emails}", Toast.LENGTH_SHORT).show()
-                    }
-                ){
-                    override fun getBody(): ByteArray {
-                        return requestBody.toByteArray(Charset.defaultCharset())
-                    }
-
-                    override fun parseNetworkError(volleyError: VolleyError?): VolleyError {
-
-                        val responseBody = String(volleyError!!.networkResponse.data,
-                            charset("utf-8"))
-                        val data = JSONObject(responseBody)
-
-                        val errorCode:Int = volleyError!!.networkResponse.statusCode
-                        var message = data.getString("message")
-                        Log.e("errormessage",message)
-                        Looper.prepare()
-                        Toast.makeText(requireContext(),
-                            message, Toast.LENGTH_SHORT).show()
-                        return super.parseNetworkError(volleyError)
-                    }
-                    override fun parseNetworkResponse(response: NetworkResponse?): Response<String> {
-                        if(response!=null) {
-                            Log.d("STTSCODE", response.statusCode.toString())
-                            val responseBody = String(response.data,
-                                charset("utf-8"))
-                            val data = JSONObject(responseBody)
-                            var message = data.getString("message")
-                            var isSuccess = data.getBoolean("success")
-                            if(isSuccess){
-                                var datax = data.getJSONObject("data")
-                                var exceptionEmail:String? = datax.getString("EMAIL")
-                                var exceptionNama:String? = datax.getString("NAMA")
-                                var exceptionToken:String? = datax.getString("REMEMBER_TOKEN")
-                                var exceptionStatus:String? = datax.getString("STATUS")
-                                var exceptionSubscribe:String? = datax.getString("SUBSCRIBED")
-                                if(exceptionEmail!=null){
-                                    Log.d("EMAILMASUK",exceptionEmail)
-                                }
-                                if(response.statusCode==200){
-                                    Looper.prepare()
+                val client = ApiConfiguration.getApiService().login(userLoginData = loginTryUser)
+                client.enqueue(object: Callback<UserDRO> {
+                    override fun onResponse(call: Call<UserDRO>, response: retrofit2.Response<UserDRO>){
+                        if(response.isSuccessful){
+                            val responseBody = response.body()
+                            if(responseBody!=null){
+//                            tvInfo.text = responseBody.weather[0].description
+                                if(responseBody.data!=null){
                                     Toast.makeText(requireContext(),
-                                        message, Toast.LENGTH_SHORT).show()
+                                        "Login Berhasil! Welcome ${responseBody.data.NAMA}", Toast.LENGTH_SHORT).show()
                                 }
                             }
                         }
-                        return super.parseNetworkResponse(response)
+                        else{
+                            val statusCode:Int = response.code()
+                            Log.e(nameFrag, "Fail Access: $statusCode")
+                            if(statusCode==404){
+                                Toast.makeText(requireContext(),
+                                    "Email tidak terdaftar", Toast.LENGTH_SHORT).show()
+                            }
+                            else if(statusCode==402){
+                                Toast.makeText(requireContext(),
+                                    "Password anda tidak sesuai", Toast.LENGTH_SHORT).show()
+                            }
+                        }
                     }
-                }
-                val queue : RequestQueue = Volley.newRequestQueue(requireContext())
-                queue.add(strReq)
 
+                    override fun onFailure(call: Call<UserDRO>, t: Throwable) {
+                        Log.e(nameFrag, "onFailure: ${t.message}")
+                    }
+                })
             }catch (e:Error){
                 Log.e("NETWORKERROR",e.message.toString())
                 Toast.makeText(requireContext(),

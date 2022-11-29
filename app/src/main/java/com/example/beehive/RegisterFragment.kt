@@ -1,15 +1,22 @@
 package com.example.beehive
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import com.example.beehive.api_config.ApiConfiguration
+import com.example.beehive.api_config.UserDRO
+import com.example.beehive.data.BasicDRO
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class RegisterFragment : Fragment() {
-
+    var nameFrag:String = "RegisterFragment"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -27,7 +34,7 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var btnNextRegister:Button = view.findViewById(R.id.btnNextRegister)
-        var btnBackRegister:FloatingActionButton = view.findViewById(R.id.btnBackRegister)
+        var btnBackRegister:ImageButton = view.findViewById(R.id.btnBackRegister)
         var txtLinkToLogin:TextView = view.findViewById(R.id.txtLinkToLogin)
         var cbProceedContinue:CheckBox = view.findViewById(R.id.cbProceedContinue)
         var rbBeeworker:RadioButton = view.findViewById(R.id.rbBeeworker)
@@ -47,7 +54,9 @@ class RegisterFragment : Fragment() {
         btnNextRegister.setOnClickListener {
             var email:String = txtEmailRegister.text.toString()
             var role:Int = 0
-            if(cbProceedContinue.isChecked){
+
+            try{
+                if(cbProceedContinue.isChecked){
                 if(email==""){
                     Toast.makeText(
                         requireContext(),
@@ -62,12 +71,41 @@ class RegisterFragment : Fragment() {
                         "Harus memilih role!", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.frMain,RegisterFinalFragment(email,role))
-                    .commit()
+
+                val client = ApiConfiguration.getApiService().cekEmail(email = email)
+                client.enqueue(object: Callback<BasicDRO> {
+                    override fun onResponse(call: Call<BasicDRO>, response: retrofit2.Response<BasicDRO>){
+                        if(response.isSuccessful){
+                            parentFragmentManager.beginTransaction()
+                                .replace(R.id.frMain,RegisterFinalFragment(email,role))
+                                .commit()
+                        }
+                        else{
+                            val statusCode:Int = response.code()
+                            Log.e(nameFrag, "Fail Access: $statusCode")
+                            if(statusCode==404){
+                                Toast.makeText(requireContext(),
+                                    "Email ini sudah digunakan", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<BasicDRO>, t: Throwable) {
+                        Log.e(nameFrag, "onFailure: ${t.message}")
+                    }
+
+                })
+
             }else{
                 Toast.makeText(requireContext(),
                     "You have to check proceed to continue", Toast.LENGTH_SHORT).show()
+            }
+
+            }
+            catch (e:Error){
+                Log.e("NETWORKERROR",e.message.toString())
+                Toast.makeText(requireContext(),
+                    "Network Error!", Toast.LENGTH_SHORT).show()
             }
         }
     }
