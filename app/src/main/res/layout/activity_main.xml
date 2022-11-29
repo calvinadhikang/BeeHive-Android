@@ -18,7 +18,7 @@
         app:labelVisibilityMode="selected"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_user_before_login" />
+        app:menu="@menu/menu_user" />
 
     <FrameLayout
         android:id="@+id/frMain"

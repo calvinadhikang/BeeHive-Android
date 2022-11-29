@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg"
-    tools:context=".RegisterFragment">
+    tools:context=".user_auth.RegisterFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -64,7 +64,7 @@
             android:layout_height="49dp"
             android:layout_marginStart="64dp"
             android:layout_marginTop="282dp"
-            android:background="@color/textboxcolor"
+            android:background="@drawable/rounded_edittext"
             android:ems="10"
             android:hint="Email"
             android:inputType="textEmailAddress"

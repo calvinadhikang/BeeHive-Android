@@ -1,4 +1,4 @@
-package com.example.beehive
+package com.example.beehive.user_auth
 
 import android.os.Bundle
 import android.util.Log
@@ -10,9 +10,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.beehive.MainActivity
+import com.example.beehive.R
 import com.example.beehive.data.UserLoginDTO
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.api_config.UserDRO
+import com.example.beehive.env
 import com.example.beehive.observerConnectivity.ConnectivityObserver
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -56,7 +59,7 @@ class LoginFragment : Fragment() {
         val txtEmailLogin: EditText = view.findViewById(R.id.txtEmailLogin)
         txtLinkToRegister.setOnClickListener{
             parentFragmentManager.beginTransaction()
-                .replace(R.id.frMain,RegisterFragment())
+                .replace(R.id.frMain, RegisterFragment())
                 .commit()
         }
         btnLogin.setOnClickListener {
@@ -82,6 +85,7 @@ class LoginFragment : Fragment() {
                             if(responseBody!=null){
 //                            tvInfo.text = responseBody.weather[0].description
                                 if(responseBody.data!=null){
+                                    acti.afterLogin()
                                     Toast.makeText(requireContext(),
                                         "Login Berhasil! Welcome ${responseBody.data.NAMA}", Toast.LENGTH_SHORT).show()
                                 }

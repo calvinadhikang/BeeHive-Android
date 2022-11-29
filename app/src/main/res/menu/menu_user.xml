@@ -11,6 +11,14 @@
         android:icon="@drawable/search"
         android:title="Search" />
     <item
+        android:id="@+id/menu_add"
+        android:icon="@drawable/ic_baseline_add_24"
+        android:title="Add" />
+    <item
+        android:id="@+id/menu_notification"
+        android:icon="@drawable/ic_baseline_notifications_24"
+        android:title="Notification" />
+    <item
         android:id="@+id/menu_profile"
         android:icon="@drawable/person"
         android:title="Profile" />

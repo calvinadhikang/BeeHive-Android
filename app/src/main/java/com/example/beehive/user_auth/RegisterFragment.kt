@@ -1,4 +1,4 @@
-package com.example.beehive
+package com.example.beehive.user_auth
 
 import android.os.Bundle
 import android.util.Log
@@ -7,13 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import com.example.beehive.R
 import com.example.beehive.api_config.ApiConfiguration
-import com.example.beehive.api_config.UserDRO
 import com.example.beehive.data.BasicDRO
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.Response
 
 class RegisterFragment : Fragment() {
     var nameFrag:String = "RegisterFragment"
@@ -43,12 +41,12 @@ class RegisterFragment : Fragment() {
 
         btnBackRegister.setOnClickListener{
             parentFragmentManager.beginTransaction()
-                .replace(R.id.frMain,LoginFragment())
+                .replace(R.id.frMain, LoginFragment())
                 .commit()
         }
         txtLinkToLogin.setOnClickListener{
             parentFragmentManager.beginTransaction()
-                .replace(R.id.frMain,LoginFragment())
+                .replace(R.id.frMain, LoginFragment())
                 .commit()
         }
         btnNextRegister.setOnClickListener {
@@ -77,7 +75,7 @@ class RegisterFragment : Fragment() {
                     override fun onResponse(call: Call<BasicDRO>, response: retrofit2.Response<BasicDRO>){
                         if(response.isSuccessful){
                             parentFragmentManager.beginTransaction()
-                                .replace(R.id.frMain,RegisterFinalFragment(email,role))
+                                .replace(R.id.frMain, RegisterFinalFragment(email,role))
                                 .commit()
                         }
                         else{

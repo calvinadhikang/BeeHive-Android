@@ -17,7 +17,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Search For Stings"
-        android:background="@color/textboxcolor"
+        android:background="@drawable/rounded_edittext"
         android:padding="10dp"
         android:radius="180dp"
         app:layout_constraintEnd_toStartOf="@+id/imageView"

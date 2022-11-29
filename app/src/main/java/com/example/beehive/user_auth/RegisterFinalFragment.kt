@@ -1,28 +1,20 @@
-package com.example.beehive
+package com.example.beehive.user_auth
 
 import android.os.Bundle
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import com.android.volley.NetworkResponse
-import com.android.volley.RequestQueue
-import com.android.volley.Response
-import com.android.volley.VolleyError
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
+import com.example.beehive.MainActivity
+import com.example.beehive.R
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.api_config.UserDRO
 import com.example.beehive.data.UserRegisterDTO
-import com.google.android.material.datepicker.MaterialDatePicker.Builder.datePicker
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import org.json.JSONObject
+import com.example.beehive.env
 import retrofit2.Call
 import retrofit2.Callback
-import java.nio.charset.Charset
 import java.util.*
 
 
@@ -57,12 +49,12 @@ class RegisterFinalFragment(
 
         txtLinkToLogin2.setOnClickListener{
             parentFragmentManager.beginTransaction()
-                .replace(R.id.frMain,LoginFragment())
+                .replace(R.id.frMain, LoginFragment())
                 .commit()
         }
         btnBackRegisterFinal.setOnClickListener{
             parentFragmentManager.beginTransaction()
-                .replace(R.id.frMain,RegisterFragment())
+                .replace(R.id.frMain, RegisterFragment())
                 .commit()
         }
         btnRegister.setOnClickListener{
@@ -116,7 +108,7 @@ class RegisterFinalFragment(
                                     txtConfirmPasswordRegister.setText("")
 
                                     parentFragmentManager.beginTransaction()
-                                        .replace(R.id.frMain,LoginFragment())
+                                        .replace(R.id.frMain, LoginFragment())
                                         .commit()
                                 }
                             }

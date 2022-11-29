@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg"
-    tools:context=".RegisterFinalFragment">
+    tools:context=".user_auth.RegisterFinalFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
             android:layout_height="49dp"
             android:layout_marginStart="68dp"
             android:layout_marginTop="320dp"
-            android:background="@color/textboxcolor"
+            android:background="@drawable/rounded_edittext"
             android:ems="10"
             android:hint="Enter Your Name"
             android:inputType="textPersonName"
@@ -71,7 +71,7 @@
             android:layout_height="49dp"
             android:layout_marginStart="68dp"
             android:layout_marginTop="220dp"
-            android:background="@color/textboxcolor"
+            android:background="@drawable/rounded_edittext"
             android:ems="10"
             android:hint="Enter Your Confirmation Password"
             android:inputType="textPassword"
@@ -136,7 +136,7 @@
             android:layout_height="49dp"
             android:layout_marginStart="68dp"
             android:layout_marginTop="124dp"
-            android:background="@color/textboxcolor"
+            android:background="@drawable/rounded_edittext"
             android:ems="10"
             android:hint="Enter Your Password"
             android:inputType="textPassword"
@@ -178,7 +178,7 @@
             android:layout_height="92dp"
             android:layout_marginStart="68dp"
             android:layout_marginTop="412dp"
-            android:background="@color/textboxcolor"
+            android:background="@drawable/rounded_edittext"
             android:text=""
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
