@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/accent"
+    android:background="@color/bg"
     tools:context=".LoginFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -120,7 +120,7 @@
             android:background="@color/textboxcolor"
             android:ems="10"
             android:hint="Email"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:textColor="#373434"
             android:padding="12dp"
             app:layout_constraintStart_toStartOf="parent"
