@@ -6,10 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.example.beehive.MainActivity
 import com.example.beehive.R
 import com.example.beehive.data.UserLoginDTO
@@ -57,9 +54,15 @@ class LoginFragment : Fragment() {
         val txtLinkToRegister: TextView = view.findViewById(R.id.txtLinkToRegister)
         val txtPasswordLogin: EditText = view.findViewById(R.id.txtPasswordLogin)
         val txtEmailLogin: EditText = view.findViewById(R.id.txtEmailLogin)
+        val btnBackLogin: ImageView = view.findViewById(R.id.btnBackLogin)
         txtLinkToRegister.setOnClickListener{
             parentFragmentManager.beginTransaction()
                 .replace(R.id.frMain, RegisterFragment())
+                .commit()
+        }
+        btnBackLogin.setOnClickListener{
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.frMain, UserBeforeLoginFragment())
                 .commit()
         }
         btnLogin.setOnClickListener {

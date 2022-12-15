@@ -35,8 +35,8 @@ class RegisterFragment : Fragment() {
         var btnBackRegister:ImageButton = view.findViewById(R.id.btnBackRegister)
         var txtLinkToLogin:TextView = view.findViewById(R.id.txtLinkToLogin)
         var cbProceedContinue:CheckBox = view.findViewById(R.id.cbProceedContinue)
-        var rbBeeworker:RadioButton = view.findViewById(R.id.rbBeeworker)
-        var rbFarmer:RadioButton = view.findViewById(R.id.rbFarmer)
+//        var rbBeeworker:RadioButton = view.findViewById(R.id.rbBeeworker)
+//        var rbFarmer:RadioButton = view.findViewById(R.id.rbFarmer)
         var txtEmailRegister:EditText = view.findViewById(R.id.txtEmailRegister)
 
         btnBackRegister.setOnClickListener{
@@ -51,7 +51,7 @@ class RegisterFragment : Fragment() {
         }
         btnNextRegister.setOnClickListener {
             var email:String = txtEmailRegister.text.toString()
-            var role:Int = 0
+            var role:Int = 1
 
             try{
                 if(cbProceedContinue.isChecked){
@@ -61,14 +61,14 @@ class RegisterFragment : Fragment() {
                         "Email harus diisi!", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
-                if(rbBeeworker.isChecked) role = 2
-                else if(rbFarmer.isChecked) role = 1
-                if(role==0){
-                    Toast.makeText(
-                        requireContext(),
-                        "Harus memilih role!", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
+//                if(rbBeeworker.isChecked) role = 2
+//                else if(rbFarmer.isChecked) role = 1
+//                if(role==0){
+//                    Toast.makeText(
+//                        requireContext(),
+//                        "Harus memilih role!", Toast.LENGTH_SHORT).show()
+//                    return@setOnClickListener
+//                }
 
                 val client = ApiConfiguration.getApiService().cekEmail(email = email)
                 client.enqueue(object: Callback<BasicDRO> {

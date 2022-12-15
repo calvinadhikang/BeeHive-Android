@@ -9,8 +9,8 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navbarBeforeLogin"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
         android:layout_marginBottom="4dp"
         android:background="@color/bg"
         app:itemIconTint="@color/black"
@@ -22,8 +22,8 @@
 
     <FrameLayout
         android:id="@+id/frMain"
-        android:layout_width="409dp"
-        android:layout_height="669dp"
+        android:layout_width="match_parent"
+        android:layout_height="637dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
