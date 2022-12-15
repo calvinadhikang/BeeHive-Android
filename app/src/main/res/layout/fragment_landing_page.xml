@@ -9,27 +9,26 @@
 
     <EditText
         android:id="@+id/editTextTextPersonName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="354dp"
+        android:layout_height="53dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Search For Stings"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="Search For Stings"
+        android:inputType="textPersonName"
         android:padding="10dp"
         android:radius="180dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        android:textColorHint="@color/gray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="43dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:src="@drawable/search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,9 +38,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:text="By Category"
         android:textColor="@color/primary"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
@@ -50,11 +51,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" >
+        app:layout_constraintTop_toBottomOf="@+id/textView5">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -64,6 +66,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
         android:textColor="@color/primary"
         android:text="Most Ordered Sting This Month"
         app:layout_constraintStart_toStartOf="parent"
