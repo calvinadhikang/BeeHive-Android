@@ -8,9 +8,11 @@ import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.android.volley.VolleyLog
+import com.example.beehive.api_config.UserData
 import com.example.beehive.observerConnectivity.ConnectivityObserver
 import com.example.beehive.observerConnectivity.NetworkConnectivityObserver
 import com.example.beehive.user_auth.UserBeforeLoginFragment
+import com.example.beehive.user_profile.UserProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.CoroutineScope
@@ -22,6 +24,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var frMain: FrameLayout
     lateinit var connectivityObserver: ConnectivityObserver //buat cek network aplikasi
     val coroutine = CoroutineScope(Dispatchers.IO)
+    var isLogin:Boolean = false
+     var userLogin:UserData? = null
      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,10 +33,9 @@ class MainActivity : AppCompatActivity() {
 
          frMain = findViewById(R.id.frMain)
          navbar = findViewById(R.id.navbarBeforeLogin)
-         VolleyLog.DEBUG = true;
+//         VolleyLog.DEBUG = true;
          swapToFrag(LandingPageFragment(), Bundle())
-
-            beforeLogin()
+         beforeLogin()
          navbar.setOnNavigationItemSelectedListener {
              return@setOnNavigationItemSelectedListener when(it.itemId){
                  R.id.menu_home->{
@@ -49,7 +52,11 @@ class MainActivity : AppCompatActivity() {
                      true
                  }
                  R.id.menu_profile->{
-                     swapToFrag(UserBeforeLoginFragment(), Bundle())
+                     if(isLogin){
+                         swapToFrag(UserProfileFragment(), Bundle())
+                     }else {
+                         swapToFrag(UserBeforeLoginFragment(), Bundle())
+                     }
                      true
                  }
                  else->false
@@ -63,13 +70,26 @@ class MainActivity : AppCompatActivity() {
         fragmentManager.commit()
     }
     fun beforeLogin(){
+        isLogin = false
         val nav_Menu: Menu = navbar.menu
         nav_Menu.findItem(R.id.menu_add).isVisible = false
         nav_Menu.findItem(R.id.menu_notification).isVisible = false
+        swapToFrag(UserBeforeLoginFragment(), Bundle())
     }
     fun afterLogin(){
         val nav_Menu: Menu = navbar.menu
         nav_Menu.findItem(R.id.menu_add).isVisible = true
         nav_Menu.findItem(R.id.menu_notification).isVisible = true
+        isLogin = true
+        swapToFrag(UserProfileFragment(), Bundle())
+    }
+    fun login(user:UserData){
+        userLogin = user
+        afterLogin()
+    }
+    fun logout(){
+        userLogin = null
+        beforeLogin()
+
     }
 }

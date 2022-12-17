@@ -49,7 +49,6 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val acti = activity as MainActivity
-        val WS_HOST:String = env.URL
         val btnLogin: Button = view.findViewById(R.id.btnLogin)
         val txtLinkToRegister: TextView = view.findViewById(R.id.txtLinkToRegister)
         val txtPasswordLogin: EditText = view.findViewById(R.id.txtPasswordLogin)
@@ -76,8 +75,6 @@ class LoginFragment : Fragment() {
             var loginTryUser: UserLoginDTO = UserLoginDTO(
                 emails,pass
             )
-//            https://medium.com/swlh/simplest-post-request-on-android-kotlin-using-retrofit-e0a9db81f11a
-//            asynch()
             try {
 
                 val client = ApiConfiguration.getApiService().login(userLoginData = loginTryUser)
@@ -88,9 +85,11 @@ class LoginFragment : Fragment() {
                             if(responseBody!=null){
 //                            tvInfo.text = responseBody.weather[0].description
                                 if(responseBody.data!=null){
-                                    acti.afterLogin()
+                                    acti.login(responseBody.data)
                                     Toast.makeText(requireContext(),
                                         "Login Berhasil! Welcome ${responseBody.data.NAMA}", Toast.LENGTH_SHORT).show()
+
+
                                 }
                             }
                         }

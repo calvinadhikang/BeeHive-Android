@@ -96,7 +96,7 @@ class RegisterFragment : Fragment() {
 
             }else{
                 Toast.makeText(requireContext(),
-                    "You have to check proceed to continue", Toast.LENGTH_SHORT).show()
+                    "You have to agree to terms to continue", Toast.LENGTH_SHORT).show()
             }
 
             }

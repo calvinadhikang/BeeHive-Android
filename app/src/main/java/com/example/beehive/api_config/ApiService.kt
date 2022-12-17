@@ -22,4 +22,11 @@ interface ApiService {
 
     @POST("register")
     fun register(@Body userRegisterData: UserRegisterDTO): Call<UserDRO>
+
+    //get user profile
+
+    @GET("user/get")
+    fun getProfile(
+        @Query("REMEMBER_TOKEN") remember_token:String
+    ): Call<UserDRO>
 }

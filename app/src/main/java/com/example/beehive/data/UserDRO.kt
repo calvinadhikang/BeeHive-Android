@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class UserDRO(
 
 	@field:SerializedName("data")
-	val data: Data? = null,
+	val data: UserData? = null,
 
 	@field:SerializedName("success")
 	val success: Boolean? = null,
@@ -23,22 +23,22 @@ data class ROLES(
 	val role: String? = null
 )
 
-data class Data(
+data class UserData(
 
 	@field:SerializedName("NAMA")
 	val NAMA: String? = null,
 
 	@field:SerializedName("CREATED_AT")
-	val CREATEDAT: String? = null,
+	val CREATED_AT: String? = null,
 
 	@field:SerializedName("PICTURE")
 	val PICTURE: String? = null,
 
 	@field:SerializedName("EMAIL_VERIFIED_AT")
-	val EMAILVERIFIEDAT: String? = null,
+	val EMAIL_VERIFIED_AT: String? = null,
 
 	@field:SerializedName("DELETED_AT")
-	val DELETEDAT: Any? = null,
+	val DELETED_AT: Any? = null,
 
 	@field:SerializedName("BIO")
 	val BIO: String? = null,
@@ -65,10 +65,10 @@ data class Data(
 	val ROLES: ROLES? = null,
 
 	@field:SerializedName("TANGGAL_LAHIR")
-	val TANGGALLAHIR: String? = null,
+	val TANGGAL_LAHIR: String? = null,
 
 	@field:SerializedName("UPDATED_AT")
-	val UPDATEDAT: String? = null,
+	val UPDATED_AT: String? = null,
 
 	@field:SerializedName("REMEMBER_TOKEN")
 	val REMEMBER_TOKEN: String? = null
