@@ -48,6 +48,7 @@ class UserProfileFragment : Fragment() {
         val lblEmailUserProfile:TextView = view.findViewById(R.id.lblEmailUserProfile)
         val imgProfilePicture:ImageView = view.findViewById(R.id.imageProfilePictureUserProfile)
         val btnLogout: Button = view.findViewById(R.id.btnLogout)
+        val btnEditProfile: Button = view.findViewById(R.id.btnEditProfileUser)
 
         lblNamaUserProfile.text = acti.userLogin!!.NAMA
         lblBalanceUserProfile.text = acti.userLogin!!.BALANCE!!.toBigDecimal().toInt().toRupiah()
@@ -108,6 +109,10 @@ class UserProfileFragment : Fragment() {
             Toast.makeText(requireContext(),
                 "Berhasil Logout", Toast.LENGTH_SHORT).show()
         }
+        btnEditProfile.setOnClickListener {
+
+        }
+
 
     }
 }

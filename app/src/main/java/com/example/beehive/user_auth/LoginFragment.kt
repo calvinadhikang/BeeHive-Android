@@ -104,6 +104,10 @@ class LoginFragment : Fragment() {
                                 Toast.makeText(requireContext(),
                                     "Password anda tidak sesuai", Toast.LENGTH_SHORT).show()
                             }
+                            else if(statusCode==405){
+                                Toast.makeText(requireContext(),
+                                    "Fitur untuk Beeworker di mobile belum tersedia", Toast.LENGTH_SHORT).show()
+                            }
                         }
                     }
 

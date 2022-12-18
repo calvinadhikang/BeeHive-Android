@@ -15,6 +15,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Category Available"
+        android:textColor="@color/primary"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

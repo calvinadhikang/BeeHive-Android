@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.android.volley.VolleyLog
 import com.example.beehive.api_config.UserData
+import com.example.beehive.lelang_sting.CreateLelangStingFragment
 import com.example.beehive.observerConnectivity.ConnectivityObserver
 import com.example.beehive.observerConnectivity.NetworkConnectivityObserver
 import com.example.beehive.user_auth.UserBeforeLoginFragment
@@ -43,9 +44,11 @@ class MainActivity : AppCompatActivity() {
                      true
                  }
                  R.id.menu_search->{
+                     swapToFrag(SearchFragment(), Bundle())
                      true
                  }
                  R.id.menu_add->{
+                     swapToFrag(CreateLelangStingFragment(),Bundle())
                      true
                  }
                  R.id.menu_notification->{
@@ -84,12 +87,15 @@ class MainActivity : AppCompatActivity() {
         swapToFrag(UserProfileFragment(), Bundle())
     }
     fun login(user:UserData){
-        userLogin = user
+        updateLogin(user)
         afterLogin()
     }
     fun logout(){
         userLogin = null
         beforeLogin()
 
+    }
+    fun updateLogin(user: UserData){
+        userLogin = user
     }
 }
