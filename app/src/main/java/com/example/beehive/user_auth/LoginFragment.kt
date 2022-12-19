@@ -69,7 +69,6 @@ class LoginFragment : Fragment() {
                 emails,pass
             )
             try {
-
                 val client = ApiConfiguration.getApiService().login(userLoginData = loginTryUser)
                 client.enqueue(object: Callback<UserDRO> {
                     override fun onResponse(call: Call<UserDRO>, response: retrofit2.Response<UserDRO>){

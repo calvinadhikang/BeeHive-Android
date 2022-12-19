@@ -1,9 +1,6 @@
 package com.example.beehive.api_config
 
-import com.example.beehive.data.BasicDRO
-import com.example.beehive.data.ListCategoryDRO
-import com.example.beehive.data.UserLoginDTO
-import com.example.beehive.data.UserRegisterDTO
+import com.example.beehive.data.*
 import retrofit2.Call
 import retrofit2.http.*
 import retrofit2.http.GET
@@ -36,4 +33,12 @@ interface ApiService {
     fun fetchCategory(
         @Query("REMEMBER_TOKEN") remember_token:String
     ): Call<ListCategoryDRO>
+
+
+
+    @POST("sting/lelang/make")
+    fun CreateLelangSting(
+        @Query("REMEMBER_TOKEN") remember_token:String,
+        @Body lelangStingData: CreateLelangStingDTO
+    ): Call<BasicDRO>
 }

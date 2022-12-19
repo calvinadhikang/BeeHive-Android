@@ -15,3 +15,9 @@ data class UserRegisterDTO(
     var role:Int,
     var birthday:String,
 )
+data class CreateLelangStingDTO(
+    var title:String,
+    var requirement:String,
+    var price:Int,
+    var category:Int
+)
