@@ -71,23 +71,19 @@ class RegisterFinalFragment(
             var calendar:Calendar = Calendar.getInstance();
             var yearNow:Int = calendar.get(Calendar.YEAR);
             if(password==""||confirm==""||name==""){
-                Toast.makeText(requireContext(),
-                    "Ada field kosong!", Toast.LENGTH_SHORT).show()
+                acti.showModal("Ada field kosong!"){}
                 return@setOnClickListener
             }
             if(password!=confirm){
-                Toast.makeText(requireContext(),
-                    "Password dan konfirmasi harus sama!", Toast.LENGTH_SHORT).show()
+                acti.showModal("Password dan konfirmasi harus sama!"){}
                 return@setOnClickListener
             }
             if(password.length<8){
-                Toast.makeText(requireContext(),
-                        "Panjang password minimal 8 karakter!", Toast.LENGTH_SHORT).show()
+                acti.showModal("Panjang password minimal 8 karakter!"){}
                 return@setOnClickListener
             }
             if(yearNow-18 < year){
-                Toast.makeText(requireContext(),
-                    "Anda harus berusia minimal 18 tahun!", Toast.LENGTH_SHORT).show()
+                acti.showModal("Anda harus berusia minimal 18 tahun!"){}
                 return@setOnClickListener
             }
             var registerTryUser:UserRegisterDTO = UserRegisterDTO(
@@ -101,8 +97,7 @@ class RegisterFinalFragment(
                             val responseBody = response.body()
                             if(responseBody!=null){
                                 if(responseBody.data!=null){
-                                    Toast.makeText(requireContext(),
-                                        "Register Berhasil! Hello ${responseBody.data.NAMA}", Toast.LENGTH_SHORT).show()
+                                    acti.showModal("Register Berhasil!"){}
                                     txtNameRegister.setText("")
                                     txtPasswordRegister.setText("")
                                     txtConfirmPasswordRegister.setText("")
@@ -117,20 +112,13 @@ class RegisterFinalFragment(
                             val statusCode:Int = response.code()
                             Log.e(nameFrag, "Fail Access: $statusCode")
                             if(statusCode==404){
-                                Toast.makeText(requireContext(),
-                                    "Email Sudah Digunakan", Toast.LENGTH_SHORT).show()
+                                acti.showModal("Email Sudah Digunakan"){}
                             }
                             else if(statusCode==403){
-                                Toast.makeText(requireContext(),
-                                    "Panjang password minimal 8 karakter", Toast.LENGTH_SHORT).show()
-                            }
-                            else if(statusCode==403){
-                                Toast.makeText(requireContext(),
-                                    "Panjang password minimal 8 karakter", Toast.LENGTH_SHORT).show()
+                                acti.showModal("Panjang password minimal 8 karakter"){}
                             }
                             else if(statusCode==500){
-                                Toast.makeText(requireContext(),
-                                    "Register failed", Toast.LENGTH_SHORT).show()
+                                acti.showModal("Register failed"){}
                             }
                         }
                     }
@@ -141,8 +129,7 @@ class RegisterFinalFragment(
                 })
             }catch (e:Error){
                 Log.e("NETWORKERROR",e.message.toString())
-                Toast.makeText(requireContext(),
-                    "Network Error!", Toast.LENGTH_SHORT).show()
+                acti.showModal("Network Error!"){}
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.example.beehive.api_config
 
 import com.example.beehive.data.BasicDRO
+import com.example.beehive.data.ListCategoryDRO
 import com.example.beehive.data.UserLoginDTO
 import com.example.beehive.data.UserRegisterDTO
 import retrofit2.Call
@@ -29,4 +30,10 @@ interface ApiService {
     fun getProfile(
         @Query("REMEMBER_TOKEN") remember_token:String
     ): Call<UserDRO>
+
+
+    @GET("category/fetch")
+    fun fetchCategory(
+        @Query("REMEMBER_TOKEN") remember_token:String
+    ): Call<ListCategoryDRO>
 }

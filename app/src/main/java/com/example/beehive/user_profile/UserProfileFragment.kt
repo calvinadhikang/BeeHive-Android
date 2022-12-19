@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import com.example.beehive.CurrencyUtils.toRupiah
 import com.example.beehive.MainActivity
 import com.example.beehive.R
@@ -103,11 +104,13 @@ class UserProfileFragment : Fragment() {
 //
 //        })
         btnLogout.setOnClickListener {
-            acti.logout()
+            acti.showConfirmation("Are you sure you want to logout?","Yes",
+            "No",{
+                    acti.logout()
+                    acti.showModal("Berhasil Log Out!"){}
+                 },{
 
-            //todo berikan konfirmasi
-            Toast.makeText(requireContext(),
-                "Berhasil Logout", Toast.LENGTH_SHORT).show()
+                })
         }
         btnEditProfile.setOnClickListener {
 

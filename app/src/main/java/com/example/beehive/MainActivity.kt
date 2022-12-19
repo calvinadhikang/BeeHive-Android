@@ -1,10 +1,15 @@
 package com.example.beehive
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.android.volley.VolleyLog
@@ -97,5 +102,58 @@ class MainActivity : AppCompatActivity() {
     }
     fun updateLogin(user: UserData){
         userLogin = user
+    }
+    fun showModal(
+        message:String,
+        btnOkText:String = "OK",
+        callbackFun:()->Unit
+    ){
+
+        val dialogBinding = this.layoutInflater
+            .inflate(R.layout.dialog_layout,null)
+        val myDialog = Dialog(this)
+        myDialog.setContentView(dialogBinding)
+        myDialog.setCancelable(true)
+        myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        myDialog.show()
+        val txtHeader: TextView = dialogBinding.findViewById(R.id.txtHeaderModal)
+        txtHeader.text = message
+
+        val btnOk: Button = dialogBinding.findViewById(R.id.btnOkModal)
+        btnOk.text = btnOkText
+        btnOk.setOnClickListener{
+            myDialog.dismiss()
+            callbackFun()
+        }
+    }
+    fun showConfirmation(
+        message:String,
+        btnSuccessText:String = "Yes",
+        btnFailText:String = "No",
+        callbackSuccess:()->Unit,
+        callbackFail:()->Unit,){
+
+        val dialogBinding = this.layoutInflater
+            .inflate(R.layout.dialog_confirmation_layout,null)
+        val myDialog = Dialog(this)
+        myDialog.setContentView(dialogBinding)
+        myDialog.setCancelable(true)
+        myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        myDialog.show()
+        val txtHeader: TextView = dialogBinding.findViewById(R.id.txtHeaderModal)
+        txtHeader.text = message
+
+        val btnYes: Button = dialogBinding.findViewById(R.id.btnYesModal)
+        btnYes.text = btnSuccessText
+        btnYes.setOnClickListener{
+            myDialog.dismiss()
+            callbackSuccess()
+        }
+        val btnNo: Button = dialogBinding.findViewById(R.id.btnNoModal)
+        btnNo.text = btnFailText
+        btnNo.setOnClickListener{
+            myDialog.dismiss()
+            callbackFail()
+        }
     }
 }

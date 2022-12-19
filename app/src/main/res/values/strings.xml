@@ -4,4 +4,5 @@
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sed mattis mauris. Vestibulum a mi ut neque vulputate malesuada a vitae lorem. Vestibulum suscipit non massa sed facilisis. Integer at sapien ligula. Etiam feugiat condimentum ornare. Praesent bibendum, tortor at placerat pretium, velit massa accumsan nibh, quis bibendum dolor lorem a odio. Morbi et arcu sed odio ullamcorper pellentesque. Duis mollis leo sit amet nibh dapibus, nec tempor nunc vestibulum.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="header_modal">Are you sure?</string>
 </resources>

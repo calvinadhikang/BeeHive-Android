@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import com.example.beehive.MainActivity
 import com.example.beehive.R
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.data.BasicDRO
@@ -31,6 +32,7 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val acti = activity as MainActivity
         var btnNextRegister:Button = view.findViewById(R.id.btnNextRegister)
         var btnBackRegister:ImageButton = view.findViewById(R.id.btnBackRegister)
         var txtLinkToLogin:TextView = view.findViewById(R.id.txtLinkToLogin)
@@ -56,9 +58,7 @@ class RegisterFragment : Fragment() {
             try{
                 if(cbProceedContinue.isChecked){
                 if(email==""){
-                    Toast.makeText(
-                        requireContext(),
-                        "Email harus diisi!", Toast.LENGTH_SHORT).show()
+                    acti.showModal("Email harus diisi!"){}
                     return@setOnClickListener
                 }
 //                if(rbBeeworker.isChecked) role = 2
@@ -82,8 +82,7 @@ class RegisterFragment : Fragment() {
                             val statusCode:Int = response.code()
                             Log.e(nameFrag, "Fail Access: $statusCode")
                             if(statusCode==404){
-                                Toast.makeText(requireContext(),
-                                    "Email ini sudah digunakan", Toast.LENGTH_SHORT).show()
+                                acti.showModal("Email ini sudah digunakan"){}
                             }
                         }
                     }
@@ -95,15 +94,13 @@ class RegisterFragment : Fragment() {
                 })
 
             }else{
-                Toast.makeText(requireContext(),
-                    "You have to agree to terms to continue", Toast.LENGTH_SHORT).show()
+                    acti.showModal("You have to agree to terms to continue"){}
             }
 
             }
             catch (e:Error){
                 Log.e("NETWORKERROR",e.message.toString())
-                Toast.makeText(requireContext(),
-                    "Network Error!", Toast.LENGTH_SHORT).show()
+                acti.showModal("Network Error!"){}
             }
         }
     }

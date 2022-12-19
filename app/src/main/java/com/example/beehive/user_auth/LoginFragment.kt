@@ -1,5 +1,8 @@
 package com.example.beehive.user_auth
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,11 +10,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import com.example.beehive.MainActivity
 import com.example.beehive.R
 import com.example.beehive.data.UserLoginDTO
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.api_config.UserDRO
+import com.example.beehive.data.BasicDRO
 import com.example.beehive.env
 import com.example.beehive.observerConnectivity.ConnectivityObserver
 import kotlinx.coroutines.flow.Flow
@@ -35,17 +40,6 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
-     fun asynch(){
-        val acti = activity as MainActivity
-        val statusNetwork: Flow<ConnectivityObserver.Status> = acti.connectivityObserver.observe()
-         acti.coroutine.launch {
-             var g = statusNetwork.collect()
-             acti.runOnUiThread{
-                 Toast.makeText(requireContext(),
-                     "${g}", Toast.LENGTH_SHORT).show()
-             }
-         }
-    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val acti = activity as MainActivity
@@ -68,8 +62,7 @@ class LoginFragment : Fragment() {
             var emails: String = txtEmailLogin.text.toString()
             var pass: String = txtPasswordLogin.text.toString()
             if(emails==""||pass==""){
-                Toast.makeText(requireContext(),
-                    "Semua input harus diisi", Toast.LENGTH_SHORT).show()
+                acti.showModal("Semua input harus diisi"){}
                 return@setOnClickListener
             }
             var loginTryUser: UserLoginDTO = UserLoginDTO(
@@ -80,33 +73,29 @@ class LoginFragment : Fragment() {
                 val client = ApiConfiguration.getApiService().login(userLoginData = loginTryUser)
                 client.enqueue(object: Callback<UserDRO> {
                     override fun onResponse(call: Call<UserDRO>, response: retrofit2.Response<UserDRO>){
+                        val responseBody = response.body()
                         if(response.isSuccessful){
-                            val responseBody = response.body()
                             if(responseBody!=null){
-//                            tvInfo.text = responseBody.weather[0].description
                                 if(responseBody.data!=null){
                                     acti.login(responseBody.data)
-                                    Toast.makeText(requireContext(),
-                                        "Login Berhasil! Welcome ${responseBody.data.NAMA}", Toast.LENGTH_SHORT).show()
-
+                                    acti.showModal("Login Berhasil! Welcome ${responseBody.data.NAMA}"){}
 
                                 }
                             }
                         }
                         else{
                             val statusCode:Int = response.code()
-                            Log.e(nameFrag, "Fail Access: $statusCode")
+                                Log.e(nameFrag, "Fail Access: $statusCode")
                             if(statusCode==404){
-                                Toast.makeText(requireContext(),
-                                    "Email tidak terdaftar", Toast.LENGTH_SHORT).show()
+                                acti.showModal("Email tidak terdaftar"){}
                             }
                             else if(statusCode==402){
-                                Toast.makeText(requireContext(),
-                                    "Password anda tidak sesuai", Toast.LENGTH_SHORT).show()
+                                acti.showModal("Password anda tidak sesuai"){}
                             }
                             else if(statusCode==405){
-                                Toast.makeText(requireContext(),
-                                    "Fitur untuk Beeworker di mobile belum tersedia", Toast.LENGTH_SHORT).show()
+
+                                acti.showModal("Fitur untuk beeworker belum tersedia di mobile"){}
+//
                             }
                         }
                     }
@@ -117,9 +106,9 @@ class LoginFragment : Fragment() {
                 })
             }catch (e:Error){
                 Log.e("NETWORKERROR",e.message.toString())
-                Toast.makeText(requireContext(),
-                    "Network Error!", Toast.LENGTH_SHORT).show()
+                acti.showModal("Network Error!"){}
             }
         }
     }
+
 }
