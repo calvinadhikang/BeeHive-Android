@@ -26,7 +26,7 @@ data class ROLES(
 data class UserData(
 
 	@field:SerializedName("NAMA")
-	val NAMA: String? = null,
+    var NAMA: String? = null,
 
 	@field:SerializedName("CREATED_AT")
 	val CREATED_AT: String? = null,
@@ -47,7 +47,7 @@ data class UserData(
 	val EMAIL: String? = null,
 
 	@field:SerializedName("BALANCE")
-	val BALANCE: String? = null,
+	var BALANCE: String? = null,
 
 	@field:SerializedName("SUBSCRIBED")
 	val SUBSCRIBED: Int? = null,

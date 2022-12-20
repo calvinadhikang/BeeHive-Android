@@ -21,3 +21,6 @@ data class CreateLelangStingDTO(
     var price:Int,
     var category:Int
 )
+data class TopUpDTO(
+    var nominal:Int
+)

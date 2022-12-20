@@ -125,6 +125,7 @@ class RegisterFinalFragment(
 
                     override fun onFailure(call: Call<UserDRO>, t: Throwable) {
                         Log.e(nameFrag, "onFailure: ${t.message}")
+                        acti.showModal("Poor network connection detected"){}
                     }
                 })
             }catch (e:Error){

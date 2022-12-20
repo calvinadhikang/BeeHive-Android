@@ -10,6 +10,9 @@ import retrofit2.http.POST
 interface ApiService {
     @Headers("Content-Type: application/json")
 
+    @GET("nanoid")
+    fun getNanoID(): Call<BasicDRO>
+
     @GET("cek/email")
     fun cekEmail(
         @Query("email") email:String
@@ -28,6 +31,11 @@ interface ApiService {
         @Query("REMEMBER_TOKEN") remember_token:String
     ): Call<UserDRO>
 
+    @POST("user/topup")
+    fun TopUp(
+        @Query("REMEMBER_TOKEN") remember_token:String,
+        @Body topUpData: TopUpDTO,
+    ): Call<BasicDRO>
 
     @GET("category/fetch")
     fun fetchCategory(

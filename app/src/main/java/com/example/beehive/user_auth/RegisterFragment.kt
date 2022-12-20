@@ -89,6 +89,7 @@ class RegisterFragment : Fragment() {
 
                     override fun onFailure(call: Call<BasicDRO>, t: Throwable) {
                         Log.e(nameFrag, "onFailure: ${t.message}")
+                        acti.showModal("Poor network connection detected"){}
                     }
 
                 })

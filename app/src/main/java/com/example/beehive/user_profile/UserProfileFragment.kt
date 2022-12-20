@@ -18,6 +18,7 @@ import com.example.beehive.api_config.UserDRO
 import com.example.beehive.api_config.UserData
 import com.example.beehive.data.BasicDRO
 import com.example.beehive.env
+import com.example.beehive.topup.TopUpFragment
 import com.example.beehive.user_auth.RegisterFinalFragment
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -49,6 +50,7 @@ class UserProfileFragment : Fragment() {
         val lblEmailUserProfile:TextView = view.findViewById(R.id.lblEmailUserProfile)
         val imgProfilePicture:ImageView = view.findViewById(R.id.imageProfilePictureUserProfile)
         val btnLogout: Button = view.findViewById(R.id.btnLogout)
+        val btnTopUp: Button = view.findViewById(R.id.btnTopUp)
         val btnEditProfile: Button = view.findViewById(R.id.btnEditProfileUser)
 
         lblNamaUserProfile.text = acti.userLogin!!.NAMA
@@ -67,42 +69,7 @@ class UserProfileFragment : Fragment() {
             .resize(50,50)
             .into(imgProfilePicture)
 
-//        val client = ApiConfiguration.getApiService().getProfile(remember_token = acti.userLogin!!.REMEMBER_TOKEN!!)
-//        client.enqueue(object: Callback<UserDRO> {
-//            override fun onResponse(call: Call<UserDRO>, response: retrofit2.Response<UserDRO>){
-//                if(response.isSuccessful){
-//                    val responseBody = response.body()
-//                    if(responseBody!=null){
-//                        if(responseBody.data!=null){
-//                            var data:UserData = responseBody.data
-//                            lblNamaUserProfile.text = data.NAMA
-//                            lblBalanceUserProfile.text = data.BALANCE!!.toBigDecimal().toInt().toRupiah()
-//                            lblBirthUserProfile.text = data.TANGGAL_LAHIR
-//                            if(data.SUBSCRIBED==0){
-//                                lblAccountTypeUserProfile.text = "Free User"
-//                            }else{
-//                                lblAccountTypeUserProfile.text = "Subscribed"
-//                            }
-//                            lblEmailUserProfile.text = data.EMAIL
-//                            Picasso.get().load(env.URLIMAGE+"profile-pictures/${data.PICTURE}").into(imgProfilePicture)
-//                        }
-//                    }
-//                }
-//                else{
-//                    val statusCode:Int = response.code()
-//                    Log.e("GET_PROFILE_ERROR", "Fail Access: $statusCode")
-//                    if(statusCode==401){
-//                        Toast.makeText(requireContext(),
-//                            "Unauthorized", Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<UserDRO>, t: Throwable) {
-//                Log.e("GET_PROFILE_ERROR", "onFailure: ${t.message}")
-//            }
-//
-//        })
+
         btnLogout.setOnClickListener {
             acti.showConfirmation("Are you sure you want to logout?","Yes",
             "No",{
@@ -115,7 +82,12 @@ class UserProfileFragment : Fragment() {
         btnEditProfile.setOnClickListener {
 
         }
+        btnTopUp.setOnClickListener {
 
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.frMain, TopUpFragment())
+                .commit()
+        }
 
     }
 }

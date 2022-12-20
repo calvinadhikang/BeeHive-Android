@@ -84,7 +84,7 @@ class LoginFragment : Fragment() {
                         }
                         else{
                             val statusCode:Int = response.code()
-                                Log.e(nameFrag, "Fail Access: $statusCode")
+                                Log.e("ErrorLogin", "Fail Access: $statusCode")
                             if(statusCode==404){
                                 acti.showModal("Email tidak terdaftar"){}
                             }
@@ -100,7 +100,8 @@ class LoginFragment : Fragment() {
                     }
 
                     override fun onFailure(call: Call<UserDRO>, t: Throwable) {
-                        Log.e(nameFrag, "onFailure: ${t.message}")
+                        acti.showModal("Poor network connection detected"){}
+                        Log.e("ErrorLogin", "onFailure: ${t.message}")
                     }
                 })
             }catch (e:Error){

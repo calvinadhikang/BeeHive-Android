@@ -4,15 +4,20 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.android.volley.VolleyLog
+import com.example.beehive.CurrencyUtils.toRupiah
+import com.example.beehive.api_config.ApiConfiguration
+import com.example.beehive.api_config.UserDRO
 import com.example.beehive.api_config.UserData
 import com.example.beehive.lelang_sting.CreateLelangStingFragment
 import com.example.beehive.observerConnectivity.ConnectivityObserver
@@ -21,8 +26,11 @@ import com.example.beehive.user_auth.UserBeforeLoginFragment
 import com.example.beehive.user_profile.UserProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import retrofit2.Call
+import retrofit2.Callback
 
 
 class MainActivity : AppCompatActivity() {
@@ -155,5 +163,31 @@ class MainActivity : AppCompatActivity() {
             myDialog.dismiss()
             callbackFail()
         }
+    }
+    fun reloadUser(){
+        val client = ApiConfiguration.getApiService().getProfile(remember_token = userLogin!!.REMEMBER_TOKEN!!)
+        client.enqueue(object: Callback<UserDRO> {
+            override fun onResponse(call: Call<UserDRO>, response: retrofit2.Response<UserDRO>){
+                if(response.isSuccessful){
+                    val responseBody = response.body()
+                    if(responseBody!=null){
+                        if(responseBody.data!=null){
+                            var data:UserData = responseBody.data
+                            userLogin!!.NAMA = data.NAMA
+                            userLogin!!.BALANCE = data.BALANCE!!
+                        }
+                    }
+                }
+                else{
+                    val statusCode:Int = response.code()
+                    Log.e("GET_PROFILE_ERROR", "Fail Access: $statusCode")
+                }
+            }
+
+            override fun onFailure(call: Call<UserDRO>, t: Throwable) {
+                Log.e("GET_PROFILE_ERROR", "onFailure: ${t.message}")
+            }
+
+        })
     }
 }

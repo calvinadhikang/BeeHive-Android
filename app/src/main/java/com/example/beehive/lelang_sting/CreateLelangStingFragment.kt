@@ -128,6 +128,7 @@ class CreateLelangStingFragment : Fragment() {
                     }
 
                     override fun onFailure(call: Call<BasicDRO>, t: Throwable) {
+                        acti.showModal("Poor network connection detected"){}
                         Log.e("CREATELELANGSTINGERROR", "onFailure: ${t.message}")
                     }
                 })
