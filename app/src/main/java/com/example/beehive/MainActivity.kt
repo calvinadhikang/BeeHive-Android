@@ -19,6 +19,8 @@ import com.example.beehive.CurrencyUtils.toRupiah
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.api_config.UserDRO
 import com.example.beehive.api_config.UserData
+import com.example.beehive.dao.AppDatabase
+import com.example.beehive.dao.User
 import com.example.beehive.lelang_sting.CreateLelangStingFragment
 import com.example.beehive.observerConnectivity.ConnectivityObserver
 import com.example.beehive.observerConnectivity.NetworkConnectivityObserver
@@ -29,6 +31,7 @@ import com.google.android.material.navigation.NavigationView
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 
@@ -38,8 +41,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var frMain: FrameLayout
     lateinit var connectivityObserver: ConnectivityObserver //buat cek network aplikasi
     val coroutine = CoroutineScope(Dispatchers.IO)
+    lateinit var db: AppDatabase
     var isLogin:Boolean = false
-     var userLogin:UserData? = null
+    var userLogin:UserData? = null
      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -47,9 +51,23 @@ class MainActivity : AppCompatActivity() {
 
          frMain = findViewById(R.id.frMain)
          navbar = findViewById(R.id.navbarBeforeLogin)
-//         VolleyLog.DEBUG = true;
+         db = AppDatabase.build(this)
+
+         var rememberMeCheck:User? = null
+         coroutine.launch {
+             rememberMeCheck = db.userDAO.get()
+
+             runOnUiThread{
+                 if(rememberMeCheck==null){
+                     //tidak ada user yang lagi login
+                     beforeLogin()
+                 }else{
+                     //ada user loged in
+                     reloadUser(rememberMeCheck!!.REMEMBER_TOKEN,true)
+                 }
+             }
+         }
          swapToFrag(LandingPageFragment(), Bundle())
-         beforeLogin()
          navbar.setOnNavigationItemSelectedListener {
              return@setOnNavigationItemSelectedListener when(it.itemId){
                  R.id.menu_home->{
@@ -69,7 +87,11 @@ class MainActivity : AppCompatActivity() {
                  }
                  R.id.menu_profile->{
                      if(isLogin){
-                         swapToFrag(UserProfileFragment(), Bundle())
+                         try {
+                            swapToFrag(UserProfileFragment(), Bundle())
+                         }catch (e:Error){
+                             Toast.makeText(this, "Check your connection", Toast.LENGTH_SHORT).show()
+                         }
                      }else {
                          swapToFrag(UserBeforeLoginFragment(), Bundle())
                      }
@@ -99,18 +121,32 @@ class MainActivity : AppCompatActivity() {
         isLogin = true
         swapToFrag(UserProfileFragment(), Bundle())
     }
+    fun afterFetchRememberMe(){
+        val nav_Menu: Menu = navbar.menu
+        nav_Menu.findItem(R.id.menu_add).isVisible = true
+        nav_Menu.findItem(R.id.menu_notification).isVisible = true
+        isLogin = true
+        swapToFrag(LandingPageFragment(), Bundle())
+    }
     fun login(user:UserData){
         updateLogin(user)
+        var rememberme: User = User(user.REMEMBER_TOKEN!!,user.EMAIL!!,user.NAMA!!)
+        coroutine.launch {
+            db.userDAO.insert(rememberme)  //ini ngesave isi user
+        }
         afterLogin()
     }
     fun logout(){
         userLogin = null
+        coroutine.launch {
+            db.userDAO.logout()
+        }
         beforeLogin()
 
     }
     fun updateLogin(user: UserData){
         userLogin = user
-    }
+      }
     fun showModal(
         message:String,
         btnOkText:String = "OK",
@@ -164,8 +200,9 @@ class MainActivity : AppCompatActivity() {
             callbackFail()
         }
     }
-    fun reloadUser(){
-        val client = ApiConfiguration.getApiService().getProfile(remember_token = userLogin!!.REMEMBER_TOKEN!!)
+    fun reloadUser(REMEMBER_TOKEN:String, firstTime:Boolean = false){
+        val client = ApiConfiguration.getApiService().getProfile(remember_token =
+        REMEMBER_TOKEN)
         client.enqueue(object: Callback<UserDRO> {
             override fun onResponse(call: Call<UserDRO>, response: retrofit2.Response<UserDRO>){
                 if(response.isSuccessful){
@@ -173,8 +210,17 @@ class MainActivity : AppCompatActivity() {
                     if(responseBody!=null){
                         if(responseBody.data!=null){
                             var data:UserData = responseBody.data
-                            userLogin!!.NAMA = data.NAMA
-                            userLogin!!.BALANCE = data.BALANCE!!
+                            if(firstTime){
+                                userLogin = data
+                                afterFetchRememberMe()
+                            }else{
+                                userLogin!!.NAMA = data.NAMA
+                                userLogin!!.BALANCE = data.BALANCE!!
+                                userLogin!!.PICTURE = data.PICTURE!!
+                                userLogin!!.PICTURE = data.PICTURE!!
+                                userLogin!!.BIO = data.BIO!!
+                            }
+
                         }
                     }
                 }

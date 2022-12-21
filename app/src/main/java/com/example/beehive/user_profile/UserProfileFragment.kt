@@ -42,6 +42,7 @@ class UserProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val acti = activity as MainActivity
         val lblNamaUserProfile:TextView = view.findViewById(R.id.lblNamaUserProfile)
         val lblBalanceUserProfile:TextView = view.findViewById(R.id.lblBalanceUserProfile)

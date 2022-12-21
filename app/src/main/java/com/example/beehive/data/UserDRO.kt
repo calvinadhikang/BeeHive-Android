@@ -29,19 +29,19 @@ data class UserData(
     var NAMA: String? = null,
 
 	@field:SerializedName("CREATED_AT")
-	val CREATED_AT: String? = null,
+	var CREATED_AT: String? = null,
 
 	@field:SerializedName("PICTURE")
-	val PICTURE: String? = null,
+	var PICTURE: String? = null,
 
 	@field:SerializedName("EMAIL_VERIFIED_AT")
-	val EMAIL_VERIFIED_AT: String? = null,
+	var EMAIL_VERIFIED_AT: String? = null,
 
 	@field:SerializedName("DELETED_AT")
-	val DELETED_AT: Any? = null,
+	var DELETED_AT: Any? = null,
 
 	@field:SerializedName("BIO")
-	val BIO: String? = null,
+	var BIO: String? = null,
 
 	@field:SerializedName("EMAIL")
 	val EMAIL: String? = null,
@@ -50,26 +50,26 @@ data class UserData(
 	var BALANCE: String? = null,
 
 	@field:SerializedName("SUBSCRIBED")
-	val SUBSCRIBED: Int? = null,
+	var SUBSCRIBED: Int? = null,
 
 	@field:SerializedName("STATUS")
-	val STATUS: Int? = null,
+	var STATUS: Int? = null,
 
 	@field:SerializedName("PASSWORD")
-	val PASSWORD: String? = null,
+	var PASSWORD: String? = null,
 
 	@field:SerializedName("RATING")
-	val RATING: String? = null,
+	var RATING: String? = null,
 
 	@field:SerializedName("ROLES")
-	val ROLES: ROLES? = null,
+	var ROLES: ROLES? = null,
 
 	@field:SerializedName("TANGGAL_LAHIR")
-	val TANGGAL_LAHIR: String? = null,
+	var TANGGAL_LAHIR: String? = null,
 
 	@field:SerializedName("UPDATED_AT")
-	val UPDATED_AT: String? = null,
+	var UPDATED_AT: String? = null,
 
 	@field:SerializedName("REMEMBER_TOKEN")
-	val REMEMBER_TOKEN: String? = null
+	var REMEMBER_TOKEN: String? = null
 )

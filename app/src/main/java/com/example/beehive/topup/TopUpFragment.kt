@@ -109,7 +109,7 @@ class TopUpFragment : Fragment() {
                     override fun onResponse(call: Call<BasicDRO>, response: retrofit2.Response<BasicDRO>){
                         if(response.isSuccessful){
                             acti.showModal("Berhasil top up!"){}
-                            acti.reloadUser()
+                            acti.reloadUser(acti.userLogin!!.REMEMBER_TOKEN!!)
                             txtNominal.setText("")
                         }
                         else{
