@@ -25,17 +25,22 @@
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/card_category.xml" value="0.4" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/card_category_with_logo.xml" value="0.4" />
+        <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/card_complain.xml" value="0.176" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/card_list_lelang.xml" value="0.264" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/dialog_confirmation_layout.xml" value="0.2" />
+        <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/dialog_decline_transaction_sting.xml" value="0.264" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/dialog_layout.xml" value="0.264" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/dialog_pay_topup.xml" value="0.264" />
+        <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/dialog_rate_transcation_sting.xml" value="0.264" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/fragment_buy_sting.xml" value="0.264" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/fragment_create_lelang_sting.xml" value="0.264" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/fragment_detail_buy_sting.xml" value="0.176" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/fragment_detail_category.xml" value="0.264" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/fragment_detail_ordered_sting.xml" value="0.264" />
+        <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/fragment_detail_ordered_sting_in_progress.xml" value="0.176" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/fragment_detail_sting.xml" value="0.14447463768115942" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/fragment_landing_page.xml" value="0.2" />
+        <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/fragment_list_complains.xml" value="0.264" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/fragment_list_lelang_sting.xml" value="0.264" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/fragment_login.xml" value="0.176" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/fragment_notification.xml" value="0.14447463768115942" />

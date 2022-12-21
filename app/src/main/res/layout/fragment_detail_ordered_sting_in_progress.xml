@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    tools:context=".transaction_sting.DetailOrderedStingInProgressFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btnComplains"
+            android:layout_width="335dp"
+            android:layout_height="58dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="148dp"
+            android:text="Open Complains"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnAccept" />
+
+        <TextView
+            android:id="@+id/lblRevisionLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="68dp"
+            android:text="Revision Left : 3"
+            android:textColor="@color/primary"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout6" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout6"
+            android:layout_width="match_parent"
+            android:layout_height="113dp"
+            android:background="@drawable/background_curved_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textViewe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="92dp"
+                android:layout_marginTop="32dp"
+                android:text="Nama Sting"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="42dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="32dp"
+                android:clickable="true"
+                android:src="@drawable/back"
+                app:backgroundTint="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/lblStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:text="Status : In Revision"
+            android:textColor="@color/primary"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout6" />
+
+        <Button
+            android:id="@+id/btnDownload"
+            android:layout_width="335dp"
+            android:layout_height="58dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@android:color/transparent"
+            android:text="Donwload Latest Deliver"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lblRevisionLeft"
+            app:strokeColor="@color/primary"
+            android:textColor="@color/primary"
+            app:strokeWidth="1dp" />
+
+        <Button
+            android:id="@+id/btnDecline"
+            android:layout_width="160dp"
+            android:layout_height="58dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/error"
+            android:text="Decline Work"
+            android:textColor="@color/primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnDownload" />
+
+        <Button
+            android:id="@+id/btnAccept"
+            android:layout_width="160dp"
+            android:layout_height="58dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="12dp"
+            android:text="Accept Work"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/btnDecline"
+            app:layout_constraintTop_toBottomOf="@+id/btnDownload" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
