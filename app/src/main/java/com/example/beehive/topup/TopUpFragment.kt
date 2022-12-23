@@ -44,7 +44,11 @@ class TopUpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val acti = activity as MainActivity
+        acti.supportActionBar!!.hide()
+        acti.title = "Top Up"
+
         val btnBack: ImageButton = view.findViewById(R.id.btnBack)
         val btn10k: Button = view.findViewById(R.id.btn10k)
         val btn20k: Button = view.findViewById(R.id.btn20k)

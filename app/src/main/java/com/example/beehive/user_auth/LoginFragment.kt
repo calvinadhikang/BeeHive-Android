@@ -43,6 +43,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val acti = activity as MainActivity
+        acti.supportActionBar!!.hide()
         val btnLogin: Button = view.findViewById(R.id.btnLogin)
         val txtLinkToRegister: TextView = view.findViewById(R.id.txtLinkToRegister)
         val txtPasswordLogin: EditText = view.findViewById(R.id.txtPasswordLogin)

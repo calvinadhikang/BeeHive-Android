@@ -28,8 +28,9 @@
             android:layout_height="match_parent"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/secondary"
+            android:backgroundTint="@color/primary"
             android:text="Pending"
+            android:textColor="@color/white"
             android:textSize="14sp" />
 
         <Button
@@ -38,8 +39,9 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/secondary"
+            android:backgroundTint="@color/primary"
             android:text="Accepted"
+            android:textColor="@color/white"
             android:textSize="14sp" />
 
     </LinearLayout>
@@ -54,8 +56,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="@color/secondary"
+            android:backgroundTint="@color/primary"
             android:text="Revision"
+            android:textColor="@color/white"
             android:textSize="12sp" />
 
         <Button
@@ -65,8 +68,9 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/secondary"
+            android:backgroundTint="@color/primary"
             android:text="Canceled"
+            android:textColor="@color/white"
             android:textSize="12sp" />
 
         <Button
@@ -74,8 +78,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="@color/secondary"
+            android:backgroundTint="@color/primary"
             android:text="Done"
+            android:textColor="@color/white"
             android:textSize="12sp" />
     </LinearLayout>
 

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/bg"
     tools:context=".lelang_sting.ListLelangStingFragment">
 
@@ -11,15 +11,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView2a9"
-            android:layout_width="275dp"
-            android:layout_height="43dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="72dp"
-            android:text="List Lelang Sting"
-            android:textColor="@color/primary"
-            android:textSize="30sp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvListLelangSting"
+            android:layout_width="391dp"
+            android:layout_height="549dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnNavCreateLelangSting" />
+
+        <Button
+            android:id="@+id/btnNavListLelangSting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="128dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/secondary"
+            android:text="List Lelang"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -28,8 +36,8 @@
             android:id="@+id/btnNavCreateLelangSting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
             android:backgroundTint="#B4AEABAB"
             android:text="Create"
             android:textColor="#A9474646"
@@ -37,24 +45,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/btnNavListLelangSting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="144dp"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="@color/secondary"
-            android:text="List Lelang"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvListLelangSting"
-            android:layout_width="391dp"
-            android:layout_height="583dp"
-            android:layout_marginTop="1dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2a9" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

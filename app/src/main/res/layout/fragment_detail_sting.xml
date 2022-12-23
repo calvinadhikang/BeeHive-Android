@@ -88,6 +88,7 @@
             android:layout_height="wrap_content"
             android:text="Buy"
             android:background="@color/primary"
+            android:textColor="@color/white"
             android:layout_gravity="end"/>
     </LinearLayout>
 </ScrollView>

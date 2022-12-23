@@ -8,10 +8,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.android.volley.VolleyLog
@@ -21,6 +18,8 @@ import com.example.beehive.api_config.UserDRO
 import com.example.beehive.api_config.UserData
 import com.example.beehive.dao.AppDatabase
 import com.example.beehive.dao.User
+import com.example.beehive.data.Category
+import com.example.beehive.data.ListCategoryDRO
 import com.example.beehive.lelang_sting.CreateLelangStingFragment
 import com.example.beehive.observerConnectivity.ConnectivityObserver
 import com.example.beehive.observerConnectivity.NetworkConnectivityObserver
@@ -44,6 +43,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var db: AppDatabase
     var isLogin:Boolean = false
     var userLogin:UserData? = null
+
+    var listCategory:List<Category> = listOf()
+
      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -60,14 +62,19 @@ class MainActivity : AppCompatActivity() {
              runOnUiThread{
                  if(rememberMeCheck==null){
                      //tidak ada user yang lagi login
-                     beforeLogin()
+                     isLogin = false
+                     val nav_Menu: Menu = navbar.menu
+                     nav_Menu.findItem(R.id.menu_add).isVisible = false
+                     nav_Menu.findItem(R.id.menu_notification).isVisible = false
+                     swapToFrag(LandingPageFragment(), Bundle())
                  }else{
                      //ada user loged in
                      reloadUser(rememberMeCheck!!.REMEMBER_TOKEN,true)
+                     swapToFrag(LandingPageFragment(), Bundle())
                  }
              }
          }
-         swapToFrag(LandingPageFragment(), Bundle())
+
          navbar.setOnNavigationItemSelectedListener {
              return@setOnNavigationItemSelectedListener when(it.itemId){
                  R.id.menu_home->{
@@ -101,6 +108,32 @@ class MainActivity : AppCompatActivity() {
              }
          }
     }
+    fun fetchCategory(){
+        val client = ApiConfiguration.getApiService().fetchCategory(remember_token = userLogin!!.REMEMBER_TOKEN!!)
+        client.enqueue(object: Callback<ListCategoryDRO> {
+            override fun onResponse(call: Call<ListCategoryDRO>, response: retrofit2.Response<ListCategoryDRO>){
+                if(response.isSuccessful){
+                    val responseBody = response.body()
+                    if(responseBody!=null){
+                        listCategory = responseBody.data as List<Category>
+
+                    }
+                }
+                else{
+                    val statusCode:Int = response.code()
+                    val message:String = response.body()!!.message!!
+                    Log.e("ERROR FETCH CATEGORY", "Fail Access: $statusCode")
+                    Toast.makeText(this@MainActivity,
+                        message.toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ListCategoryDRO>, t: Throwable) {
+                Log.e("ERROR FETCH CATEGORY", "onFailure: ${t.message}")
+            }
+
+        })
+    }
     private fun swapToFrag(fragment: Fragment, bundle:Bundle){
         fragment.arguments = bundle
         val fragmentManager = supportFragmentManager.beginTransaction()
@@ -119,6 +152,7 @@ class MainActivity : AppCompatActivity() {
         nav_Menu.findItem(R.id.menu_add).isVisible = true
         nav_Menu.findItem(R.id.menu_notification).isVisible = true
         isLogin = true
+        fetchCategory()
         swapToFrag(UserProfileFragment(), Bundle())
     }
     fun afterFetchRememberMe(){
@@ -126,6 +160,7 @@ class MainActivity : AppCompatActivity() {
         nav_Menu.findItem(R.id.menu_add).isVisible = true
         nav_Menu.findItem(R.id.menu_notification).isVisible = true
         isLogin = true
+        fetchCategory()
         swapToFrag(LandingPageFragment(), Bundle())
     }
     fun login(user:UserData){
@@ -236,4 +271,17 @@ class MainActivity : AppCompatActivity() {
 
         })
     }
+
+
+//    <ImageView
+//    android:id="@+id/imageView6"
+//    android:layout_width="50dp"
+//    android:layout_height="50dp"
+//    android:layout_marginBottom="15dp"
+//    android:background="@drawable/button_nav_add"
+//    android:padding="6dp"
+//    app:layout_constraintBottom_toBottomOf="parent"
+//    app:layout_constraintEnd_toEndOf="@+id/navbarBeforeLogin"
+//    app:layout_constraintStart_toStartOf="parent"
+//    app:srcCompat="@drawable/add_white" />
 }

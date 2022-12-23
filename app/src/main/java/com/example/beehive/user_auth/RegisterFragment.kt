@@ -33,6 +33,7 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val acti = activity as MainActivity
+        acti.supportActionBar!!.hide()
         var btnNextRegister:Button = view.findViewById(R.id.btnNextRegister)
         var btnBackRegister:ImageButton = view.findViewById(R.id.btnBackRegister)
         var txtLinkToLogin:TextView = view.findViewById(R.id.txtLinkToLogin)

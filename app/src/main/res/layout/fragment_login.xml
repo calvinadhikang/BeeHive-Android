@@ -15,7 +15,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="313dp"
+            android:layout_height="373dp"
             android:background="@color/primary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -70,7 +70,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="360dp"
             android:layout_height="399dp"
-            android:layout_marginTop="240dp"
+            android:layout_marginTop="250dp"
             android:background="@drawable/background_white_form"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

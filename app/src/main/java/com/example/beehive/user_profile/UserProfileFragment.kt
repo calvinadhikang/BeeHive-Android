@@ -44,6 +44,9 @@ class UserProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val acti = activity as MainActivity
+        acti.title = "User Profile"
+        acti.supportActionBar!!.show()
+
         val lblNamaUserProfile:TextView = view.findViewById(R.id.lblNamaUserProfile)
         val lblBalanceUserProfile:TextView = view.findViewById(R.id.lblBalanceUserProfile)
         val lblBirthUserProfile:TextView = view.findViewById(R.id.lblBirthUserProfile)

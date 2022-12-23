@@ -31,5 +31,7 @@ class DetailOrderedStingInProgressFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val acti = activity as MainActivity
+        acti.supportActionBar!!.hide()
+        acti.title = "Detail Ordered Sting"
     }
 }

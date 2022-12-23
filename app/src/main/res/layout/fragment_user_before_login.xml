@@ -15,7 +15,7 @@
             android:id="@+id/btnToLogin"
             android:layout_width="267dp"
             android:layout_height="57dp"
-            android:layout_marginTop="476dp"
+            android:layout_marginTop="512dp"
 
             android:text="Sign In!"
             android:textColor="@color/white"
@@ -27,7 +27,7 @@
             android:id="@+id/btnToRegister"
             android:layout_width="267dp"
             android:layout_height="52dp"
-            android:layout_marginTop="540dp"
+            android:layout_marginTop="576dp"
             android:backgroundTint="#FFFFFF"
             android:text="Sign Up!"
             android:textColor="#3C3535"
@@ -37,7 +37,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="357dp"
+            android:layout_height="417dp"
             android:background="@drawable/background_curved_1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -47,18 +47,18 @@
                 android:layout_width="83dp"
                 android:layout_height="86dp"
                 android:layout_marginStart="48dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="44dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/logo1" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/textView25"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
-                android:layout_marginTop="136dp"
-                android:text="Welcome to"
+                android:layout_marginTop="216dp"
+                android:text="Beehive!"
                 android:textColor="#C0D9D2"
                 android:textSize="35sp"
                 android:textStyle="bold"
@@ -66,12 +66,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView25"
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
-                android:layout_marginTop="180dp"
-                android:text="Beehive!"
+                android:layout_marginTop="172dp"
+                android:text="Welcome to"
                 android:textColor="#C0D9D2"
                 android:textSize="35sp"
                 android:textStyle="bold"
@@ -83,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
-                android:layout_marginTop="244dp"
+                android:layout_marginTop="280dp"
                 android:text="Bee the most coolest freelancer!"
                 android:textColor="#C0D9D2"
                 android:textSize="17sp"

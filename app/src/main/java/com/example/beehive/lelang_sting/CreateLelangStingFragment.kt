@@ -38,6 +38,8 @@ class CreateLelangStingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val acti = activity as MainActivity
+        acti.supportActionBar!!.show()
+        acti.title = "Create Lelang Sting"
         val txtProjectRequirement: EditText = view.findViewById(R.id.txtProjectRequirement)
         val txtProjectTitle: EditText = view.findViewById(R.id.txtProjectTitle)
         val txtProjectCommision: EditText = view.findViewById(R.id.txtProjectCommision)
@@ -45,7 +47,6 @@ class CreateLelangStingFragment : Fragment() {
         val btnNavListLelangSting: Button = view.findViewById(R.id.btnNavListLelangSting)
         val btnCreateLelangSting: Button = view.findViewById(R.id.btnCreateLelangSting)
         val spinnerCategory: Spinner = view.findViewById(R.id.spinnerCategory)
-        var listCategory:List<Category> = listOf()
         var token:String = acti.userLogin!!.REMEMBER_TOKEN!!
 //        var spinnerAdapter: ArrayAdapter<Category> = ArrayAdapter<Category>(
 //            requireContext(),android.R.layout.simple_spinner_item, listCategory
@@ -53,41 +54,19 @@ class CreateLelangStingFragment : Fragment() {
 //        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 //        spinnerCategory.adapter = spinnerAdapter
 
+        var spinnerAdapter: ArrayAdapter<Category> = ArrayAdapter<Category>(
+            requireContext(),android.R.layout.simple_spinner_item, acti.listCategory
+        )
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerCategory.adapter = spinnerAdapter
+
+
         btnNavListLelangSting.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.frMain, ListLelangStingFragment())
                 .commit()
         }
-        val client = ApiConfiguration.getApiService().fetchCategory(remember_token = acti.userLogin!!.REMEMBER_TOKEN!!)
-        client.enqueue(object: Callback<ListCategoryDRO> {
-            override fun onResponse(call: Call<ListCategoryDRO>, response: retrofit2.Response<ListCategoryDRO>){
-                if(response.isSuccessful){
-                    val responseBody = response.body()
-                    if(responseBody!=null){
-                        listCategory = responseBody.data as List<Category>
-                        var spinnerAdapter: ArrayAdapter<Category> = ArrayAdapter<Category>(
-                            requireContext(),android.R.layout.simple_spinner_item, listCategory
-                        )
-                        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                        spinnerCategory.adapter = spinnerAdapter
-                    }
-                }
-                else{
-                    val statusCode:Int = response.code()
-                    val message:String = response.body()!!.message!!
-                    Log.e("ERROR FETCH CATEGORY", "Fail Access: $statusCode")
-//                    if(statusCode==401){
-//                    }
-                    Toast.makeText(requireContext(),
-                        message.toString(), Toast.LENGTH_SHORT).show()
-                }
-            }
 
-            override fun onFailure(call: Call<ListCategoryDRO>, t: Throwable) {
-                Log.e("ERROR FETCH CATEGORY", "onFailure: ${t.message}")
-            }
-
-        })
 
         btnCreateLelangSting.setOnClickListener {
             var title:String = txtProjectTitle.text.toString()
@@ -99,7 +78,7 @@ class CreateLelangStingFragment : Fragment() {
                 return@setOnClickListener
             }
             price = priceStr.toInt()
-            var category:Int = listCategory[spinnerCategory.selectedItemPosition].ID_CATEGORY!!
+            var category:Int = acti.listCategory[spinnerCategory.selectedItemPosition].ID_CATEGORY!!
             var lelangData:CreateLelangStingDTO = CreateLelangStingDTO(title,requirement, price, category)
             try {
                 val client = ApiConfiguration.getApiService().CreateLelangSting(lelangStingData = lelangData,

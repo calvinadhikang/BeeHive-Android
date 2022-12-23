@@ -39,6 +39,8 @@ class RegisterFinalFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val acti = activity as MainActivity
+        acti.supportActionBar!!.hide()
         var txtLinkToLogin2:TextView = view.findViewById(R.id.txtLinkToLogin2)
         var btnBackRegisterFinal:ImageButton = view.findViewById(R.id.btnBackRegisterFinal)
         var btnRegister:Button = view.findViewById(R.id.btnRegister)
@@ -62,7 +64,6 @@ class RegisterFinalFragment(
             var confirm:String = txtConfirmPasswordRegister.text.toString()
             var name:String = txtNameRegister.text.toString()
             val acti = activity as MainActivity
-            val WS_HOST:String = env.URL
             val day: Int = txtDateRegister.dayOfMonth
             val month: Int = txtDateRegister.month
             val year: Int = txtDateRegister.year

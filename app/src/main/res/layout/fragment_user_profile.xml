@@ -15,10 +15,9 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="345dp"
             android:layout_height="520dp"
-            android:layout_marginTop="84dp"
+            android:layout_marginTop="36dp"
             android:background="@drawable/background_curved_full"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.549"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -149,30 +148,18 @@
                     android:layout_width="288dp"
                     android:layout_height="52dp"
                     android:layout_marginStart="28dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="-2dp"
                     android:text="Logout"
                     android:textColor="@color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/btnEditProfileUser" />
 
                 <Button
-                    android:id="@+id/btnEditProfileUser"
-                    android:layout_width="288dp"
-                    android:layout_height="52dp"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="280dp"
-                    android:backgroundTint="#3E7C17"
-                    android:text="Edit Profile"
-                    android:textColor="@color/white"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <Button
                     android:id="@+id/btnTopUp"
                     android:layout_width="288dp"
                     android:layout_height="52dp"
                     android:layout_marginStart="28dp"
-                    android:layout_marginTop="216dp"
+                    android:layout_marginTop="240dp"
                     android:backgroundTint="#FFFFFF"
                     android:text="Top Up"
                     android:textColor="@color/primary"
@@ -180,6 +167,18 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:strokeColor="@color/primary"
                     app:strokeWidth="1dp" />
+
+                <Button
+                    android:id="@+id/btnEditProfileUser"
+                    android:layout_width="288dp"
+                    android:layout_height="52dp"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="288dp"
+                    android:backgroundTint="#3E7C17"
+                    android:text="Edit Profile"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
@@ -190,24 +189,11 @@
                 android:layout_marginTop="28dp"
                 android:background="@drawable/full_rounded_picture"
                 android:clipToOutline="true"
+                android:src="@drawable/logo1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/logo1" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/textView27"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="28dp"
-            android:text="User Profile"
-            android:textColor="@color/primary"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

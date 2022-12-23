@@ -28,6 +28,7 @@ class UserBeforeLoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val acti = activity as MainActivity
+        acti.supportActionBar!!.hide()
         var btnToLogin: Button = view.findViewById(R.id.btnToLogin)
         var btnToRegister: Button = view.findViewById(R.id.btnToRegister)
         btnToLogin.setOnClickListener {

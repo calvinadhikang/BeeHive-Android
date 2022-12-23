@@ -20,4 +20,10 @@ class NotificationFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_notification, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val acti = activity as MainActivity
+        acti.supportActionBar!!.show()
+        acti.title = "Notifications"
+    }
 }
