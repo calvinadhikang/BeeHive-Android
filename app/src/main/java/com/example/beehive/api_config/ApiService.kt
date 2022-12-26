@@ -39,7 +39,6 @@ interface ApiService {
 
     @GET("category/fetch")
     fun fetchCategory(
-        @Query("REMEMBER_TOKEN") remember_token:String
     ): Call<ListCategoryDRO>
 
 

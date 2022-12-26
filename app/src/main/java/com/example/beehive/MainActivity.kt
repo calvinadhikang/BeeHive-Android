@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity() {
          }
     }
     fun fetchCategory(){
-        val client = ApiConfiguration.getApiService().fetchCategory(remember_token = userLogin!!.REMEMBER_TOKEN!!)
+        val client = ApiConfiguration.getApiService().fetchCategory()
         client.enqueue(object: Callback<ListCategoryDRO> {
             override fun onResponse(call: Call<ListCategoryDRO>, response: retrofit2.Response<ListCategoryDRO>){
                 if(response.isSuccessful){
