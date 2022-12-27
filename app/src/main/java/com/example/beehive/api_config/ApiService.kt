@@ -42,7 +42,11 @@ interface ApiService {
         @Query("REMEMBER_TOKEN") remember_token:String
     ): Call<ListCategoryDRO>
 
+    @GET("sting/most")
+    fun fetchMostSting(): Call<MostStingDRO>
 
+    @GET("category/fetch")
+    fun fetchCategoryNoAuth(): Call<ListCategoryDRO>
 
     @POST("sting/lelang/make")
     fun CreateLelangSting(
