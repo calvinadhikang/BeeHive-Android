@@ -21,50 +21,105 @@ data class MostStingDRO(
 data class StingMost(
 
 	@field:SerializedName("MAX_REVISION_PREMIUM")
-	val mAXREVISIONPREMIUM: String? = null,
+	val MAX_REVISION_PREMIUM: String? = null,
 
 	@field:SerializedName("PRICE_BASIC")
-	val pRICEBASIC: String? = null,
+	val PRICE_BASIC: String? = null,
 
 	@field:SerializedName("MAX_REVISION_BASIC")
-	val mAXREVISIONBASIC: String? = null,
+	val MAX_REVISION_BASIC: String? = null,
 
 	@field:SerializedName("CREATED_AT")
-	val cREATEDAT: String? = null,
+	val CREATED_AT: String? = null,
 
 	@field:SerializedName("DELETED_AT")
-	val dELETEDAT: String? = null,
+	val DELETED_AT: String? = null,
+
+	@field:SerializedName("author")
+	val author: Author? = null,
 
 	@field:SerializedName("NAMA_THUMBNAIL")
-	val nAMATHUMBNAIL: String? = null,
+	val NAMA_THUMBNAIL: String? = null,
 
 	@field:SerializedName("ID_STING")
-	val iDSTING: String? = null,
+	val ID_STING: String? = null,
 
 	@field:SerializedName("STATUS")
-	val sTATUS: String? = null,
+	val STATUS: String? = null,
 
 	@field:SerializedName("DESKRIPSI")
-	val dESKRIPSI: String? = null,
+	val DESKRIPSI: String? = null,
 
 	@field:SerializedName("DESKRIPSI_BASIC")
-	val dESKRIPSIBASIC: String? = null,
+	val DESKRIPSI_BASIC: String? = null,
 
 	@field:SerializedName("RATING")
-	val rATING: String? = null,
+	val RATING: String? = null,
 
 	@field:SerializedName("TITLE_STING")
-	val tITLESTING: String? = null,
+	val TITLE_STING: String? = null,
 
 	@field:SerializedName("DESKRIPSI_PREMIUM")
-	val dESKRIPSIPREMIUM: String? = null,
+	val DESKRIPSI_PREMIUM: String? = null,
 
 	@field:SerializedName("EMAIL_BEEWORKER")
-	val eMAILBEEWORKER: String? = null,
+	val EMAIL_BEEWORKER: String? = null,
 
 	@field:SerializedName("UPDATED_AT")
-	val uPDATEDAT: String? = null,
+	val UPDATED_AT: String? = null,
 
 	@field:SerializedName("PRICE_PREMIUM")
-	val pRICEPREMIUM: String? = null
+	val PRICE_PREMIUM: String? = null
+) : Parcelable
+
+@Parcelize
+data class Author(
+
+	@field:SerializedName("SUBSCRIBED_AT")
+	val SUBSCRIBED_AT: String? = null,
+
+	@field:SerializedName("NAMA")
+	val NAMA: String? = null,
+
+	@field:SerializedName("CREATED_AT")
+	val CREATED_AT: String? = null,
+
+	@field:SerializedName("PICTURE")
+	val PICTURE: String? = null,
+
+	@field:SerializedName("EMAIL_VERIFIED_AT")
+	val EMAIL_VERIFIED_AT: String? = null,
+
+	@field:SerializedName("DELETED_AT")
+	val DELETED_AT: String? = null,
+
+	@field:SerializedName("BIO")
+	val BIO: String? = null,
+
+	@field:SerializedName("EMAIL")
+	val EMAIL: String? = null,
+
+	@field:SerializedName("BALANCE")
+	val BALANCE: String? = null,
+
+	@field:SerializedName("SUBSCRIBED")
+	val SUBSCRIBED: String? = null,
+
+	@field:SerializedName("STATUS")
+	val STATUS: String? = null,
+
+	@field:SerializedName("PASSWORD")
+	val PASSWORD: String? = null,
+
+	@field:SerializedName("RATING")
+	val RATING: String? = null,
+
+	@field:SerializedName("TANGGAL_LAHIR")
+	val TANGGAL_LAHIR: String? = null,
+
+	@field:SerializedName("UPDATED_AT")
+	val UPDATED_AT: String? = null,
+
+	@field:SerializedName("REMEMBER_TOKEN")
+	val REMEMBER_TOKEN: String? = null
 ) : Parcelable

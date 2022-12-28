@@ -27,7 +27,7 @@
         android:layout_marginTop="8dp"
         android:text="TextView"
         android:textColor="#4CAF50"
-        app:layout_constraintStart_toEndOf="@+id/imageView8"
+        app:layout_constraintStart_toEndOf="@+id/imgBeeworker"
         app:layout_constraintTop_toBottomOf="@+id/lblNamaWorker_card" />
 
     <TextView
@@ -38,11 +38,11 @@
         android:layout_marginTop="8dp"
         android:text="TextView"
         android:textColor="#4CAF50"
-        app:layout_constraintStart_toEndOf="@+id/imageView8"
+        app:layout_constraintStart_toEndOf="@+id/imgBeeworker"
         app:layout_constraintTop_toTopOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/imgBeeworker"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
@@ -62,7 +62,7 @@
         android:textColor="#4CAF50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imgSting"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+        app:layout_constraintTop_toBottomOf="@+id/imgBeeworker" />
 
     <TextView
         android:id="@+id/lblHargaSting_card"
