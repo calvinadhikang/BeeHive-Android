@@ -5,10 +5,10 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 @Parcelize
-data class ListCategoryDRO(
+data class MostStingDRO(
 
 	@field:SerializedName("data")
-	val data: List<Category?>? = null,
+	val data: StingMost? = null,
 
 	@field:SerializedName("success")
 	val success: Boolean? = null,
@@ -18,16 +18,16 @@ data class ListCategoryDRO(
 ) : Parcelable
 
 @Parcelize
-data class StingsRelatedItem(
+data class StingMost(
 
 	@field:SerializedName("MAX_REVISION_PREMIUM")
-	val MAXREVISIONPREMIUM: Int? = null,
+	val mAXREVISIONPREMIUM: String? = null,
 
 	@field:SerializedName("PRICE_BASIC")
-	val pRICEBASIC: Int? = null,
+	val pRICEBASIC: String? = null,
 
 	@field:SerializedName("MAX_REVISION_BASIC")
-	val mAXREVISIONBASIC: Int? = null,
+	val mAXREVISIONBASIC: String? = null,
 
 	@field:SerializedName("CREATED_AT")
 	val cREATEDAT: String? = null,
@@ -42,7 +42,7 @@ data class StingsRelatedItem(
 	val iDSTING: String? = null,
 
 	@field:SerializedName("STATUS")
-	val sTATUS: Int? = null,
+	val sTATUS: String? = null,
 
 	@field:SerializedName("DESKRIPSI")
 	val dESKRIPSI: String? = null,
@@ -62,51 +62,9 @@ data class StingsRelatedItem(
 	@field:SerializedName("EMAIL_BEEWORKER")
 	val eMAILBEEWORKER: String? = null,
 
-	@field:SerializedName("pivot")
-	val pivot: Pivot? = null,
-
 	@field:SerializedName("UPDATED_AT")
 	val uPDATEDAT: String? = null,
 
 	@field:SerializedName("PRICE_PREMIUM")
-	val pRICEPREMIUM: Int? = null
+	val pRICEPREMIUM: String? = null
 ) : Parcelable
-
-@Parcelize
-data class Pivot(
-
-	@field:SerializedName("ID_CATEGORY")
-	val ID_CATEGORY: Int? = null,
-
-	@field:SerializedName("ID_STING")
-	val ID_STING: String? = null
-) : Parcelable
-
-@Parcelize
-data class Category(
-
-	@field:SerializedName("stingsRelatedCount")
-	val StingsRelatedCount: Int,
-
-	@field:SerializedName("NAMA_CATEGORY")
-	val NAMA_CATEGORY: String,
-
-	@field:SerializedName("ID_CATEGORY")
-	val ID_CATEGORY: Int,
-
-	@field:SerializedName("CREATED_AT")
-	val CREATED_AT: String,
-
-	@field:SerializedName("stings_related")
-	val stingsRelated: List<StingsRelatedItem?>,
-
-	@field:SerializedName("DELETED_AT")
-	val DELETED_AT: String? = null,
-
-	@field:SerializedName("UPDATED_AT")
-	val UPDATED_AT: String? = null
-) : Parcelable{
-	override fun toString(): String {
-		return NAMA_CATEGORY!!
-	}
-}

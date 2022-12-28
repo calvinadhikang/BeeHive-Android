@@ -41,7 +41,11 @@ interface ApiService {
     fun fetchCategory(
     ): Call<ListCategoryDRO>
 
+    @GET("sting/most")
+    fun fetchMostSting(): Call<MostStingDRO>
 
+    @GET("category/fetch")
+    fun fetchCategoryNoAuth(): Call<ListCategoryDRO>
 
     @POST("sting/lelang/make")
     fun CreateLelangSting(
