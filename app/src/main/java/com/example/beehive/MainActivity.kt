@@ -6,13 +6,9 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.view.MenuItem
-import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.android.volley.VolleyLog
-import com.example.beehive.CurrencyUtils.toRupiah
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.api_config.UserDRO
 import com.example.beehive.api_config.UserData
@@ -20,14 +16,14 @@ import com.example.beehive.dao.AppDatabase
 import com.example.beehive.dao.User
 import com.example.beehive.data.Category
 import com.example.beehive.data.ListCategoryDRO
+import com.example.beehive.data.ListStingDRO
+import com.example.beehive.data.ListTransactionStingDRO
 import com.example.beehive.lelang_sting.CreateLelangStingFragment
 import com.example.beehive.observerConnectivity.ConnectivityObserver
 import com.example.beehive.observerConnectivity.NetworkConnectivityObserver
 import com.example.beehive.user_auth.UserBeforeLoginFragment
 import com.example.beehive.user_profile.UserProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
-import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -75,6 +71,31 @@ class MainActivity : AppCompatActivity() {
              }
          }
 
+         val client = ApiConfiguration.getApiService().fetchTransactionSting()
+         client.enqueue(object: Callback<ListTransactionStingDRO> {
+             override fun onResponse(call: Call<ListTransactionStingDRO>, response: retrofit2.Response<ListTransactionStingDRO>){
+                 if(response.isSuccessful){
+                     val responseBody = response.body()
+                     if(responseBody!=null){
+                         Log.i("ENRICOASD",responseBody.toString())
+                         showModal("FETCH DONE"){}
+
+                     }
+                 }
+                 else{
+                     val statusCode:Int = response.code()
+                     val message:String = response.body()!!.message!!
+                     Log.e("ERROR FETCH STING", "Fail Access: $statusCode")
+                     Toast.makeText(this@MainActivity,
+                         message.toString(), Toast.LENGTH_SHORT).show()
+                 }
+             }
+
+             override fun onFailure(call: Call<ListTransactionStingDRO>, t: Throwable) {
+                 Log.e("ERROR FETCH CATEGORY", "onFailure: ${t.message}")
+             }
+
+         })
          navbar.setOnNavigationItemSelectedListener {
              return@setOnNavigationItemSelectedListener when(it.itemId){
                  R.id.menu_home->{

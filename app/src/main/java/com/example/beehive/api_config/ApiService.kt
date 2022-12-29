@@ -24,8 +24,8 @@ interface ApiService {
     @POST("register")
     fun register(@Body userRegisterData: UserRegisterDTO): Call<UserDRO>
 
-    //get user profile
 
+//    USER SECTION
     @GET("user/get")
     fun getProfile(
         @Query("REMEMBER_TOKEN") remember_token:String
@@ -37,16 +37,62 @@ interface ApiService {
         @Body topUpData: TopUpDTO,
     ): Call<BasicDRO>
 
+    @POST("user/password")
+    fun changePassword(
+        @Query("REMEMBER_TOKEN") remember_token:String,
+        @Body changePasswordData: ChangePasswordDTO,
+    ): Call<BasicDRO>
+
+    @POST("user/profile")
+    fun changeProfile(
+        @Query("REMEMBER_TOKEN") remember_token:String,
+        @Body changeProfileData: ChangeProfileUserDTO,
+    ): Call<BasicDRO>
+
+
+    //CATEGORY SECTION
     @GET("category/fetch")
     fun fetchCategory(
     ): Call<ListCategoryDRO>
 
-    @GET("sting/most")
-    fun fetchMostSting(): Call<MostStingDRO>
-
     @GET("category/fetch")
     fun fetchCategoryNoAuth(): Call<ListCategoryDRO>
 
+    //STING SECTION
+    @GET("sting/{id}")
+    fun getStingDetail(
+        @Path("id") id:String
+    ): Call<StingDRO>
+
+    @GET("sting/fetch")
+    fun fetchSting(): Call<ListStingDRO>
+
+    @GET("sting/most")
+    fun fetchMostSting(): Call<MostStingDRO>
+
+    //SECTION TRANSACTION STING
+    @GET("sting/transaction/fetch")
+    fun fetchTransactionSting(): Call<ListTransactionStingDRO>
+
+    @GET("sting/transaction/fetch/{status}")
+    fun fetchTransactionStingByStatus(
+        @Path("status") status:String
+    ): Call<ListTransactionStingDRO>
+
+    @POST("sting/buy/{kode}/{mode}")
+    fun buySting(
+        @Query("REMEMBER_TOKEN") remember_token:String,
+        @Path("kode") kode:String,
+        @Path("mode") mode:String,
+        @Body buyStingData: BuyStingDTO
+    ): Call<BasicDRO>
+
+
+    //SECTION LELANG
+    @GET("sting/lelang/fetch")
+    fun fetchLelangSting(
+        @Query("REMEMBER_TOKEN") remember_token:String,
+    ): Call<ListLelangStingDRO>
     @POST("sting/lelang/make")
     fun CreateLelangSting(
         @Query("REMEMBER_TOKEN") remember_token:String,

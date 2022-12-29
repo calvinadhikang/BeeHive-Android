@@ -21,6 +21,17 @@ data class CreateLelangStingDTO(
     var price:Int,
     var category:Int
 )
+data class BuyStingDTO(
+    var REQUIREMENT_PROJECT:String,
+)
 data class TopUpDTO(
     var nominal:Int
+)
+data class ChangePasswordDTO(
+    var new:String,
+    var confirm:String
+)
+data class ChangeProfileUserDTO(
+    var name:String,
+    var bio:String
 )
