@@ -79,5 +79,11 @@ data class TransactionStingData(
 	val FILENAME_FINAL: String? = null,
 
 	@field:SerializedName("DATE_END")
-	val DATE_END: String? = null
+	val DATE_END: String? = null,
+
+	@field:SerializedName("sting")
+	val sting: StingData? = null,
+
+	@field:SerializedName("author")
+	val author: Author? = null,
 ) : Parcelable

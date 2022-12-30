@@ -1,4 +1,4 @@
-package com.example.beehive.topup
+package com.example.beehive.user_profile
 
 import android.app.Dialog
 import android.graphics.Color
@@ -19,8 +19,6 @@ import com.example.beehive.R
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.data.BasicDRO
 import com.example.beehive.data.TopUpDTO
-import com.example.beehive.user_auth.RegisterFinalFragment
-import com.example.beehive.user_profile.UserProfileFragment
 import retrofit2.Call
 import retrofit2.Callback
 import java.text.SimpleDateFormat

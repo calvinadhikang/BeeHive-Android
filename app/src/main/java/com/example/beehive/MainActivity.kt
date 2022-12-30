@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -293,6 +294,14 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId==android.R.id.home){
+        }
+        Toast.makeText(this,
+            "bruh", Toast.LENGTH_SHORT).show()
+        return true
+//        return super.onOptionsItemSelected(item)
+    }
 
 //    <ImageView
 //    android:id="@+id/imageView6"

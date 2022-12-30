@@ -1,28 +1,16 @@
 package com.example.beehive.user_profile
 
-import android.icu.number.NumberFormatter.with
-import android.icu.number.NumberRangeFormatter.with
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
 import com.example.beehive.CurrencyUtils.toRupiah
 import com.example.beehive.MainActivity
 import com.example.beehive.R
-import com.example.beehive.api_config.ApiConfiguration
-import com.example.beehive.api_config.UserDRO
-import com.example.beehive.api_config.UserData
-import com.example.beehive.data.BasicDRO
 import com.example.beehive.env
-import com.example.beehive.topup.TopUpFragment
-import com.example.beehive.user_auth.RegisterFinalFragment
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
 import com.squareup.picasso.Picasso;
 
 class UserProfileFragment : Fragment() {
@@ -46,6 +34,7 @@ class UserProfileFragment : Fragment() {
         val acti = activity as MainActivity
         acti.title = "User Profile"
         acti.supportActionBar!!.show()
+        acti.supportActionBar!!.setDisplayHomeAsUpEnabled(false)
 
         val lblNamaUserProfile:TextView = view.findViewById(R.id.lblNamaUserProfile)
         val lblBalanceUserProfile:TextView = view.findViewById(R.id.lblBalanceUserProfile)
@@ -72,6 +61,8 @@ class UserProfileFragment : Fragment() {
             .load(env.URLIMAGE+"profile-pictures/${acti.userLogin!!.PICTURE}")
             .resize(50,50)
             .into(imgProfilePicture)
+        imgProfilePicture.clipToOutline = true
+        imgProfilePicture.setBackgroundResource(R.drawable.full_rounded_picture)
 
 
         btnLogout.setOnClickListener {
@@ -84,14 +75,16 @@ class UserProfileFragment : Fragment() {
                 })
         }
         btnEditProfile.setOnClickListener {
-
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.frMain, UserEditProfileFragment())
+                .commit()
         }
         btnTopUp.setOnClickListener {
-
             parentFragmentManager.beginTransaction()
                 .replace(R.id.frMain, TopUpFragment())
                 .commit()
         }
 
     }
+
 }
