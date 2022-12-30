@@ -74,6 +74,11 @@ interface ApiService {
     @GET("sting/transaction/fetch")
     fun fetchTransactionSting(): Call<ListTransactionStingDRO>
 
+    @GET("sting/category/{category}")
+    fun fetchTransactionStingByCategory(
+        @Path("category") category:Int
+    ): Call<ListTransactionStingDRO>
+
     @GET("sting/transaction/fetch/{status}")
     fun fetchTransactionStingByStatus(
         @Path("status") status:String

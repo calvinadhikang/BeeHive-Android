@@ -82,5 +82,9 @@ data class StingData(
 	val UPDATED_AT: String? = null,
 
 	@field:SerializedName("PRICE_PREMIUM")
-	val PRICE_PREMIUM: String? = null
+	val PRICE_PREMIUM: String? = null,
+
+	@field:SerializedName("JUMLAH_ORDER")
+	val JUMLAH_ORDER: String? = null
+
 ) : Parcelable
