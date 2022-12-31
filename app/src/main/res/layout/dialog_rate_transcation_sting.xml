@@ -77,11 +77,11 @@
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="Enter your review, please be honest :D"
+        android:hint="Wow it's very good (^人^)"
         android:inputType="textMultiLine"
         android:padding="9dp"
         android:textColor="@color/primary"
-        android:textColorHint="#A10E4E18"
+        android:textColorHint="#8A0E4E18"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView51a" />
 

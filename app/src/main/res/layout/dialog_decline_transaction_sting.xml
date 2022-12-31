@@ -77,7 +77,7 @@
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="Enter your reason for declining this deliver sting"
+        android:hint="Ohno its bad (* ￣︿￣)"
         android:inputType="textMultiLine"
         android:padding="9dp"
         android:textColor="@color/primary"

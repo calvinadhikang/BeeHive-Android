@@ -5,8 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import com.example.beehive.MainActivity
 import com.example.beehive.R
+import com.example.beehive.lelang_sting.ListLelangStingFragment
 
 class DetailOrderedStingInProgressFragment : Fragment() {
 
@@ -33,5 +36,30 @@ class DetailOrderedStingInProgressFragment : Fragment() {
         val acti = activity as MainActivity
         acti.supportActionBar!!.hide()
         acti.title = "Detail Ordered Sting"
+        val btnDownload:Button = view.findViewById(R.id.btnDownload)
+        val btnDecline:Button = view.findViewById(R.id.btnDecline)
+        val btnAccept:Button = view.findViewById(R.id.btnAccept)
+        val btnComplains:Button = view.findViewById(R.id.btnComplains)
+        val btnBack:ImageButton = view.findViewById(R.id.btnBack)
+
+        btnBack.setOnClickListener{
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.frMain, ListLelangStingFragment())
+                .commit()
+        }
+        btnDownload.setOnClickListener {
+
+        }
+        btnDecline.setOnClickListener {
+
+        }
+        btnAccept.setOnClickListener {
+
+        }
+        btnComplains.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.frMain, ListComplainsFragment())
+                .commit()
+        }
     }
 }
