@@ -1,6 +1,7 @@
 package com.example.beehive.api_config
 
 import com.example.beehive.data.*
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 import retrofit2.http.GET
@@ -49,6 +50,12 @@ interface ApiService {
         @Body changeProfileData: ChangeProfileUserDTO,
     ): Call<BasicDRO>
 
+    @Multipart
+    @POST("user/picture")
+    fun changePicture(
+        @Query("REMEMBER_TOKEN") remember_token:String,
+        @Part picture: MultipartBody.Part
+    ): Call<BasicDRO>
 
     //CATEGORY SECTION
     @GET("category/fetch")

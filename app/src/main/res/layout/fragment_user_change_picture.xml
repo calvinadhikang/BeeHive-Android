@@ -49,7 +49,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="351dp"
-            android:layout_height="491dp"
+            android:layout_height="500dp"
             android:layout_marginTop="80dp"
             android:background="@drawable/background_white_form"
             app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +67,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/imageView7"
+                    android:id="@+id/imgTemp"
                     android:layout_width="144dp"
                     android:layout_height="111dp"
                     android:layout_marginTop="28dp"
@@ -86,19 +86,19 @@
                     android:textSize="19sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+                    app:layout_constraintTop_toBottomOf="@+id/imgTemp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
                 android:id="@+id/btnSavePicture"
                 android:layout_width="290dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="68dp"
                 android:background="@color/primary"
                 android:text="Save Changes"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.513"
+                app:layout_constraintHorizontal_bias="0.491"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/uploadFileZone" />
 
@@ -108,9 +108,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:text="Upload New Profile Picture"
+                android:textColor="@color/primary"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@color/primary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -121,11 +121,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:text="PNG, JPG, or GIF are allowed"
-                android:textSize="17sp"
                 android:textColor="@color/primary"
+                android:textSize="17sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView54" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
