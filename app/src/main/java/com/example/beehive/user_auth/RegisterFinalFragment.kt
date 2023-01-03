@@ -7,12 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import com.example.beehive.MainActivity
+import com.example.beehive.activities.MainActivity
 import com.example.beehive.R
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.api_config.UserDRO
 import com.example.beehive.data.UserRegisterDTO
-import com.example.beehive.env
 import retrofit2.Call
 import retrofit2.Callback
 import java.util.*

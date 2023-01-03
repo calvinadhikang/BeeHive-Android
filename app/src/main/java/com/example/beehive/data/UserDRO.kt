@@ -1,7 +1,10 @@
 package com.example.beehive.api_config
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class UserDRO(
 
 	@field:SerializedName("data")
@@ -12,8 +15,9 @@ data class UserDRO(
 
 	@field:SerializedName("message")
 	val message: String? = null
-)
+):	Parcelable
 
+@Parcelize
 data class ROLES(
 
 	@field:SerializedName("Status")
@@ -21,8 +25,9 @@ data class ROLES(
 
 	@field:SerializedName("Role")
 	val role: String? = null
-)
+):	Parcelable
 
+@Parcelize
 data class UserData(
 
 	@field:SerializedName("NAMA")
@@ -38,7 +43,7 @@ data class UserData(
 	var EMAIL_VERIFIED_AT: String? = null,
 
 	@field:SerializedName("DELETED_AT")
-	var DELETED_AT: Any? = null,
+	var DELETED_AT: String? = null,
 
 	@field:SerializedName("BIO")
 	var BIO: String? = null,
@@ -72,4 +77,4 @@ data class UserData(
 
 	@field:SerializedName("REMEMBER_TOKEN")
 	var REMEMBER_TOKEN: String? = null
-)
+):	Parcelable

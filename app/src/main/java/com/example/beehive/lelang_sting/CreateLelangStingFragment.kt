@@ -7,15 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import com.example.beehive.MainActivity
+import com.example.beehive.activities.MainActivity
 import com.example.beehive.R
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.data.BasicDRO
 import com.example.beehive.data.Category
 import com.example.beehive.data.CreateLelangStingDTO
-import com.example.beehive.data.ListCategoryDRO
-import com.example.beehive.user_auth.RegisterFinalFragment
-import com.example.beehive.user_auth.RegisterFragment
 import retrofit2.Call
 import retrofit2.Callback
 

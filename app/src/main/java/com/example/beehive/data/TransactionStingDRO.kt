@@ -48,6 +48,9 @@ data class TransactionStingData(
 	@field:SerializedName("TAX")
 	val TAX: String? = null,
 
+	@field:SerializedName("sting")
+	val sting: StingData? = null,
+
 	@field:SerializedName("EMAIL_FARMER")
 	val EMAIL_FARMER: String? = null,
 
@@ -57,14 +60,26 @@ data class TransactionStingData(
 	@field:SerializedName("ID_STING")
 	val ID_STING: String? = null,
 
+	@field:SerializedName("revisionWaiting")
+	val revisionWaiting: Int? = null,
+
+	@field:SerializedName("revisionLeft")
+	val revisionLeft: Int? = null,
+
 	@field:SerializedName("STATUS")
 	val STATUS: String? = null,
 
 	@field:SerializedName("JUMLAH_REVISI")
 	val JUMLAH_REVISI: String? = null,
 
+	@field:SerializedName("complains")
+	val complains: List<ComplainDRO?>? = null,
+
 	@field:SerializedName("ID_TRANSACTION")
 	val ID_TRANSACTION: String? = null,
+
+	@field:SerializedName("statusString")
+	val statusString: String? = null,
 
 	@field:SerializedName("DATE_START")
 	val DATE_START: String? = null,
@@ -79,11 +94,7 @@ data class TransactionStingData(
 	val FILENAME_FINAL: String? = null,
 
 	@field:SerializedName("DATE_END")
-	val DATE_END: String? = null,
-
-	@field:SerializedName("sting")
-	val sting: StingData? = null,
-
-	@field:SerializedName("author")
-	val author: Author? = null,
+	val DATE_END: String? = null
 ) : Parcelable
+
+

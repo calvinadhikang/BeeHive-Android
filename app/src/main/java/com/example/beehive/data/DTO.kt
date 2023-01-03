@@ -35,3 +35,10 @@ data class ChangeProfileUserDTO(
     var name:String,
     var bio:String
 )
+data class DeclineTransactionStingDTO(
+    var complain:String,
+)
+data class CompleteTransactionStingDTO(
+    var rating:Int,
+    var review:String,
+)

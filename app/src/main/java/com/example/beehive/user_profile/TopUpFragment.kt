@@ -14,7 +14,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import com.example.beehive.CurrencyUtils.toRupiah
-import com.example.beehive.MainActivity
+import com.example.beehive.activities.MainActivity
 import com.example.beehive.R
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.data.BasicDRO

@@ -1,8 +1,5 @@
 package com.example.beehive.user_auth
 
-import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,18 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
-import com.example.beehive.MainActivity
+import com.example.beehive.activities.MainActivity
 import com.example.beehive.R
 import com.example.beehive.data.UserLoginDTO
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.api_config.UserDRO
-import com.example.beehive.data.BasicDRO
-import com.example.beehive.env
-import com.example.beehive.observerConnectivity.ConnectivityObserver
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 
