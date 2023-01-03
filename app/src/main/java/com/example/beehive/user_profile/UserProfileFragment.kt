@@ -3,12 +3,11 @@ package com.example.beehive.user_profile
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.example.beehive.CurrencyUtils.toRupiah
-import com.example.beehive.MainActivity
+import com.example.beehive.activities.MainActivity
 import com.example.beehive.R
 import com.example.beehive.env
 import com.squareup.picasso.Picasso;

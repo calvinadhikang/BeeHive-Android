@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import com.example.beehive.CurrencyUtils.toRupiah
+import com.example.beehive.activities.MainActivity
 
 class BuyStingFragment (
     var judul: String, var tipe: String, var desc: String, var harga: String

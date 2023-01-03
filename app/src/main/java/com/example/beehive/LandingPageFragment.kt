@@ -6,25 +6,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.beehive.activities.MainActivity
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.data.*
 import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.Response
-import kotlin.math.log
 
-class LandingPageFragment : Fragment() {
+class LandingPageFragment(
+    var listCategory: List<Category>
+
+) : Fragment() {
 
     lateinit var rv: RecyclerView
     lateinit var rvSting: RecyclerView
     lateinit var adpt: RVCategoryAdapter
     lateinit var adptSting: RVStingAdapter
 
-    var listCategory: List<Category> = listOf()
+//    var listCategory: List<Category> = listOf()
     var listSting: ArrayList<StingMost> = arrayListOf()
 
 
@@ -53,29 +54,32 @@ class LandingPageFragment : Fragment() {
         rv = view.findViewById(R.id.rvKategori)
         rvSting = view.findViewById(R.id.rvStingMost)
 
+        rv.adapter = RVCategoryAdapter(listCategory)
+        rv.layoutManager = GridLayoutManager(view.context, 1, GridLayoutManager.HORIZONTAL, false)
+
         //fetchCategory
-        val categoryAPI = ApiConfiguration.getApiService().fetchCategoryNoAuth()
-        categoryAPI.enqueue(object: Callback<ListCategoryDRO> {
-            override fun onResponse(call: Call<ListCategoryDRO>, response: retrofit2.Response<ListCategoryDRO>){
-                if(response.isSuccessful){
-                    val responseBody = response.body()
-                    if(responseBody!=null){
-                        listCategory = responseBody.data as List<Category>
-
-                        rv.adapter = RVCategoryAdapter(listCategory)
-                        rv.layoutManager = GridLayoutManager(view.context, 1, GridLayoutManager.HORIZONTAL, false)
-                    }
-                }
-                else{
-
-                }
-            }
-
-            override fun onFailure(call: Call<ListCategoryDRO>, t: Throwable) {
-                Log.e("ERROR FETCH CATEGORY", "onFailure: ${t.message}")
-            }
-
-        })
+//        val categoryAPI = ApiConfiguration.getApiService().fetchCategoryNoAuth()
+//        categoryAPI.enqueue(object: Callback<ListCategoryDRO> {
+//            override fun onResponse(call: Call<ListCategoryDRO>, response: retrofit2.Response<ListCategoryDRO>){
+//                if(response.isSuccessful){
+//                    val responseBody = response.body()
+//                    if(responseBody!=null){
+//                        listCategory = responseBody.data as List<Category>
+//
+//                        rv.adapter = RVCategoryAdapter(listCategory)
+//                        rv.layoutManager = GridLayoutManager(view.context, 1, GridLayoutManager.HORIZONTAL, false)
+//                    }
+//                }
+//                else{
+//
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<ListCategoryDRO>, t: Throwable) {
+//                Log.e("ERROR FETCH CATEGORY", "onFailure: ${t.message}")
+//            }
+//
+//        })
 
         //fetch most sting
         val stingMostAPI = ApiConfiguration.getApiService().fetchMostSting()

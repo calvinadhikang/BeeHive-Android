@@ -1,4 +1,4 @@
-package com.example.beehive
+package com.example.beehive.activities
 
 import android.app.Dialog
 import android.graphics.Color
@@ -10,6 +10,9 @@ import android.view.MenuItem
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.beehive.LandingPageFragment
+import com.example.beehive.R
+import com.example.beehive.SearchFragment
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.api_config.UserDRO
 import com.example.beehive.api_config.UserData
@@ -17,8 +20,6 @@ import com.example.beehive.dao.AppDatabase
 import com.example.beehive.dao.User
 import com.example.beehive.data.Category
 import com.example.beehive.data.ListCategoryDRO
-import com.example.beehive.data.ListStingDRO
-import com.example.beehive.data.ListTransactionStingDRO
 import com.example.beehive.lelang_sting.CreateLelangStingFragment
 import com.example.beehive.observerConnectivity.ConnectivityObserver
 import com.example.beehive.observerConnectivity.NetworkConnectivityObserver
@@ -51,46 +52,65 @@ class MainActivity : AppCompatActivity() {
          frMain = findViewById(R.id.frMain)
          navbar = findViewById(R.id.navbarBeforeLogin)
          db = AppDatabase.build(this)
-
-         var rememberMeCheck:User? = null
-         coroutine.launch {
-             rememberMeCheck = db.userDAO.get()
-
-             runOnUiThread{
-                 if(rememberMeCheck==null){
-                     //tidak ada user yang lagi login
-                     isLogin = false
-                     val nav_Menu: Menu = navbar.menu
-                     nav_Menu.findItem(R.id.menu_add).isVisible = false
-                     nav_Menu.findItem(R.id.menu_notification).isVisible = false
-                     swapToFrag(LandingPageFragment(), Bundle())
-                 }else{
-                     //ada user loged in
-                     reloadUser(rememberMeCheck!!.REMEMBER_TOKEN,true)
-                     swapToFrag(LandingPageFragment(), Bundle())
-                 }
+         try {
+             isLogin = intent.getBooleanExtra("is_login",false)
+             listCategory = intent.getParcelableArrayListExtra<Category>("list_category") as List<Category>
+             if(!isLogin){
+                 val nav_Menu: Menu = navbar.menu
+                 nav_Menu.findItem(R.id.menu_add).isVisible = false
+                 nav_Menu.findItem(R.id.menu_notification).isVisible = false
+                 swapToFrag(LandingPageFragment(listCategory), Bundle())
+             }else{
+                 userLogin = intent.getParcelableExtra("user_login")
+                 afterFetchRememberMe()
              }
+         }catch (e:Error){
+             Log.e("Failed_intent",e.message.toString())
          }
 
+//         val client = ApiConfiguration.getApiService().fetchTransactionStingByCategory(category = 5)
+//         client.enqueue(object: Callback<ListTransactionStingDRO> {
+//             override fun onResponse(call: Call<ListTransactionStingDRO>, response: retrofit2.Response<ListTransactionStingDRO>){
+//                 if(response.isSuccessful){
+//                     val responseBody = response.body()
+//                     if(responseBody!=null){
+//                         Log.i("ENRICOASD",responseBody.toString())
+//                         showModal("FETCH DONE"){}
+//
+//                     }
+//                 }
+//                 else{
+//                     val statusCode:Int = response.code()
+//                     val message:String = response.body()!!.message!!
+//                     Log.e("ERROR FETCH STING", "Fail Access: $statusCode")
+//                     Toast.makeText(this@MainActivity,
+//                         message.toString(), Toast.LENGTH_SHORT).show()
+//                 }
+//             }
+//
+//             override fun onFailure(call: Call<ListTransactionStingDRO>, t: Throwable) {
+//                 Log.e("ERROR FETCH", "onFailure: ${t.message}")
+//             }
+//
+//         })
          navbar.setOnNavigationItemSelectedListener {
              return@setOnNavigationItemSelectedListener when(it.itemId){
-                 R.id.menu_home->{
-                     swapToFrag(LandingPageFragment(), Bundle())
+                 R.id.menu_home ->{
+                     swapToFrag(LandingPageFragment(listCategory), Bundle())
                      true
                  }
-                 R.id.menu_search->{
+                 R.id.menu_search ->{
                      swapToFrag(SearchFragment(), Bundle())
                      true
                  }
-                 R.id.menu_add->{
+                 R.id.menu_add ->{
                      swapToFrag(CreateLelangStingFragment(),Bundle())
                      true
                  }
-                 R.id.menu_notification->{
-                     swapToFrag(NotificationFragment(),Bundle())
+                 R.id.menu_notification ->{
                      true
                  }
-                 R.id.menu_profile->{
+                 R.id.menu_profile ->{
                      if(isLogin){
                          try {
                             swapToFrag(UserProfileFragment(), Bundle())
@@ -157,9 +177,7 @@ class MainActivity : AppCompatActivity() {
         val nav_Menu: Menu = navbar.menu
         nav_Menu.findItem(R.id.menu_add).isVisible = true
         nav_Menu.findItem(R.id.menu_notification).isVisible = true
-        isLogin = true
-        fetchCategory()
-        swapToFrag(LandingPageFragment(), Bundle())
+        swapToFrag(LandingPageFragment(listCategory), Bundle())
     }
     fun login(user:UserData){
         updateLogin(user)
@@ -279,15 +297,4 @@ class MainActivity : AppCompatActivity() {
 //        return super.onOptionsItemSelected(item)
     }
 
-//    <ImageView
-//    android:id="@+id/imageView6"
-//    android:layout_width="50dp"
-//    android:layout_height="50dp"
-//    android:layout_marginBottom="15dp"
-//    android:background="@drawable/button_nav_add"
-//    android:padding="6dp"
-//    app:layout_constraintBottom_toBottomOf="parent"
-//    app:layout_constraintEnd_toEndOf="@+id/navbarBeforeLogin"
-//    app:layout_constraintStart_toStartOf="parent"
-//    app:srcCompat="@drawable/add_white" />
 }

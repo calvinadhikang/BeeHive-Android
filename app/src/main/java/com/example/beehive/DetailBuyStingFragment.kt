@@ -20,6 +20,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
+import com.example.beehive.activities.MainActivity
 
 class DetailBuyStingFragment : Fragment() {
 

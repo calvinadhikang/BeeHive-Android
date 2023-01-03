@@ -16,6 +16,7 @@ import com.example.beehive.data.TransactionStingData
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
+import com.example.beehive.activities.MainActivity
 
 class NotificationFragment : Fragment() {
 
