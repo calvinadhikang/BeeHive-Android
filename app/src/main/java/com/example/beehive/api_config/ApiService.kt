@@ -62,10 +62,10 @@ interface ApiService {
     fun fetchCategory(
     ): Call<ListCategoryDRO>
 
-    @GET("sting/category/{id}")
-    fun fetchStingByCategory(
-        @Path("id") id: String
-    ): Call<StingByCategoryDRO>
+//    @GET("sting/category/{id}")
+//    fun fetchStingByCategory(
+//        @Path("id") id: String
+//    ): Call<StingByCategoryDRO>
 
     @GET("category/fetch")
     fun fetchCategoryNoAuth(): Call<ListCategoryDRO>
@@ -80,7 +80,13 @@ interface ApiService {
     fun fetchSting(): Call<ListStingDRO>
 
     @GET("sting/most")
-    fun fetchMostSting(): Call<MostStingDRO>
+    fun fetchMostSting(): Call<StingDRO>
+
+    @GET("sting/category/{category}")
+    fun fetchStingByCategory(
+//        @Query("REMEMBER_TOKEN") remember_token:String,
+        @Path("category") category:Int
+    ): Call<ListStingDRO>
 
     //SECTION TRANSACTION STING
     @GET("sting/transaction/fetch")
@@ -88,11 +94,6 @@ interface ApiService {
         @Query("REMEMBER_TOKEN") remember_token:String,
     ): Call<ListTransactionStingDRO>
 
-    @GET("sting/category/{category}")
-    fun fetchTransactionStingByCategory(
-        @Query("REMEMBER_TOKEN") remember_token:String,
-        @Path("category") category:Int
-    ): Call<ListTransactionStingDRO>
 
     @GET("sting/transaction/fetch/{status}")
     fun fetchTransactionStingByStatus(

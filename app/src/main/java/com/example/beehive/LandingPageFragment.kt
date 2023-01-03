@@ -26,7 +26,7 @@ class LandingPageFragment(
     lateinit var adptSting: RVStingAdapter
 
 //    var listCategory: List<Category> = listOf()
-    var listSting: ArrayList<StingMost> = arrayListOf()
+    var listSting: List<StingData> = arrayListOf()
 
     //ini harus di override bila ada error :
     // -> "Can not perform this action after onSaveInstanceState"
@@ -53,7 +53,10 @@ class LandingPageFragment(
         rv = view.findViewById(R.id.rvKategori)
         rvSting = view.findViewById(R.id.rvStingMost)
 
-        rv.adapter = RVCategoryAdapter(listCategory)
+        rv.adapter = RVCategoryAdapter(listCategory){ pos ->
+            var key = listCategory[pos].ID_CATEGORY.toString()
+            (activity as MainActivity).detailCategory(key,listCategory[pos].NAMA_CATEGORY)
+        }
         rv.layoutManager = GridLayoutManager(view.context, 1, GridLayoutManager.HORIZONTAL, false)
 
         //fetchCategory
@@ -82,13 +85,14 @@ class LandingPageFragment(
 
         //fetch most sting
         val stingMostAPI = ApiConfiguration.getApiService().fetchMostSting()
-        stingMostAPI.enqueue(object: Callback<MostStingDRO>{
-            override fun onResponse(call: Call<MostStingDRO>, response: retrofit2.Response<MostStingDRO>) {
+        stingMostAPI.enqueue(object: Callback<StingDRO>{
+            override fun onResponse(call: Call<StingDRO>, response: retrofit2.Response<StingDRO>) {
                 if (response.isSuccessful){
                     val responseBody = response.body()
                     if (responseBody != null){
-                        var dataSting = responseBody.data as StingMost
-                        listSting.add(dataSting)
+                        var dataSting = responseBody.data as StingData
+//                        listSting.add(dataSting.data)
+                        listSting = listOf(dataSting)
 
                         rvSting.adapter = RVStingAdapter(listSting)
                         rvSting.layoutManager = LinearLayoutManager(view.context)
@@ -96,7 +100,7 @@ class LandingPageFragment(
                 }
             }
 
-            override fun onFailure(call: Call<MostStingDRO>, t: Throwable) {
+            override fun onFailure(call: Call<StingDRO>, t: Throwable) {
 
             }
 

@@ -10,10 +10,7 @@ import android.view.MenuItem
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.beehive.LandingPageFragment
-import com.example.beehive.NotificationFragment
-import com.example.beehive.R
-import com.example.beehive.SearchFragment
+import com.example.beehive.*
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.api_config.UserDRO
 import com.example.beehive.api_config.UserData
@@ -129,8 +126,8 @@ class MainActivity : AppCompatActivity() {
          }
     }
 
-    public fun detailCategory(key: String){
-        swapToFrag(DetailCategoryFragment(key), Bundle())
+    public fun detailCategory(key: String, namaCategory:String){
+        swapToFrag(DetailCategoryFragment(key,namaCategory), Bundle())
     }
 
     fun fetchCategory(){

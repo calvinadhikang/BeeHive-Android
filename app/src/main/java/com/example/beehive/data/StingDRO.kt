@@ -88,3 +88,55 @@ data class StingData(
 	val JUMLAH_ORDER: String? = null
 
 ) : Parcelable
+
+@Parcelize
+data class Author(
+
+	@field:SerializedName("SUBSCRIBED_AT")
+	val SUBSCRIBED_AT: String? = null,
+
+	@field:SerializedName("NAMA")
+	val NAMA: String? = null,
+
+	@field:SerializedName("CREATED_AT")
+	val CREATED_AT: String? = null,
+
+	@field:SerializedName("PICTURE")
+	val PICTURE: String? = null,
+
+	@field:SerializedName("EMAIL_VERIFIED_AT")
+	val EMAIL_VERIFIED_AT: String? = null,
+
+	@field:SerializedName("DELETED_AT")
+	val DELETED_AT: String? = null,
+
+	@field:SerializedName("BIO")
+	val BIO: String? = null,
+
+	@field:SerializedName("EMAIL")
+	val EMAIL: String? = null,
+
+	@field:SerializedName("BALANCE")
+	val BALANCE: String? = null,
+
+	@field:SerializedName("SUBSCRIBED")
+	val SUBSCRIBED: String? = null,
+
+	@field:SerializedName("STATUS")
+	val STATUS: String? = null,
+
+	@field:SerializedName("PASSWORD")
+	val PASSWORD: String? = null,
+
+	@field:SerializedName("RATING")
+	val RATING: String? = null,
+
+	@field:SerializedName("TANGGAL_LAHIR")
+	val TANGGAL_LAHIR: String? = null,
+
+	@field:SerializedName("UPDATED_AT")
+	val UPDATED_AT: String? = null,
+
+	@field:SerializedName("REMEMBER_TOKEN")
+	val REMEMBER_TOKEN: String? = null
+) : Parcelable

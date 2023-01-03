@@ -16,7 +16,7 @@ import retrofit2.Callback
 import com.example.beehive.activities.MainActivity
 
 class DetailCategoryFragment(
-    var key: String
+    var key: String, var namaCategory:String
 ) : Fragment() {
 
     override fun onCreateView(
@@ -28,23 +28,23 @@ class DetailCategoryFragment(
     }
 
     lateinit var rv: RecyclerView
-    var listSting: List<StingMost> = listOf()
+    var listSting: List<StingData> = listOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val acti = activity as MainActivity
         acti.supportActionBar!!.show()
-        acti.title = "Stings for "
+        acti.title = "Stings for $namaCategory"
 
         rv = view.findViewById(R.id.rvStingByCategory)
 
-        val categoryAPI = ApiConfiguration.getApiService().fetchStingByCategory(key)
-        categoryAPI.enqueue(object: Callback<StingByCategoryDRO> {
-            override fun onResponse(call: Call<StingByCategoryDRO>, response: retrofit2.Response<StingByCategoryDRO>){
+        val categoryAPI = ApiConfiguration.getApiService().fetchStingByCategory(key.toInt())
+        categoryAPI.enqueue(object: Callback<ListStingDRO> {
+            override fun onResponse(call: Call<ListStingDRO>, response: retrofit2.Response<ListStingDRO>){
                 if(response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody!=null){
-                        listSting = responseBody.data as List<StingMost>
+                        listSting = responseBody.data as List<StingData>
 
                         rv.adapter = RVStingAdapter(listSting)
                         rv.layoutManager = LinearLayoutManager(view.context)
@@ -55,7 +55,7 @@ class DetailCategoryFragment(
                 }
             }
 
-            override fun onFailure(call: Call<StingByCategoryDRO>, t: Throwable) {
+            override fun onFailure(call: Call<ListStingDRO>, t: Throwable) {
                 Log.e("ERROR FETCH CATEGORY", "onFailure: ${t.message}")
             }
         })
