@@ -79,16 +79,20 @@ interface ApiService {
 
     //SECTION TRANSACTION STING
     @GET("sting/transaction/fetch")
-    fun fetchTransactionSting(): Call<ListTransactionStingDRO>
+    fun fetchTransactionSting(
+        @Query("REMEMBER_TOKEN") remember_token:String,
+    ): Call<ListTransactionStingDRO>
 
     @GET("sting/category/{category}")
     fun fetchTransactionStingByCategory(
+        @Query("REMEMBER_TOKEN") remember_token:String,
         @Path("category") category:Int
     ): Call<ListTransactionStingDRO>
 
     @GET("sting/transaction/fetch/{status}")
     fun fetchTransactionStingByStatus(
-        @Path("status") status:String
+        @Path("status") status:String,
+        @Query("REMEMBER_TOKEN") remember_token:String
     ): Call<ListTransactionStingDRO>
 
     @POST("sting/buy/{kode}/{mode}")

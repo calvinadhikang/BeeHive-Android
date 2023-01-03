@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-class DetailOrderedStingFragment : Fragment() {
+class DetailOrderedStingFragment (
+    var namaBeeworker: String, var requirement: String, var harga: String, var tglMulai: String, var tglSelesai: String
+): Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
