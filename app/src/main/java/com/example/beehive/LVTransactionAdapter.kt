@@ -42,11 +42,15 @@ class LVTransactionAdapter (
                 popUp.show()
             }
             else{
-                onClick(listTransaction[position].author!!.NAMA!!,
+                var temp = "Kosong"
+                if (listTransaction[position].DATE_END != null){
+                    temp = listTransaction[position].DATE_END!!
+                }
+                onClick(listTransaction[position].sting!!.author!!.NAMA!!,
                     listTransaction[position].REQUIREMENT_PROJECT!!,
                     listTransaction[position].COMMISION!!,
                     listTransaction[position].DATE_START!!,
-                    listTransaction[position].DATE_END!!
+                    temp
                 )
             }
         }

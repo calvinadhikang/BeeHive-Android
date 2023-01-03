@@ -11,6 +11,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.beehive.LandingPageFragment
+import com.example.beehive.NotificationFragment
 import com.example.beehive.R
 import com.example.beehive.SearchFragment
 import com.example.beehive.api_config.ApiConfiguration
@@ -108,6 +109,7 @@ class MainActivity : AppCompatActivity() {
                      true
                  }
                  R.id.menu_notification ->{
+                     swapToFrag(NotificationFragment(),Bundle())
                      true
                  }
                  R.id.menu_profile ->{

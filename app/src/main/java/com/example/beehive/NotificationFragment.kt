@@ -250,7 +250,7 @@ class NotificationFragment : Fragment() {
                             var data: List<TransactionStingData> = responseBody.data as List<TransactionStingData>
                             listTransaction = responseBody.data as ArrayList<TransactionStingData>
                             daftarTransaction = LVTransactionAdapter(requireActivity(), listTransaction){
-                                    namaBeeworker, requirement, harga, tglMulai, tglSelesai ->
+                                    namaBeeworker, requirement, harga, tglMulai, tglSelesai->
                                 parentFragmentManager.beginTransaction()
                                     .replace(R.id.frMain, DetailOrderedStingFragment(namaBeeworker, requirement, harga, tglMulai, tglSelesai))
                                     .commit()
