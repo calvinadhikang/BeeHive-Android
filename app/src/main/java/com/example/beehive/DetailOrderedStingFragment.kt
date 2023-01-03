@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.beehive.activities.MainActivity
 
-class DetailOrderedStingFragment : Fragment() {
+class DetailOrderedStingFragment (
+    var namaBeeworker: String, var requirement: String, var harga: String, var tglMulai: String, var tglSelesai: String
+): Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
