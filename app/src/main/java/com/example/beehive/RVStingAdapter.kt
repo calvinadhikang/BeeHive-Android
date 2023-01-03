@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.beehive.CurrencyUtils.toRupiah
 import com.example.beehive.data.StingData
 import com.squareup.picasso.Picasso
 
@@ -35,7 +36,7 @@ class RVStingAdapter(
         holder.tvNama.text = obj.author!!.NAMA
         holder.tvRating.text = obj.RATING
         holder.tvDesc.text = obj.DESKRIPSI_BASIC
-        holder.tvPrice.text = "Starting from Rp" + obj.PRICE_BASIC
+        holder.tvPrice.text = "Starting from " + obj.PRICE_BASIC!!.toInt().toRupiah()
 
         //Set WorkerThumbnail
         Picasso.get()
@@ -49,10 +50,10 @@ class RVStingAdapter(
             .resize(50,50)
             .into(holder.imgThumbnail)
 
-        holder.workerThumbnail.clipToOutline = true
-        holder.workerThumbnail.setBackgroundResource(R.drawable.full_rounded_picture)
-        holder.imgThumbnail.clipToOutline = true
-        holder.imgThumbnail.setBackgroundResource(R.drawable.full_rounded_picture)
+//        holder.workerThumbnail.clipToOutline = true
+//        holder.workerThumbnail.setBackgroundResource(R.drawable.full_rounded_picture)
+//        holder.imgThumbnail.clipToOutline = true
+//        holder.imgThumbnail.setBackgroundResource(R.drawable.full_rounded_picture)
     }
 
     override fun getItemCount(): Int {
