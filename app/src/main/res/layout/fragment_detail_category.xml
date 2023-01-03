@@ -8,6 +8,7 @@
     tools:context=".DetailCategoryFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvStingByCategory"
         android:layout_width="357dp"
         android:layout_height="675dp"
         android:layout_marginStart="16dp"

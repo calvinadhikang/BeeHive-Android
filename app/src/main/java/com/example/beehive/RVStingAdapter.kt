@@ -1,12 +1,12 @@
 package com.example.beehive
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.beehive.data.Category
 import com.example.beehive.data.StingMost
 import com.squareup.picasso.Picasso
 
@@ -19,8 +19,8 @@ class RVStingAdapter(
         val tvRating: TextView = view.findViewById(R.id.lblRatingWorker_card)
         val tvDesc: TextView = view.findViewById(R.id.lblDeskripsiSting_card)
         val tvPrice: TextView = view.findViewById(R.id.lblHargaSting_card)
-        val imgSting: ImageView = view.findViewById(R.id.imgSting)
-        val imgBeeworker: ImageView = view.findViewById(R.id.imgBeeworker)
+        val imgThumbnail: ImageView = view.findViewById(R.id.stingThumbnail)
+        val workerThumbnail: ImageView = view.findViewById(R.id.workerThumbnail)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,20 +32,22 @@ class RVStingAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var obj = data[position]
 
-        holder.tvNama.text = obj.EMAIL_BEEWORKER
-        holder.tvRating.text = obj.RATING
-        holder.tvDesc.text = obj.DESKRIPSI_BASIC
-        holder.tvPrice.text = "Starting from Rp" + obj.PRICE_BASIC
+        holder.tvNama.text = obj.author.nama
+        holder.tvRating.text = obj.rATING
+        holder.tvDesc.text = obj.dESKRIPSIBASIC
+        holder.tvPrice.text = "Starting from Rp" + obj.pRICEBASIC
 
+        //Set WorkerThumbnail
         Picasso.get()
-            .load(env.URLIMAGE+"sting-thumbnails/${obj.NAMA_THUMBNAIL}")
-            .resize(100,100)
-            .into(holder.imgSting)
+            .load(env.URLIMAGE+"profile-pictures/${obj.author.picture}")
+            .resize(50,50)
+            .into(holder.workerThumbnail)
 
+        //Set StingThumbnail
         Picasso.get()
-            .load(env.URLIMAGE+"profile-pictures/${obj.author!!.PICTURE}")
-            .resize(40,40)
-            .into(holder.imgBeeworker)
+            .load(env.URLIMAGE+"sting-thumbnails/${obj.nAMATHUMBNAIL}")
+            .resize(50,50)
+            .into(holder.imgThumbnail)
     }
 
     override fun getItemCount(): Int {

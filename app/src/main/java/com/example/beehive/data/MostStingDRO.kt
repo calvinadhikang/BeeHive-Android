@@ -1,5 +1,6 @@
 package com.example.beehive.data
 
+import android.os.Parcel
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
