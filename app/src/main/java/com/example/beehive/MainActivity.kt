@@ -108,6 +108,11 @@ class MainActivity : AppCompatActivity() {
              }
          }
     }
+
+    public fun detailCategory(key: String){
+        swapToFrag(DetailCategoryFragment(key), Bundle())
+    }
+
     fun fetchCategory(){
         val client = ApiConfiguration.getApiService().fetchCategory(remember_token = userLogin!!.REMEMBER_TOKEN!!)
         client.enqueue(object: Callback<ListCategoryDRO> {

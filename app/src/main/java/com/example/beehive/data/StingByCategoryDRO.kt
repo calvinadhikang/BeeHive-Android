@@ -1,15 +1,14 @@
 package com.example.beehive.data
 
-import android.os.Parcel
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 @Parcelize
-data class MostStingDRO(
+data class StingByCategoryDRO(
 
 	@field:SerializedName("data")
-	val data: StingMost? = null,
+	val data: List<StingMost?>? = null,
 
 	@field:SerializedName("success")
 	val success: Boolean? = null,
@@ -19,7 +18,7 @@ data class MostStingDRO(
 ) : Parcelable
 
 @Parcelize
-data class StingMost(
+data class DataItem(
 
 	@field:SerializedName("MAX_REVISION_PREMIUM")
 	val mAXREVISIONPREMIUM: String? = null,
@@ -63,27 +62,18 @@ data class StingMost(
 	@field:SerializedName("EMAIL_BEEWORKER")
 	val eMAILBEEWORKER: String? = null,
 
+	@field:SerializedName("PICTURE_BEEWORKER")
+	val pICTUREBEEWORKER: String? = null,
+
 	@field:SerializedName("UPDATED_AT")
 	val uPDATEDAT: String? = null,
 
+	@field:SerializedName("NAMA_BEEWORKER")
+	val nAMABEEWORKER: String? = null,
+
+	@field:SerializedName("JUMLAH_ORDER")
+	val jUMLAHORDER: String? = null,
+
 	@field:SerializedName("PRICE_PREMIUM")
-	val pRICEPREMIUM: String? = null,
-
-	@field:SerializedName("author")
-	val author: author
-) : Parcelable
-
-@Parcelize
-data class author(
-	@field:SerializedName("EMAIL")
-	val email: String,
-
-	@field:SerializedName("PASSWORD")
-	val password: String,
-
-	@field:SerializedName("NAMA")
-	val nama: String,
-
-	@field:SerializedName("PICTURE")
-	val picture: String
+	val pRICEPREMIUM: String? = null
 ) : Parcelable

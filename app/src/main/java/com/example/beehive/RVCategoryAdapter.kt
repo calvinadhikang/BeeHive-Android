@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.beehive.data.Category
 
 class RVCategoryAdapter(
-    var data: List<Category>
+    var data: List<Category>,
+    var cb: (pos: Int)->Unit
 ) : RecyclerView.Adapter<RVCategoryAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -27,6 +28,9 @@ class RVCategoryAdapter(
 
         holder.tvNama.text = obj.NAMA_CATEGORY
         holder.tvStingsCount.text = obj.StingsRelatedCount.toString() + " Stings Available"
+        holder.itemView.setOnClickListener {
+            cb(position)
+        }
     }
 
     override fun getItemCount(): Int {

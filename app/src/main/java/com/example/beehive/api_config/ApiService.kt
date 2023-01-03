@@ -42,6 +42,11 @@ interface ApiService {
         @Query("REMEMBER_TOKEN") remember_token:String
     ): Call<ListCategoryDRO>
 
+    @GET("sting/category/{id}")
+    fun fetchStingByCategory(
+        @Path("id") id: String
+    ): Call<StingByCategoryDRO>
+
     @GET("sting/most")
     fun fetchMostSting(): Call<MostStingDRO>
 

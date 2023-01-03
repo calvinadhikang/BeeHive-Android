@@ -9,9 +9,9 @@
     android:background="@drawable/background_white_form">
 
     <ImageView
-        android:id="@+id/imgSting"
+        android:id="@+id/stingThumbnail"
         android:layout_width="100dp"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_white_form"
@@ -27,7 +27,7 @@
         android:layout_marginTop="8dp"
         android:text="TextView"
         android:textColor="#4CAF50"
-        app:layout_constraintStart_toEndOf="@+id/imageView8"
+        app:layout_constraintStart_toEndOf="@+id/workerThumbnail"
         app:layout_constraintTop_toBottomOf="@+id/lblNamaWorker_card" />
 
     <TextView
@@ -38,16 +38,17 @@
         android:layout_marginTop="8dp"
         android:text="TextView"
         android:textColor="#4CAF50"
-        app:layout_constraintStart_toEndOf="@+id/imageView8"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/workerThumbnail"
         app:layout_constraintTop_toTopOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/workerThumbnail"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/imgSting"
+        app:layout_constraintStart_toEndOf="@+id/stingThumbnail"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
@@ -55,24 +56,24 @@
         android:id="@+id/lblDeskripsiSting_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="32dp"
         android:text="TextView"
         android:textColor="#4CAF50"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imgSting"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+        app:layout_constraintStart_toEndOf="@+id/stingThumbnail"
+        app:layout_constraintTop_toBottomOf="@+id/workerThumbnail" />
 
     <TextView
         android:id="@+id/lblHargaSting_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
         android:text="TextView"
         android:textColor="#4CAF50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imgSting" />
+        app:layout_constraintStart_toEndOf="@+id/stingThumbnail" />
 </androidx.constraintlayout.widget.ConstraintLayout>

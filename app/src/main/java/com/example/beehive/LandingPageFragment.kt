@@ -27,7 +27,6 @@ class LandingPageFragment : Fragment() {
     var listCategory: List<Category> = listOf()
     var listSting: ArrayList<StingMost> = arrayListOf()
 
-
     //ini harus di override bila ada error :
     // -> "Can not perform this action after onSaveInstanceState"
     // dengan cara menghilangkan call kepada : super()
@@ -62,7 +61,10 @@ class LandingPageFragment : Fragment() {
                     if(responseBody!=null){
                         listCategory = responseBody.data as List<Category>
 
-                        rv.adapter = RVCategoryAdapter(listCategory)
+                        rv.adapter = RVCategoryAdapter(listCategory, { pos ->
+                            var key = listCategory[pos].ID_CATEGORY.toString()
+                            (activity as MainActivity).detailCategory(key)
+                        })
                         rv.layoutManager = GridLayoutManager(view.context, 1, GridLayoutManager.HORIZONTAL, false)
                     }
                 }
