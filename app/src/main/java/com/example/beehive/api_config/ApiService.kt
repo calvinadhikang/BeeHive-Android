@@ -62,6 +62,11 @@ interface ApiService {
     fun fetchCategory(
     ): Call<ListCategoryDRO>
 
+    @GET("sting/category/{id}")
+    fun fetchStingByCategory(
+        @Path("id") id: String
+    ): Call<StingByCategoryDRO>
+
     @GET("category/fetch")
     fun fetchCategoryNoAuth(): Call<ListCategoryDRO>
 

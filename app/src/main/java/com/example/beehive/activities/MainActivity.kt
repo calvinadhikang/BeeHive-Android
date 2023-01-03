@@ -126,6 +126,11 @@ class MainActivity : AppCompatActivity() {
              }
          }
     }
+
+    public fun detailCategory(key: String){
+        swapToFrag(DetailCategoryFragment(key), Bundle())
+    }
+
     fun fetchCategory(){
         val client = ApiConfiguration.getApiService().fetchCategory()
         client.enqueue(object: Callback<ListCategoryDRO> {

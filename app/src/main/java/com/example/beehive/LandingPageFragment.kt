@@ -28,7 +28,6 @@ class LandingPageFragment(
 //    var listCategory: List<Category> = listOf()
     var listSting: ArrayList<StingMost> = arrayListOf()
 
-
     //ini harus di override bila ada error :
     // -> "Can not perform this action after onSaveInstanceState"
     // dengan cara menghilangkan call kepada : super()
