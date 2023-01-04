@@ -187,7 +187,7 @@ class MainActivity : AppCompatActivity() {
         updateLogin(user)
         var rememberme: User = User(user.REMEMBER_TOKEN!!,user.EMAIL!!,user.NAMA!!)
         coroutine.launch {
-            db.userDAO.insert(rememberme)  //ini ngesave isi user
+            db.userDAO.insert(rememberme)  //ini untuk save isi user
         }
         afterLogin()
     }
