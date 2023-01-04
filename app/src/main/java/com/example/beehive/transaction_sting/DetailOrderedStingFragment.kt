@@ -1,10 +1,11 @@
-package com.example.beehive
+package com.example.beehive.transaction_sting
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.beehive.R
 import com.example.beehive.activities.MainActivity
 
 class DetailOrderedStingFragment (

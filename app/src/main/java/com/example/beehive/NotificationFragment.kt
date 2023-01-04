@@ -10,13 +10,11 @@ import android.widget.Button
 import android.widget.ListView
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.data.ListTransactionStingDRO
-import com.example.beehive.data.StingDRO
-import com.example.beehive.data.StingData
 import com.example.beehive.data.TransactionStingData
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import com.example.beehive.activities.MainActivity
+import com.example.beehive.transaction_sting.DetailOrderedStingFragment
 
 class NotificationFragment : Fragment() {
 
