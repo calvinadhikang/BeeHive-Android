@@ -44,12 +44,12 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/textViewe"
+                android:id="@+id/lblNamaSting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="92dp"
                 android:layout_marginTop="32dp"
-                android:text="Nama Sting"
+                android:text="Detail Sting"
                 android:textColor="#FFFFFF"
                 android:textSize="28sp"
                 android:textStyle="bold"

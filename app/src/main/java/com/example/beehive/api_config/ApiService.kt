@@ -128,22 +128,22 @@ interface ApiService {
 
     @POST("sting/transaction/{id}/decline")
     fun declineTransactionSting(
-        @Query("REMEMBER_TOKEN") remember_token:String,
         @Path("id") id:String,
+        @Query("REMEMBER_TOKEN") remember_token:String,
         @Body declineTransactionStingData: DeclineTransactionStingDTO
     ): Call<BasicDRO>
 
     @POST("sting/transaction/{id}/accept")
     fun completeTransactionSting(
-        @Query("REMEMBER_TOKEN") remember_token:String,
         @Path("id") id:String,
+        @Query("REMEMBER_TOKEN") remember_token:String,
         @Body completeTransactionStingData: CompleteTransactionStingDTO
     ): Call<BasicDRO>
 
     @GET("sting/transaction/{id}/complains")
     fun fetchComplainTransactionSting(
+        @Path("id") id:String,
         @Query("REMEMBER_TOKEN") remember_token:String,
-        @Path("id") id:String
     ): Call<ListComplainDRO>
 
     //SECTION LELANG

@@ -12,6 +12,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/btnDetail"
+            android:layout_width="335dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="16dp"
+            android:text="Detail"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/btnDownload3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/btnDownload3"
+            app:layout_constraintTop_toBottomOf="@+id/btnDownload3" />
+
         <TextView
             android:id="@+id/lblHarga"
             android:layout_width="106dp"
@@ -75,8 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="108dp"
-            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.
-"
+            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknownprinter. "
             android:textColor="@color/primary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
@@ -122,7 +133,18 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="32dp"
-            android:text="Beeworker Nama Beeworker"
+            android:text="Beeworker"
+            android:textColor="@color/primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+
+        <TextView
+            android:id="@+id/lblBeeworkerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="116dp"
+            android:layout_marginTop="32dp"
+            android:text="<NAMA>"
             android:textColor="@color/primary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
@@ -139,14 +161,19 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
 
         <Button
-            android:id="@+id/btnBack"
-            android:layout_width="325dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="52dp"
-            android:text="Back"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblDateStarted" />
+            android:id="@+id/btnDownload3"
+            android:layout_width="335dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="28dp"
+            android:backgroundTint="@android:color/transparent"
+            android:text="Donwload Latest Deliver"
+            android:textColor="@color/primary"
+            app:layout_constraintEnd_toEndOf="@+id/lblDateEnded"
+            app:layout_constraintHorizontal_bias="0.142"
+            app:layout_constraintStart_toStartOf="@+id/lblDateStarted"
+            app:layout_constraintTop_toBottomOf="@+id/lblDateEnded"
+            app:strokeColor="@color/primary"
+            app:strokeWidth="1dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
