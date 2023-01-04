@@ -73,7 +73,7 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     fun reloadUser(REMEMBER_TOKEN:String, firstTime:Boolean = false){
-        val client = ApiConfiguration.getApiService().getProfile(remember_token =
+        val client = ApiConfiguration.getApiService().getProfileNoAuth(remember_token =
         REMEMBER_TOKEN)
         client.enqueue(object: Callback<UserDRO> {
             override fun onResponse(call: Call<UserDRO>, response: retrofit2.Response<UserDRO>){
@@ -95,11 +95,37 @@ class SplashScreenActivity : AppCompatActivity() {
                             }
 
                         }
+                    }else{
+                        Toast.makeText(this@SplashScreenActivity,
+                            "Session ended, please login again", Toast.LENGTH_SHORT).show()
+
                     }
                 }
                 else{
                     val statusCode:Int = response.code()
-                    Log.e("GET_PROFILE_ERROR", "Fail Access: $statusCode")
+
+                    val dialogBinding = this@SplashScreenActivity.layoutInflater
+                        .inflate(R.layout.dialog_layout,null)
+                    val myDialog = Dialog(this@SplashScreenActivity)
+                    myDialog.setContentView(dialogBinding)
+                    myDialog.setCancelable(true)
+                    myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                    myDialog.show()
+                    val txtHeader: TextView = dialogBinding.findViewById(R.id.txtHeaderModal)
+                    txtHeader.text = "Session ended, please login again"
+
+                    val btnOk: Button = dialogBinding.findViewById(R.id.btnOkModal)
+                    btnOk.text = "Ok"
+                    btnOk.setOnClickListener{
+                        myDialog.dismiss()
+                        isLogin = false
+                        coroutine.launch {
+                            db.userDAO.logout()
+                            runOnUiThread{
+                                fetchCategoryWithoutUserLogin()
+                            }
+                        }
+                    }
                 }
             }
 

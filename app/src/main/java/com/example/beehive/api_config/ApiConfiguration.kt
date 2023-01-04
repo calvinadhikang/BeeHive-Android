@@ -11,9 +11,15 @@ class ApiConfiguration {
         fun getApiService() : ApiService {
             val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             val client = OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
-            val retrofit = Retrofit.Builder().baseUrl(env.URL)
-                .addConverterFactory(GsonConverterFactory.create()).client(client).build()
-
+            var retrofit:Retrofit? = null
+            if(env.mode=="production"){
+                retrofit = Retrofit.Builder().baseUrl(env.URL)
+                    .addConverterFactory(GsonConverterFactory.create()).client(client).build()
+            }else{
+                retrofit = Retrofit.Builder().baseUrl(env.URL_LOCAL)
+                    .addConverterFactory(GsonConverterFactory.create()).client(client).build()
+                env.URLIMAGE = "http://10.0.2.2:8000/"
+            }
             return retrofit.create(ApiService::class.java)
         }
     }

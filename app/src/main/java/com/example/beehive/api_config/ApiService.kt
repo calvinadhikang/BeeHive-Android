@@ -32,6 +32,11 @@ interface ApiService {
         @Query("REMEMBER_TOKEN") remember_token:String
     ): Call<UserDRO>
 
+    @GET("user/get/token")
+    fun getProfileNoAuth(
+        @Query("REMEMBER_TOKEN") remember_token:String
+    ): Call<UserDRO>
+
     @POST("user/topup")
     fun TopUp(
         @Query("REMEMBER_TOKEN") remember_token:String,
