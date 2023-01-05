@@ -16,6 +16,7 @@ import com.example.beehive.R
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.data.*
 import com.example.beehive.lelang_sting.ListLelangStingFragment
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 
@@ -51,12 +52,21 @@ class DetailOrderedStingInProgressFragment(
         var lblNamaSting:TextView  = view.findViewById(R.id.lblNamaSting)
         lblNamaSting.text = "Detail $mode Sting"
 
+        val lblStatus:TextView = view.findViewById(R.id.lblStatus)
+        val lblRevisionLeft:TextView = view.findViewById(R.id.lblRevisionLeft)
         val btnDownload:Button = view.findViewById(R.id.btnDownload)
         val btnDecline:Button = view.findViewById(R.id.btnDecline)
         val btnAccept:Button = view.findViewById(R.id.btnAccept)
         val btnComplains:Button = view.findViewById(R.id.btnComplains)
         val btnBack:ImageButton = view.findViewById(R.id.btnBack)
 
+        if(mode=="transaction"){
+            lblStatus.text = "Status : ${transaction!!.statusString}"
+            lblRevisionLeft.text = "Revision Left : ${transaction!!.revisionLeft}"
+        }else{
+//            lblStatus.text = "Status : ${lelang!!.statusString}"
+//            lblRevisionLeft.text = "Revision Left : ${lelang!!.revisionLeft}"
+        }
         btnDecline.isVisible = false
         btnDownload.isVisible = false
         btnAccept.isVisible = false
@@ -109,7 +119,15 @@ class DetailOrderedStingInProgressFragment(
         }
         btnBack.setOnClickListener{
             if(mode=="transaction"){
-
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.frMain, DetailOrderedStingFragment(
+                        transaction!!.sting!!.author!!.NAMA!!,
+                        transaction!!.REQUIREMENT_PROJECT!!,
+                        transaction!!.COMMISION!!,
+                        transaction!!.DATE_START!!,
+                        transaction!!.DATE_END!!,
+                    ))
+                    .commit()
             }else{
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.frMain, ListLelangStingFragment())
@@ -262,9 +280,7 @@ class DetailOrderedStingInProgressFragment(
                                 val responseBody = response.body()
                                 if(responseBody!=null){
                                     if(responseBody.data!=null){
-                                        val uangBaru:String = responseBody!!.message!!
                                         acti.showModal("Berhasil finish order! (づ￣ 3￣)づ"){}
-                                        acti.userLogin!!.BALANCE = uangBaru
                                         //TODO RELOAD PAGE INI DAN DISABLE BUTTON
                                         myDialog.dismiss()
                                     }
@@ -272,7 +288,7 @@ class DetailOrderedStingInProgressFragment(
                             }
                             else{
                                 val statusCode:Int = response.code()
-                                Log.e("ERROR DECLINE", "Fail Access: $statusCode")
+                                Log.e("ERROR ACC", "Fail Access: $statusCode")
                                 if(statusCode==401){
                                     acti.showModal("Unauthorized"){}
                                 }else if(statusCode==404){
@@ -282,7 +298,7 @@ class DetailOrderedStingInProgressFragment(
                         }
 
                         override fun onFailure(call: Call<BasicDRO>, t: Throwable) {
-                            Log.e("ERROR DECLINE", "onFailure: ${t.message}")
+                            Log.e("ERROR ACC", "onFailure: ${t.message}")
                             acti.showModal("Poor network connection detected"){}
                         }
 
@@ -299,9 +315,7 @@ class DetailOrderedStingInProgressFragment(
                                 val responseBody = response.body()
                                 if(responseBody!=null){
                                     if(responseBody.data!=null){
-                                        val uangBaru:String = responseBody!!.message!!
                                         acti.showModal("Berhasil finish order! (づ￣ 3￣)づ"){}
-                                        acti.userLogin!!.BALANCE = uangBaru
                                         //TODO RELOAD PAGE INI DAN DISABLE BUTTON
                                         myDialog.dismiss()
                                     }
@@ -309,7 +323,7 @@ class DetailOrderedStingInProgressFragment(
                             }
                             else{
                                 val statusCode:Int = response.code()
-                                Log.e("ERROR DECLINE", "Fail Access: $statusCode")
+                                Log.e("ERROR ACC", "Fail Access: $statusCode")
                                 if(statusCode==401){
                                     acti.showModal("Unauthorized"){}
                                 }else if(statusCode==404){
@@ -319,7 +333,7 @@ class DetailOrderedStingInProgressFragment(
                         }
 
                         override fun onFailure(call: Call<BasicDRO>, t: Throwable) {
-                            Log.e("ERROR DECLINE", "onFailure: ${t.message}")
+                            Log.e("ERROR ACC", "onFailure: ${t.message}")
                             acti.showModal("Poor network connection detected"){}
                         }
 
@@ -328,9 +342,16 @@ class DetailOrderedStingInProgressFragment(
             }
         }
         btnComplains.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.frMain, ListComplainsFragment())
-                .commit()
+            if(mode=="transaction"){
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.frMain, ListComplainsFragment(mode,transaction,lelang,
+                        transaction!!.complains!! as List<ComplainData>))
+                    .commit()
+            }else{
+//                parentFragmentManager.beginTransaction()
+//                    .replace(R.id.frMain, ListComplainsFragment(lelang!!.complains!! as List<ComplainData>))
+//                    .commit()
+            }
         }
     }
 }

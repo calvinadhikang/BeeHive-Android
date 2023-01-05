@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="92dp"
                 android:layout_marginTop="32dp"
-                android:text="Nama Sting"
+                android:text="Latest Complains "
                 android:textColor="#FFFFFF"
                 android:textSize="28sp"
                 android:textStyle="bold"
@@ -49,23 +49,10 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvComplain"
-            android:layout_width="335dp"
-            android:layout_height="462dp"
+            android:layout_width="340dp"
+            android:layout_height="513dp"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView50" />
-
-        <TextView
-            android:id="@+id/textView50"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="20dp"
-            android:text="Latest Complain"
-            android:textColor="@color/primary"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:layout_marginTop="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout6" />
 

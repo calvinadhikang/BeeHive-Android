@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.example.beehive.R
 import com.example.beehive.activities.MainActivity
+import com.example.beehive.data.ComplainData
 
 class DetailOrderedStingFragment (
     var namaBeeworker: String, var requirement: String, var harga: String, var tglMulai: String, var tglSelesai: String
@@ -31,5 +33,12 @@ class DetailOrderedStingFragment (
         val acti = activity as MainActivity
         acti.supportActionBar!!.hide()
         acti.title = "Detail Ordered Sting"
+        var btnDetail:Button = view.findViewById(R.id.btnDetail)
+        btnDetail.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.frMain,
+                    DetailOrderedStingInProgressFragment("transaction",null,null,))
+                .commit()
+        }
     }
 }

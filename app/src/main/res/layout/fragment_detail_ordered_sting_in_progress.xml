@@ -70,7 +70,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/lblbeeworkername"
+            android:id="@+id/lblStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"

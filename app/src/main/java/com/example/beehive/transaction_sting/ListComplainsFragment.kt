@@ -5,11 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.beehive.activities.MainActivity
 import com.example.beehive.R
+import com.example.beehive.data.ComplainData
+import com.example.beehive.data.LelangStingData
+import com.example.beehive.data.TransactionStingData
 
-class ListComplainsFragment : Fragment() {
-
+class ListComplainsFragment(
+    var mode:String = "transaction", //transaction atau lelang
+    var transaction: TransactionStingData? = null,
+    var lelang: LelangStingData? = null,
+    var complains:List<ComplainData>
+    ) : Fragment() {
+    lateinit var rvComplain:RecyclerView
+    lateinit var btnBack:ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -29,5 +41,17 @@ class ListComplainsFragment : Fragment() {
         val acti = activity as MainActivity
         acti.supportActionBar!!.hide()
         acti.title = "List Complain Sting"
+        var adapter:RVComplainAdapter = RVComplainAdapter(complains)
+        rvComplain = view.findViewById(R.id.rvComplain)
+        btnBack = view.findViewById(R.id.btnBack)
+        rvComplain.adapter = adapter
+        rvComplain.layoutManager =
+            GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, true)
+
+        btnBack.setOnClickListener{
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.frMain, DetailOrderedStingInProgressFragment(mode,transaction,lelang))
+                .commit()
+        }
     }
 }

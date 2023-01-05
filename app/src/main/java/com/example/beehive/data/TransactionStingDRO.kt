@@ -73,7 +73,7 @@ data class TransactionStingData(
 	val JUMLAH_REVISI: String? = null,
 
 	@field:SerializedName("complains")
-	val complains: List<ComplainDRO?>? = null,
+	val complains: List<ComplainData?>? = null,
 
 	@field:SerializedName("ID_TRANSACTION")
 	val ID_TRANSACTION: String? = null,
