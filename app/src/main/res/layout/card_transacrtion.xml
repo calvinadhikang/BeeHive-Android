@@ -13,7 +13,10 @@
         android:layout_marginBottom="5dp"
         android:background="@drawable/background_white_form"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="10dp">
 
         <ImageView
             android:id="@+id/imgStingNotif"
@@ -49,6 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="right"
                     android:text="10 - 12 - 2022" />
             </LinearLayout>
 
