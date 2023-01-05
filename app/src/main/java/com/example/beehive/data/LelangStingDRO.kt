@@ -75,5 +75,18 @@ data class LelangStingData(
 	val FILENAME_FINAL: String? = null,
 
 	@field:SerializedName("DATE_END")
-	val DATE_END: String? = null
+	val DATE_END: String? = null,
+
+	@field:SerializedName("revisionWaiting")
+	val revisionWaiting: Int? = null,
+
+	@field:SerializedName("revisionLeft")
+	val revisionLeft: Int? = null,
+
+	@field:SerializedName("complains")
+	val complains: List<ComplainData?>? = null,
+
+	@field:SerializedName("statusString")
+	val statusString: String? = null,
+
 ) : Parcelable

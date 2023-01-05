@@ -64,8 +64,8 @@ class DetailOrderedStingInProgressFragment(
             lblStatus.text = "Status : ${transaction!!.statusString}"
             lblRevisionLeft.text = "Revision Left : ${transaction!!.revisionLeft}"
         }else{
-//            lblStatus.text = "Status : ${lelang!!.statusString}"
-//            lblRevisionLeft.text = "Revision Left : ${lelang!!.revisionLeft}"
+            lblStatus.text = "Status : ${lelang!!.statusString}"
+            lblRevisionLeft.text = "Revision Left : ${lelang!!.revisionLeft}"
         }
         btnDecline.isVisible = false
         btnDownload.isVisible = false
@@ -94,12 +94,12 @@ class DetailOrderedStingInProgressFragment(
                 btnDownload.text = "There is no work delivered"
             }
         }else{
-            //mode lelang TODO GANTI KE LELANG dan ganti dro
+            //mode lelang
             if(lelang!!.FILENAME_FINAL!=""){
                 btnDownload.isVisible = true
-                if(transaction!!.revisionWaiting!!<1){
-                    if(transaction!!.STATUS!!!="2"){ //kalau belum selesai
-                        if(transaction!!.revisionLeft!!>0){
+                if(lelang!!.revisionWaiting!!<1){
+                    if(lelang!!.STATUS!!!="2"){ //kalau belum selesai
+                        if(lelang!!.revisionLeft!!>0){
                             btnDecline.isVisible = true
                         }else{
                             btnDecline.isVisible = true
@@ -154,7 +154,6 @@ class DetailOrderedStingInProgressFragment(
             val btnSubmit: Button = dialogBinding.findViewById(R.id.btnSubmit)
             val txtComplain: EditText = dialogBinding.findViewById(R.id.txtComplain)
             btnSubmit.setOnClickListener{
-                //todo submit
                 var complain:String = txtComplain.text.toString()
                 if(complain==""){
                     Toast.makeText(requireContext(),
@@ -200,9 +199,8 @@ class DetailOrderedStingInProgressFragment(
 
                     })
                 }else{
-
-                    val client = ApiConfiguration.getApiService().declineTransactionSting(
-                        id = transaction!!.ID_TRANSACTION!!,
+                    val client = ApiConfiguration.getApiService().declineLelangSting(
+                        id = lelang!!.ID_LELANG_STING!!,
                         remember_token = acti.userLogin!!.REMEMBER_TOKEN!!,
                         declineTransactionStingData = DeclineTransactionStingDTO(complain)
                     )
@@ -212,7 +210,7 @@ class DetailOrderedStingInProgressFragment(
                                 val responseBody = response.body()
                                 if(responseBody!=null){
                                     if(responseBody.data!=null){
-                                        acti.showModal("Berhasil decline order dan " +
+                                        acti.showModal("Berhasil decline lelang deliver dan " +
                                                 "mengirim complain"){}
                                         //TODO RELOAD PAGE INI DAN DISABLE BUTTON
                                         myDialog.dismiss()
@@ -225,9 +223,9 @@ class DetailOrderedStingInProgressFragment(
                                 if(statusCode==401){
                                     acti.showModal("Unauthorized"){}
                                 }else if(statusCode==404){
-                                    acti.showModal("Order ini tidak ditemukan!"){}
+                                    acti.showModal("Lelang ini tidak ditemukan!"){}
                                 }else if(statusCode==403){
-                                    acti.showModal("Order ini sudah mencapai batas maksimum revisi!"){}
+                                    acti.showModal("Lelang ini sudah mencapai batas maksimum revisi!"){}
                                 }
                             }
                         }
@@ -261,7 +259,6 @@ class DetailOrderedStingInProgressFragment(
             val btnSubmit: Button = dialogBinding.findViewById(R.id.btnSubmit)
             val txtReview: EditText = dialogBinding.findViewById(R.id.txtReview)
             btnSubmit.setOnClickListener{
-                //todo submit
                 var review:String = txtReview.text.toString()
                 if(review==""){
                     Toast.makeText(requireContext(),
@@ -304,8 +301,8 @@ class DetailOrderedStingInProgressFragment(
 
                     })
                 }else{
-                    val client = ApiConfiguration.getApiService().completeTransactionSting(
-                        id = transaction!!.ID_TRANSACTION!!,
+                    val client = ApiConfiguration.getApiService().completeLelangSting(
+                        id = lelang!!.ID_LELANG_STING!!,
                         remember_token = acti.userLogin!!.REMEMBER_TOKEN!!,
                         completeTransactionStingData = CompleteTransactionStingDTO(rating,review)
                     )
@@ -315,7 +312,7 @@ class DetailOrderedStingInProgressFragment(
                                 val responseBody = response.body()
                                 if(responseBody!=null){
                                     if(responseBody.data!=null){
-                                        acti.showModal("Berhasil finish order! (づ￣ 3￣)づ"){}
+                                        acti.showModal("Berhasil finish lelang! (づ￣ 3￣)づ"){}
                                         //TODO RELOAD PAGE INI DAN DISABLE BUTTON
                                         myDialog.dismiss()
                                     }
@@ -327,7 +324,7 @@ class DetailOrderedStingInProgressFragment(
                                 if(statusCode==401){
                                     acti.showModal("Unauthorized"){}
                                 }else if(statusCode==404){
-                                    acti.showModal("Order ini tidak ditemukan!"){}
+                                    acti.showModal("Lelang ini tidak ditemukan!"){}
                                 }
                             }
                         }
@@ -348,9 +345,10 @@ class DetailOrderedStingInProgressFragment(
                         transaction!!.complains!! as List<ComplainData>))
                     .commit()
             }else{
-//                parentFragmentManager.beginTransaction()
-//                    .replace(R.id.frMain, ListComplainsFragment(lelang!!.complains!! as List<ComplainData>))
-//                    .commit()
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.frMain, ListComplainsFragment(mode,transaction,lelang,
+                            lelang!!.complains!! as List<ComplainData>))
+                    .commit()
             }
         }
     }

@@ -108,22 +108,22 @@ interface ApiService {
 
     @POST("sting/buy/{kode}/{mode}")
     fun buySting(
-        @Query("REMEMBER_TOKEN") remember_token:String,
         @Path("kode") kode:String,
         @Path("mode") mode:String,
+        @Query("REMEMBER_TOKEN") remember_token:String,
         @Body buyStingData: BuyStingDTO
     ): Call<BasicDRO>
 
     @GET("sting/transaction/{id}")
     fun getTransactionSting(
+        @Path("id") id:String,
         @Query("REMEMBER_TOKEN") remember_token:String,
-        @Path("id") id:String
     ): Call<TransactionStingDRO>
 
     @GET("sting/transaction/{id}/cancel")
     fun cancelTransactionSting(
+        @Path("id") id:String,
         @Query("REMEMBER_TOKEN") remember_token:String,
-        @Path("id") id:String
     ): Call<BasicDRO>
 
     @POST("sting/transaction/{id}/decline")
@@ -156,4 +156,36 @@ interface ApiService {
         @Query("REMEMBER_TOKEN") remember_token:String,
         @Body lelangStingData: CreateLelangStingDTO
     ): Call<BasicDRO>
+
+    @GET("sting/lelang/{id}")
+    fun getLelangSting(
+        @Path("id") id:String,
+        @Query("REMEMBER_TOKEN") remember_token:String,
+    ): Call<LelangStingDRO>
+
+    @GET("sting/lelang/{id}/cancel")
+    fun cancelLelangSting(
+        @Path("id") id:String,
+        @Query("REMEMBER_TOKEN") remember_token:String,
+    ): Call<BasicDRO>
+
+    @POST("sting/lelang/{id}/decline")
+    fun declineLelangSting(
+        @Path("id") id:String,
+        @Query("REMEMBER_TOKEN") remember_token:String,
+        @Body declineTransactionStingData: DeclineTransactionStingDTO
+    ): Call<BasicDRO>
+
+    @POST("sting/lelang/{id}/accept")
+    fun completeLelangSting(
+        @Path("id") id:String,
+        @Query("REMEMBER_TOKEN") remember_token:String,
+        @Body completeTransactionStingData: CompleteTransactionStingDTO
+    ): Call<BasicDRO>
+
+    @GET("sting/lelang/{id}/complains")
+    fun fetchComplainLelangSting(
+        @Path("id") id:String,
+        @Query("REMEMBER_TOKEN") remember_token:String,
+    ): Call<ListComplainDRO>
 }
