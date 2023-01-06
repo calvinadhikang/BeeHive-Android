@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import com.example.beehive.activities.MainActivity
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.api_config.UserData
 import com.example.beehive.data.BasicDRO
@@ -30,7 +31,7 @@ class LVTransactionAdapter (
         val txtTipeNotif = view.findViewById<TextView>(R.id.txtTipeNotif)
         val txtReqNotif = view.findViewById<TextView>(R.id.txtReqNotif)
         val imgStingNotif = view.findViewById<ImageView>(R.id.imgStingNotif)
-
+        val acti = context as MainActivity
         view.setOnClickListener {
             if (listTransaction[position].STATUS == "0"){
                 val popUp = PopupMenu(context,it)
@@ -39,7 +40,10 @@ class LVTransactionAdapter (
                 popUp.setOnMenuItemClickListener {
                     return@setOnMenuItemClickListener when(it.itemId){
                         R.id.cancel_menu->{
-                            cancelTrans(listTransaction[position].ID_TRANSACTION!!)
+                            acti.showConfirmation("Apakah anda yakin untuk membatalkan order ini?","Yes",
+                            "No",{
+                                    cancelTrans(listTransaction[position].ID_TRANSACTION!!)
+                                },{})
                             true
                         }
                         else ->{
