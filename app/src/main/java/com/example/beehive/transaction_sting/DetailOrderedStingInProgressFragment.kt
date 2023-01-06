@@ -125,7 +125,7 @@ class DetailOrderedStingInProgressFragment(
                         transaction!!.REQUIREMENT_PROJECT!!,
                         transaction!!.COMMISION!!,
                         transaction!!.DATE_START!!,
-                        transaction!!.DATE_END!!,
+                        transaction!!.DATE_END!!, transaction!!
                     ))
                     .commit()
             }else{
