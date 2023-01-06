@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.beehive.NotificationFragment
 import com.example.beehive.R
 import com.example.beehive.activities.MainActivity
 import com.example.beehive.data.TransactionStingData
@@ -53,10 +54,10 @@ class DetailOrderedStingFragment (
         lblDateEnded.text = tglSelesai
 
         btnBackn.setOnClickListener{
-//            parentFragmentManager.beginTransaction()
-//                .replace(R.id.frMain, NotificationFragment())
-//                .commit()
-            activity?.supportFragmentManager?.popBackStack();
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.frMain, NotificationFragment())
+                .commit()
+
         }
 
 
