@@ -57,7 +57,7 @@ class LVTransactionAdapter (
                 onClick(listTransaction[position].sting!!.author!!.NAMA!!,
                     listTransaction[position].REQUIREMENT_PROJECT!!,
                     listTransaction[position].COMMISION!!,
-                    listTransaction[position].DATE_START!!,
+                    listTransaction[position].DATE_START!!+"",
                     temp,
                     listTransaction[position]
                 )

@@ -48,7 +48,8 @@ class DetailOrderedStingFragment (
         var btnDownload: Button = view.findViewById(R.id.btnDownload3)
         var btnBackn: ImageView = view.findViewById(R.id.btnBackRegisterFinal)
 
-        lblNamaSting.text = trans.sting!!.TITLE_STING
+//        lblNamaSting.text = trans.sting!!.TITLE_STING
+        lblNamaSting.text = "Detail Ordered Sting"
         lblBeeworkerName.text = namaBeeworker
         lblDeskripsi.text = trans.sting!!.DESKRIPSI
         lvlharga.text = "Rp.$harga"
@@ -65,7 +66,7 @@ class DetailOrderedStingFragment (
         btnDetail.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.frMain,
-                    DetailOrderedStingInProgressFragment("transaction",null,null,))
+                    DetailOrderedStingInProgressFragment("transaction",trans,null))
                 .commit()
         }
     }

@@ -72,7 +72,6 @@ class DetailOrderedStingInProgressFragment(
         btnDecline.isVisible = false
         btnDownload.isVisible = false
         btnAccept.isVisible = false
-        //todo kasih reload
         if(mode=="transaction"){
             if(transaction!!.FILENAME_FINAL!=""){
                 btnDownload.isVisible = true
@@ -121,13 +120,23 @@ class DetailOrderedStingInProgressFragment(
         }
         btnBack.setOnClickListener{
             if(mode=="transaction"){
+                var dateend:String = ""
+                if(transaction!!.DATE_END!=null){
+                    dateend = transaction!!.DATE_END.toString()
+                }
+                if(transaction==null){
+                    Log.i("asdx",transaction.toString())
+                    acti.showModal("${transaction.toString()}"){}
+                    return@setOnClickListener
+                }
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.frMain, DetailOrderedStingFragment(
                         transaction!!.sting!!.author!!.NAMA!!,
                         transaction!!.REQUIREMENT_PROJECT!!,
                         transaction!!.COMMISION!!,
-                        transaction!!.DATE_START!!,
-                        transaction!!.DATE_END!!, transaction!!
+                        transaction!!.DATE_START.toString(),
+                        transaction!!.DATE_END.toString(),
+                        transaction!!
                     ))
                     .commit()
             }else{
@@ -177,7 +186,15 @@ class DetailOrderedStingInProgressFragment(
                                         acti.showModal("Berhasil decline order dan " +
                                                 "mengirim complain"){}
                                         myDialog.dismiss()
-                                        //TODO redirect ke page detail
+                                        parentFragmentManager.beginTransaction()
+                                            .replace(R.id.frMain, DetailOrderedStingFragment(
+                                                transaction!!.sting!!.author!!.NAMA!!,
+                                                transaction!!.REQUIREMENT_PROJECT!!,
+                                                transaction!!.COMMISION!!,
+                                                transaction!!.DATE_START.toString(),
+                                                transaction!!.DATE_END.toString(), transaction!!
+                                            ))
+                                            .commit()
                                     }
                                 }
                             }
@@ -214,8 +231,10 @@ class DetailOrderedStingInProgressFragment(
                                     if(responseBody.data!=null){
                                         acti.showModal("Berhasil decline lelang deliver dan " +
                                                 "mengirim complain"){}
-                                        //TODO RELOAD PAGE INI DAN DISABLE BUTTON
                                         myDialog.dismiss()
+                                        parentFragmentManager.beginTransaction()
+                                            .replace(R.id.frMain, ListLelangStingFragment())
+                                            .commit()
                                     }
                                 }
                             }

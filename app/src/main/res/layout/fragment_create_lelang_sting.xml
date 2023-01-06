@@ -22,9 +22,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="24dp"
-                android:backgroundTint="@color/secondary"
                 android:text="Create"
                 android:textStyle="bold"
+                android:backgroundTint="@color/primary"
+                android:textColor="@color/light_gray"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
