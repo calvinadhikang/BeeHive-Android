@@ -1,7 +1,7 @@
 package com.example.beehive
 
 object env {
-    const val mode:String = "local"  //production or local
+    const val mode:String = "production"  //production or local
 
 
 
