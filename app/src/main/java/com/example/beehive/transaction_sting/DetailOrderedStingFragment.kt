@@ -6,13 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import com.example.beehive.R
 import com.example.beehive.activities.MainActivity
-import com.example.beehive.data.ComplainData
 import com.example.beehive.data.TransactionStingData
 
 class DetailOrderedStingFragment (
-    var namaBeeworker: String, var requirement: String, var harga: String, var tglMulai: String, var tglSelesai: String, var trans: TransactionStingData
+   var namaBeeworker: String, var requirement: String, var harga: String, var tglMulai: String, var tglSelesai: String, var trans: TransactionStingData
 ): Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +36,30 @@ class DetailOrderedStingFragment (
         acti.supportActionBar!!.hide()
         acti.title = "Detail Ordered Sting"
         var btnDetail:Button = view.findViewById(R.id.btnDetail)
+        var lblNamaSting: TextView = view.findViewById(R.id.lblNamaSting)
+        var lblBeeworkerName: TextView = view.findViewById(R.id.lblBeeworkerName)
+        var lblDeskripsi: TextView = view.findViewById(R.id.lblDeskripsi)
+        var lvlharga: TextView = view.findViewById(R.id.lblHarga)
+        var lblDateStarted: TextView = view.findViewById(R.id.lblDateStarted)
+        var lblDateEnded: TextView = view.findViewById(R.id.lblDateEnded)
+        var btnDownload: Button = view.findViewById(R.id.btnDownload3)
+        var btnBackn: ImageView = view.findViewById(R.id.btnBackRegisterFinal)
+
+        lblNamaSting.text = trans.sting!!.TITLE_STING
+        lblBeeworkerName.text = namaBeeworker
+        lblDeskripsi.text = trans.sting!!.DESKRIPSI
+        lvlharga.text = "Rp.$harga"
+        lblDateStarted.text = tglMulai
+        lblDateEnded.text = tglSelesai
+
+        btnBackn.setOnClickListener{
+//            parentFragmentManager.beginTransaction()
+//                .replace(R.id.frMain, NotificationFragment())
+//                .commit()
+            activity?.supportFragmentManager?.popBackStack();
+        }
+
+
         btnDetail.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.frMain,
