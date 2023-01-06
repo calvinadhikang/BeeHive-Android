@@ -52,7 +52,6 @@ class DetailOrderedStingFragment (
         lvlharga.text = "Rp.$harga"
         lblDateStarted.text = tglMulai
         lblDateEnded.text = tglSelesai
-
         btnBackn.setOnClickListener{
             parentFragmentManager.beginTransaction()
                 .replace(R.id.frMain, NotificationFragment())
