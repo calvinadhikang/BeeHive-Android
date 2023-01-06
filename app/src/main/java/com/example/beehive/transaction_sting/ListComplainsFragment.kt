@@ -46,7 +46,7 @@ class ListComplainsFragment(
         btnBack = view.findViewById(R.id.btnBack)
         rvComplain.adapter = adapter
         rvComplain.layoutManager =
-            GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, true)
+            GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
 
         btnBack.setOnClickListener{
             parentFragmentManager.beginTransaction()

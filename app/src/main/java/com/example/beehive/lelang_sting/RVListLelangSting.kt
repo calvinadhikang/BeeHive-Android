@@ -12,7 +12,8 @@ import com.example.beehive.data.LelangStingData
 import com.example.beehive.transaction_sting.RVComplainAdapter
 
 class RVListLelangSting (
-    var data: List<LelangStingData>
+    var data: List<LelangStingData>,
+    var detail : (lelang:LelangStingData)->Unit
 ) : RecyclerView.Adapter<RVListLelangSting.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -44,7 +45,9 @@ class RVListLelangSting (
             requirement = requirement.substring(0,49)+"..."
         }
         holder.lblDeskripsi.text = requirement
-
+        holder.itemView.setOnClickListener {
+            detail(obj)
+        }
     }
 
     override fun getItemCount(): Int {

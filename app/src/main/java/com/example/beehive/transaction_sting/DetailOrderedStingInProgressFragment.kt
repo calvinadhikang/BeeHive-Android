@@ -11,10 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.view.isVisible
+import com.example.beehive.NotificationFragment
 import com.example.beehive.activities.MainActivity
 import com.example.beehive.R
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.data.*
+import com.example.beehive.lelang_sting.DetailLelangStingFragment
 import com.example.beehive.lelang_sting.ListLelangStingFragment
 import org.w3c.dom.Text
 import retrofit2.Call
@@ -130,7 +132,7 @@ class DetailOrderedStingInProgressFragment(
                     .commit()
             }else{
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.frMain, ListLelangStingFragment())
+                    .replace(R.id.frMain, DetailLelangStingFragment(lelang!!))
                     .commit()
             }
         }
@@ -174,8 +176,8 @@ class DetailOrderedStingInProgressFragment(
                                     if(responseBody.data!=null){
                                         acti.showModal("Berhasil decline order dan " +
                                                 "mengirim complain"){}
-                                        //TODO RELOAD PAGE INI DAN DISABLE BUTTON
                                         myDialog.dismiss()
+                                        //TODO redirect ke page detail
                                     }
                                 }
                             }
@@ -249,9 +251,6 @@ class DetailOrderedStingInProgressFragment(
             myDialog.show()
 
             val ratingBar: RatingBar = dialogBinding.findViewById(R.id.ratingBar)
-            var rating:Int = 0
-            rating = ratingBar.rating.toInt()
-
             val btnCancel: Button = dialogBinding.findViewById(R.id.btnCancel)
             btnCancel.setOnClickListener{
                 myDialog.dismiss()
@@ -261,15 +260,14 @@ class DetailOrderedStingInProgressFragment(
             btnSubmit.setOnClickListener{
                 var review:String = txtReview.text.toString()
                 if(review==""){
-                    Toast.makeText(requireContext(),
-                        "Review harus diisi!", Toast.LENGTH_SHORT).show()
+                    acti.showModal("Review harus diisi! "){}
                     return@setOnClickListener
                 }
                 if(mode=="transaction"){
                     val client = ApiConfiguration.getApiService().completeTransactionSting(
                         id = transaction!!.ID_TRANSACTION!!,
                         remember_token = acti.userLogin!!.REMEMBER_TOKEN!!,
-                        completeTransactionStingData = CompleteTransactionStingDTO(rating,review)
+                        completeTransactionStingData = CompleteTransactionStingDTO(ratingBar.rating.toInt(),review)
                     )
                     client.enqueue(object: Callback<BasicDRO> {
                         override fun onResponse(call: Call<BasicDRO>, response: retrofit2.Response<BasicDRO>){
@@ -278,8 +276,10 @@ class DetailOrderedStingInProgressFragment(
                                 if(responseBody!=null){
                                     if(responseBody.data!=null){
                                         acti.showModal("Berhasil finish order! (づ￣ 3￣)づ"){}
-                                        //TODO RELOAD PAGE INI DAN DISABLE BUTTON
                                         myDialog.dismiss()
+                                        parentFragmentManager.beginTransaction()
+                                            .replace(R.id.frMain, NotificationFragment())
+                                            .commit()
                                     }
                                 }
                             }
@@ -290,6 +290,8 @@ class DetailOrderedStingInProgressFragment(
                                     acti.showModal("Unauthorized"){}
                                 }else if(statusCode==404){
                                     acti.showModal("Order ini tidak ditemukan!"){}
+                                }else if(statusCode==400){
+                                    acti.showModal("Input kurang lengkap!"){}
                                 }
                             }
                         }
@@ -304,7 +306,7 @@ class DetailOrderedStingInProgressFragment(
                     val client = ApiConfiguration.getApiService().completeLelangSting(
                         id = lelang!!.ID_LELANG_STING!!,
                         remember_token = acti.userLogin!!.REMEMBER_TOKEN!!,
-                        completeTransactionStingData = CompleteTransactionStingDTO(rating,review)
+                        completeTransactionStingData = CompleteTransactionStingDTO(ratingBar.rating.toInt(),review)
                     )
                     client.enqueue(object: Callback<BasicDRO> {
                         override fun onResponse(call: Call<BasicDRO>, response: retrofit2.Response<BasicDRO>){
@@ -313,8 +315,11 @@ class DetailOrderedStingInProgressFragment(
                                 if(responseBody!=null){
                                     if(responseBody.data!=null){
                                         acti.showModal("Berhasil finish lelang! (づ￣ 3￣)づ"){}
-                                        //TODO RELOAD PAGE INI DAN DISABLE BUTTON
-                                        myDialog.dismiss()
+                                         myDialog.dismiss()
+
+                                        parentFragmentManager.beginTransaction()
+                                            .replace(R.id.frMain, ListLelangStingFragment())
+                                            .commit()
                                     }
                                 }
                             }
@@ -325,6 +330,8 @@ class DetailOrderedStingInProgressFragment(
                                     acti.showModal("Unauthorized"){}
                                 }else if(statusCode==404){
                                     acti.showModal("Lelang ini tidak ditemukan!"){}
+                                }else if(statusCode==400){
+                                    acti.showModal("Input kurang lengkap!"){}
                                 }
                             }
                         }
@@ -353,3 +360,4 @@ class DetailOrderedStingInProgressFragment(
         }
     }
 }
+

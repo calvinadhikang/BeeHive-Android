@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    tools:context=".lelang_sting.DetailLelangStingFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="335dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="80dp"
+            android:backgroundTint="@color/error"
+            android:text="Cancel"
+            android:textColor="@color/primary"
+            app:layout_constraintEnd_toEndOf="@+id/btnDownload3"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/btnDownload3"
+            app:layout_constraintTop_toBottomOf="@+id/btnDownload3" />
+
+        <TextView
+            android:id="@+id/lblHarga"
+            android:layout_width="126dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="236dp"
+            android:layout_marginTop="196dp"
+            android:text="Rp50000"
+            android:textAlignment="textEnd"
+            android:textColor="@color/primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+
+        <TextView
+            android:id="@+id/lbl2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="248dp"
+            android:text="Date Started"
+            android:textColor="@color/primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+
+        <TextView
+            android:id="@+id/lblDateStarted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="280dp"
+            android:text="10 October 2022"
+            android:textColor="@color/primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+
+        <TextView
+            android:id="@+id/lbl5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="288dp"
+            android:layout_marginTop="248dp"
+            android:text="Date Ended"
+            android:textColor="@color/primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+
+        <TextView
+            android:id="@+id/lblDateEnded"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="162dp"
+            android:layout_marginTop="280dp"
+            android:text="12 October 2022"
+            android:textAlignment="textEnd"
+            android:textColor="@color/primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+
+        <TextView
+            android:id="@+id/lblDeskripsi"
+            android:layout_width="322dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="108dp"
+            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknownprinter. "
+            android:textColor="@color/primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout5"
+            android:layout_width="match_parent"
+            android:layout_height="117dp"
+            android:layout_marginTop="-4dp"
+            android:background="@drawable/background_curved_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="28dp"
+                android:clickable="true"
+                android:src="@drawable/back"
+                app:backgroundTint="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/lblNamaSting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="96dp"
+                android:layout_marginTop="40dp"
+                android:text="Detail Lelang Sting"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/lblNamaBeeworker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="32dp"
+            android:text="Beeworker"
+            android:textColor="@color/primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+
+        <TextView
+            android:id="@+id/lblBeeworkerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="116dp"
+            android:layout_marginTop="32dp"
+            android:text="NAMA"
+            android:textColor="@color/primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+
+        <TextView
+            android:id="@+id/lbl1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="72dp"
+            android:text="Deskripsi Requirement"
+            android:textColor="@color/primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+
+        <Button
+            android:id="@+id/btnDownload3"
+            android:layout_width="335dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@android:color/transparent"
+            android:text="Donwload Latest Deliver"
+            android:textColor="@color/primary"
+            app:layout_constraintEnd_toEndOf="@+id/lblDateEnded"
+            app:layout_constraintHorizontal_bias="0.142"
+            app:layout_constraintStart_toStartOf="@+id/lblDateStarted"
+            app:layout_constraintTop_toBottomOf="@+id/lblDateEnded"
+            app:strokeColor="@color/primary"
+            app:strokeWidth="1dp" />
+
+        <Button
+            android:id="@+id/btnDetail"
+            android:layout_width="335dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="8dp"
+            android:text="Detail"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/btnDownload3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/btnDownload3"
+            app:layout_constraintTop_toBottomOf="@+id/btnDownload3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

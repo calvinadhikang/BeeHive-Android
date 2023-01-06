@@ -12,7 +12,9 @@ import com.example.beehive.data.ComplainData
 import com.example.beehive.data.TransactionStingData
 
 class DetailOrderedStingFragment (
-    var namaBeeworker: String, var requirement: String, var harga: String, var tglMulai: String, var tglSelesai: String, var trans: TransactionStingData
+    var namaBeeworker: String, var requirement: String,
+    var harga: String, var tglMulai: String, var tglSelesai: String,
+    var trans: TransactionStingData
 ): Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
