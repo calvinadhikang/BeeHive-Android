@@ -47,5 +47,9 @@ class BuyStingFragment (
         txtDescBuy.text = desc
         txtHargaBuy.text = harga
 
+        btnBuyBuy.setOnClickListener(){
+            acti.test()
+        }
+
     }
 }

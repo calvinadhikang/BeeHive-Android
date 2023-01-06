@@ -6,13 +6,21 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import com.example.beehive.api_config.ApiConfiguration
+import com.example.beehive.api_config.UserData
+import com.example.beehive.data.BasicDRO
+import com.example.beehive.data.ListTransactionStingDRO
 import com.example.beehive.data.TransactionStingData
 import com.squareup.picasso.Picasso
+import retrofit2.Call
+import retrofit2.Callback
 
 class LVTransactionAdapter (
     private val context: Activity,
     private val listTransaction: ArrayList<TransactionStingData>,
-    val onClick: (namaBeeworker: String, requirement: String, harga: String, tglMulai: String, tglSelesai: String) -> Unit
+    var userLogin: UserData,
+    val onClick: (namaBeeworker: String, requirement: String, harga: String, tglMulai: String, tglSelesai: String, trans: TransactionStingData) -> Unit,
+    val cancelTrans: (id: String) -> Unit
 ): ArrayAdapter<TransactionStingData>(context, R.layout.card_transacrtion, listTransaction){
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -31,7 +39,7 @@ class LVTransactionAdapter (
                 popUp.setOnMenuItemClickListener {
                     return@setOnMenuItemClickListener when(it.itemId){
                         R.id.cancel_menu->{
-
+                            cancelTrans(listTransaction[position].ID_TRANSACTION!!)
                             true
                         }
                         else ->{
@@ -50,7 +58,8 @@ class LVTransactionAdapter (
                     listTransaction[position].REQUIREMENT_PROJECT!!,
                     listTransaction[position].COMMISION!!,
                     listTransaction[position].DATE_START!!,
-                    temp
+                    temp,
+                    listTransaction[position]
                 )
             }
         }
@@ -74,7 +83,13 @@ class LVTransactionAdapter (
         else{
             txtTipeNotif.text = "Basic Plan"
         }
-        txtReqNotif.text = listTransaction[position].REQUIREMENT_PROJECT.toString()
+        if (listTransaction[position].REQUIREMENT_PROJECT.toString().length > 35){
+            txtReqNotif.text = listTransaction[position].REQUIREMENT_PROJECT.toString().substring(0,35) + "..."
+        }
+        else{
+            txtReqNotif.text = listTransaction[position].REQUIREMENT_PROJECT.toString()
+        }
+
 
 
         return view

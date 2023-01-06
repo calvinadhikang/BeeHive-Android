@@ -9,11 +9,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ListView
 import com.example.beehive.api_config.ApiConfiguration
-import com.example.beehive.data.ListTransactionStingDRO
-import com.example.beehive.data.TransactionStingData
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import com.example.beehive.activities.MainActivity
+import com.example.beehive.data.*
 import com.example.beehive.transaction_sting.DetailOrderedStingFragment
 
 class NotificationFragment : Fragment() {
@@ -73,12 +73,43 @@ class NotificationFragment : Fragment() {
                             if(responseBody.data!=null){
                                 var data: List<TransactionStingData> = responseBody.data as List<TransactionStingData>
                                 listTransaction = responseBody.data as ArrayList<TransactionStingData>
-                                daftarTransaction = LVTransactionAdapter(requireActivity(), listTransaction){
-                                        namaBeeworker, requirement, harga, tglMulai, tglSelesai ->
+                                daftarTransaction = LVTransactionAdapter(requireActivity(), listTransaction, acti.userLogin!!, {
+                                        namaBeeworker, requirement, harga, tglMulai, tglSelesai, trans ->
                                     parentFragmentManager.beginTransaction()
-                                        .replace(R.id.frMain, DetailOrderedStingFragment(namaBeeworker, requirement, harga, tglMulai, tglSelesai))
+                                        .replace(R.id.frMain, DetailOrderedStingFragment(namaBeeworker, requirement, harga, tglMulai, tglSelesai, trans))
                                         .commit()
-                                }
+                                }, { id ->
+                                    val cancelClient = ApiConfiguration.getApiService().cancelTransactionSting(
+                                        id,
+                                        remember_token = acti.userLogin!!.REMEMBER_TOKEN!!
+                                    )
+                                    cancelClient.enqueue(object: Callback<BasicDRO> {
+                                        override fun onResponse(call: Call<BasicDRO>, response: retrofit2.Response<BasicDRO>){
+                                            if(response.isSuccessful){
+                                                val responseBody = response.body()
+                                                if(responseBody!=null){
+                                                    if(responseBody.data!=null){
+                                                        acti.showModal(responseBody.message.toString()){}
+                                                    }
+                                                }
+                                            }
+                                            else{
+                                                val statusCode:Int = response.code()
+                                                Log.e("ErrorLogin", "Fail Access: $statusCode")
+                                                if(statusCode==404){
+                                                    acti.showModal("Order tidak ditemukan"){}
+                                                }
+                                                else if(statusCode==403){
+                                                    acti.showModal("Order ini tidak dalam keadaan pending"){}
+                                                }
+                                            }
+                                        }
+
+                                        override fun onFailure(call: Call<BasicDRO>, t: Throwable) {
+                                            Log.e("GET_PROFILE_ERROR", "onFailure: ${t.message}")
+                                        }
+                                    })
+                                })
                                 listViewNotif.adapter = daftarTransaction
                             }
                         }
@@ -109,12 +140,43 @@ class NotificationFragment : Fragment() {
                             if(responseBody.data!=null){
                                 var data: List<TransactionStingData> = responseBody.data as List<TransactionStingData>
                                 listTransaction = responseBody.data as ArrayList<TransactionStingData>
-                                daftarTransaction = LVTransactionAdapter(requireActivity(), listTransaction){
-                                        namaBeeworker, requirement, harga, tglMulai, tglSelesai ->
+                                daftarTransaction = LVTransactionAdapter(requireActivity(), listTransaction, acti.userLogin!!, {
+                                        namaBeeworker, requirement, harga, tglMulai, tglSelesai, trans ->
                                     parentFragmentManager.beginTransaction()
-                                        .replace(R.id.frMain, DetailOrderedStingFragment(namaBeeworker, requirement, harga, tglMulai, tglSelesai))
+                                        .replace(R.id.frMain, DetailOrderedStingFragment(namaBeeworker, requirement, harga, tglMulai, tglSelesai, trans))
                                         .commit()
-                                }
+                                }, { id ->
+                                    val cancelClient = ApiConfiguration.getApiService().cancelTransactionSting(
+                                        id,
+                                        remember_token = acti.userLogin!!.REMEMBER_TOKEN!!
+                                    )
+                                    cancelClient.enqueue(object: Callback<BasicDRO> {
+                                        override fun onResponse(call: Call<BasicDRO>, response: retrofit2.Response<BasicDRO>){
+                                            if(response.isSuccessful){
+                                                val responseBody = response.body()
+                                                if(responseBody!=null){
+                                                    if(responseBody.data!=null){
+                                                        acti.showModal(responseBody.message.toString()){}
+                                                    }
+                                                }
+                                            }
+                                            else{
+                                                val statusCode:Int = response.code()
+                                                Log.e("ErrorLogin", "Fail Access: $statusCode")
+                                                if(statusCode==404){
+                                                    acti.showModal("Order tidak ditemukan"){}
+                                                }
+                                                else if(statusCode==403){
+                                                    acti.showModal("Order ini tidak dalam keadaan pending"){}
+                                                }
+                                            }
+                                        }
+
+                                        override fun onFailure(call: Call<BasicDRO>, t: Throwable) {
+                                            Log.e("GET_PROFILE_ERROR", "onFailure: ${t.message}")
+                                        }
+                                    })
+                                })
                                 listViewNotif.adapter = daftarTransaction
                             }
                         }
@@ -145,12 +207,43 @@ class NotificationFragment : Fragment() {
                             if(responseBody.data!=null){
                                 var data: List<TransactionStingData> = responseBody.data as List<TransactionStingData>
                                 listTransaction = responseBody.data as ArrayList<TransactionStingData>
-                                daftarTransaction = LVTransactionAdapter(requireActivity(), listTransaction){
-                                        namaBeeworker, requirement, harga, tglMulai, tglSelesai ->
+                                daftarTransaction = LVTransactionAdapter(requireActivity(), listTransaction, acti.userLogin!!, {
+                                        namaBeeworker, requirement, harga, tglMulai, tglSelesai, trans ->
                                     parentFragmentManager.beginTransaction()
-                                        .replace(R.id.frMain, DetailOrderedStingFragment(namaBeeworker, requirement, harga, tglMulai, tglSelesai))
+                                        .replace(R.id.frMain, DetailOrderedStingFragment(namaBeeworker, requirement, harga, tglMulai, tglSelesai, trans))
                                         .commit()
-                                }
+                                }, { id ->
+                                    val cancelClient = ApiConfiguration.getApiService().cancelTransactionSting(
+                                        id,
+                                        remember_token = acti.userLogin!!.REMEMBER_TOKEN!!
+                                    )
+                                    cancelClient.enqueue(object: Callback<BasicDRO> {
+                                        override fun onResponse(call: Call<BasicDRO>, response: retrofit2.Response<BasicDRO>){
+                                            if(response.isSuccessful){
+                                                val responseBody = response.body()
+                                                if(responseBody!=null){
+                                                    if(responseBody.data!=null){
+                                                        acti.showModal(responseBody.message.toString()){}
+                                                    }
+                                                }
+                                            }
+                                            else{
+                                                val statusCode:Int = response.code()
+                                                Log.e("ErrorLogin", "Fail Access: $statusCode")
+                                                if(statusCode==404){
+                                                    acti.showModal("Order tidak ditemukan"){}
+                                                }
+                                                else if(statusCode==403){
+                                                    acti.showModal("Order ini tidak dalam keadaan pending"){}
+                                                }
+                                            }
+                                        }
+
+                                        override fun onFailure(call: Call<BasicDRO>, t: Throwable) {
+                                            Log.e("GET_PROFILE_ERROR", "onFailure: ${t.message}")
+                                        }
+                                    })
+                                })
                                 listViewNotif.adapter = daftarTransaction
                             }
                         }
@@ -181,12 +274,43 @@ class NotificationFragment : Fragment() {
                             if(responseBody.data!=null){
                                 var data: List<TransactionStingData> = responseBody.data as List<TransactionStingData>
                                 listTransaction = responseBody.data as ArrayList<TransactionStingData>
-                                daftarTransaction = LVTransactionAdapter(requireActivity(), listTransaction){
-                                        namaBeeworker, requirement, harga, tglMulai, tglSelesai ->
+                                daftarTransaction = LVTransactionAdapter(requireActivity(), listTransaction, acti.userLogin!!, {
+                                        namaBeeworker, requirement, harga, tglMulai, tglSelesai, trans ->
                                     parentFragmentManager.beginTransaction()
-                                        .replace(R.id.frMain, DetailOrderedStingFragment(namaBeeworker, requirement, harga, tglMulai, tglSelesai))
+                                        .replace(R.id.frMain, DetailOrderedStingFragment(namaBeeworker, requirement, harga, tglMulai, tglSelesai, trans))
                                         .commit()
-                                }
+                                }, { id ->
+                                    val cancelClient = ApiConfiguration.getApiService().cancelTransactionSting(
+                                        id,
+                                        remember_token = acti.userLogin!!.REMEMBER_TOKEN!!
+                                    )
+                                    cancelClient.enqueue(object: Callback<BasicDRO> {
+                                        override fun onResponse(call: Call<BasicDRO>, response: retrofit2.Response<BasicDRO>){
+                                            if(response.isSuccessful){
+                                                val responseBody = response.body()
+                                                if(responseBody!=null){
+                                                    if(responseBody.data!=null){
+                                                        acti.showModal(responseBody.message.toString()){}
+                                                    }
+                                                }
+                                            }
+                                            else{
+                                                val statusCode:Int = response.code()
+                                                Log.e("ErrorLogin", "Fail Access: $statusCode")
+                                                if(statusCode==404){
+                                                    acti.showModal("Order tidak ditemukan"){}
+                                                }
+                                                else if(statusCode==403){
+                                                    acti.showModal("Order ini tidak dalam keadaan pending"){}
+                                                }
+                                            }
+                                        }
+
+                                        override fun onFailure(call: Call<BasicDRO>, t: Throwable) {
+                                            Log.e("GET_PROFILE_ERROR", "onFailure: ${t.message}")
+                                        }
+                                    })
+                                })
                                 listViewNotif.adapter = daftarTransaction
                             }
                         }
@@ -217,12 +341,43 @@ class NotificationFragment : Fragment() {
                             if(responseBody.data!=null){
                                 var data: List<TransactionStingData> = responseBody.data as List<TransactionStingData>
                                 listTransaction = responseBody.data as ArrayList<TransactionStingData>
-                                daftarTransaction = LVTransactionAdapter(requireActivity(), listTransaction){
-                                        namaBeeworker, requirement, harga, tglMulai, tglSelesai ->
+                                daftarTransaction = LVTransactionAdapter(requireActivity(), listTransaction, acti.userLogin!!, {
+                                        namaBeeworker, requirement, harga, tglMulai, tglSelesai, trans ->
                                     parentFragmentManager.beginTransaction()
-                                        .replace(R.id.frMain, DetailOrderedStingFragment(namaBeeworker, requirement, harga, tglMulai, tglSelesai))
+                                        .replace(R.id.frMain, DetailOrderedStingFragment(namaBeeworker, requirement, harga, tglMulai, tglSelesai, trans))
                                         .commit()
-                                }
+                                }, { id ->
+                                    val cancelClient = ApiConfiguration.getApiService().cancelTransactionSting(
+                                        id,
+                                        remember_token = acti.userLogin!!.REMEMBER_TOKEN!!
+                                    )
+                                    cancelClient.enqueue(object: Callback<BasicDRO> {
+                                        override fun onResponse(call: Call<BasicDRO>, response: retrofit2.Response<BasicDRO>){
+                                            if(response.isSuccessful){
+                                                val responseBody = response.body()
+                                                if(responseBody!=null){
+                                                    if(responseBody.data!=null){
+                                                        acti.showModal(responseBody.message.toString()){}
+                                                    }
+                                                }
+                                            }
+                                            else{
+                                                val statusCode:Int = response.code()
+                                                Log.e("ErrorLogin", "Fail Access: $statusCode")
+                                                if(statusCode==404){
+                                                    acti.showModal("Order tidak ditemukan"){}
+                                                }
+                                                else if(statusCode==403){
+                                                    acti.showModal("Order ini tidak dalam keadaan pending"){}
+                                                }
+                                            }
+                                        }
+
+                                        override fun onFailure(call: Call<BasicDRO>, t: Throwable) {
+                                            Log.e("GET_PROFILE_ERROR", "onFailure: ${t.message}")
+                                        }
+                                    })
+                                })
                                 listViewNotif.adapter = daftarTransaction
                             }
                         }
@@ -247,12 +402,43 @@ class NotificationFragment : Fragment() {
                         if(responseBody.data!=null){
                             var data: List<TransactionStingData> = responseBody.data as List<TransactionStingData>
                             listTransaction = responseBody.data as ArrayList<TransactionStingData>
-                            daftarTransaction = LVTransactionAdapter(requireActivity(), listTransaction){
-                                    namaBeeworker, requirement, harga, tglMulai, tglSelesai->
+                            daftarTransaction = LVTransactionAdapter(requireActivity(), listTransaction, acti.userLogin!!, {
+                                    namaBeeworker, requirement, harga, tglMulai, tglSelesai, trans ->
                                 parentFragmentManager.beginTransaction()
-                                    .replace(R.id.frMain, DetailOrderedStingFragment(namaBeeworker, requirement, harga, tglMulai, tglSelesai))
+                                    .replace(R.id.frMain, DetailOrderedStingFragment(namaBeeworker, requirement, harga, tglMulai, tglSelesai, trans))
                                     .commit()
-                            }
+                            }, { id ->
+                                val cancelClient = ApiConfiguration.getApiService().cancelTransactionSting(
+                                    id,
+                                    remember_token = acti.userLogin!!.REMEMBER_TOKEN!!
+                                )
+                                cancelClient.enqueue(object: Callback<BasicDRO> {
+                                    override fun onResponse(call: Call<BasicDRO>, response: retrofit2.Response<BasicDRO>){
+                                        if(response.isSuccessful){
+                                            val responseBody = response.body()
+                                            if(responseBody!=null){
+                                                if(responseBody.data!=null){
+                                                    acti.showModal(responseBody.message.toString()){}
+                                                }
+                                            }
+                                        }
+                                        else{
+                                            val statusCode:Int = response.code()
+                                            Log.e("ErrorLogin", "Fail Access: $statusCode")
+                                            if(statusCode==404){
+                                                acti.showModal("Order tidak ditemukan"){}
+                                            }
+                                            else if(statusCode==403){
+                                                acti.showModal("Order ini tidak dalam keadaan pending"){}
+                                            }
+                                        }
+                                    }
+
+                                    override fun onFailure(call: Call<BasicDRO>, t: Throwable) {
+                                        Log.e("GET_PROFILE_ERROR", "onFailure: ${t.message}")
+                                    }
+                                })
+                            })
                             listViewNotif.adapter = daftarTransaction
                         }
                     }
