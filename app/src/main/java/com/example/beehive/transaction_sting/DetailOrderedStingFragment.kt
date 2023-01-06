@@ -13,8 +13,10 @@ import com.example.beehive.R
 import com.example.beehive.activities.MainActivity
 import com.example.beehive.data.TransactionStingData
 
-class DetailOrderedStingFragment (
-   var namaBeeworker: String, var requirement: String, var harga: String, var tglMulai: String, var tglSelesai: String, var trans: TransactionStingData
+class DetailOrderedStingFragment ( 
+    var namaBeeworker: String, var requirement: String,
+    var harga: String, var tglMulai: String, var tglSelesai: String,
+    var trans: TransactionStingData 
 ): Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

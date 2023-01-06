@@ -16,6 +16,7 @@ import com.example.beehive.data.BasicDRO
 import com.example.beehive.data.DeclineTransactionStingDTO
 import com.example.beehive.data.LelangStingData
 import com.example.beehive.data.ListLelangStingDRO
+import com.example.beehive.transaction_sting.DetailOrderedStingInProgressFragment
 import com.example.beehive.transaction_sting.RVComplainAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -57,7 +58,13 @@ class ListLelangStingFragment : Fragment() {
                     if(responseBody!=null){
                         if(responseBody.data!=null){
                             val listLelang:List<LelangStingData> = (responseBody.data as List<LelangStingData>?)!!
-                            adapter = RVListLelangSting(listLelang)
+                            adapter = RVListLelangSting(listLelang){
+                                parentFragmentManager.beginTransaction()
+                                    .replace(R.id.frMain,
+                                        DetailLelangStingFragment(it)
+                                    )
+                                    .commit()
+                            }
                             rvListLelangSting.adapter = adapter
                             rvListLelangSting.layoutManager =
                                 GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
