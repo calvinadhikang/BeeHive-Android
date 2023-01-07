@@ -7,6 +7,20 @@
     android:background="@color/bg"
     tools:context=".DetailCategoryFragment">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animLoading3"
+        android:layout_width="231dp"
+        android:layout_height="158dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="44dp"
+        android:paddingStart="1dp"
+        android:paddingTop="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvStingByCategory"
         android:layout_width="357dp"

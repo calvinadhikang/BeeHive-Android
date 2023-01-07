@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.data.*
 import retrofit2.Call
@@ -35,7 +36,7 @@ class DetailCategoryFragment(
         val acti = activity as MainActivity
         acti.supportActionBar!!.show()
         acti.title = "Stings for $namaCategory"
-
+        var animLoading3 = view.findViewById<LottieAnimationView>(R.id.animLoading3)
         rv = view.findViewById(R.id.rvStingByCategory)
 
         val categoryAPI = ApiConfiguration.getApiService().fetchStingByCategory(key.toInt())
@@ -44,6 +45,7 @@ class DetailCategoryFragment(
                 if(response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody!=null){
+                        animLoading3.visibility = View.GONE
                         listSting = responseBody.data as List<StingData>
 
                         rv.adapter = RVStingAdapter(listSting)
