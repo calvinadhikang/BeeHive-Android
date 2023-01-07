@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ListView
+import androidx.core.view.isVisible
+import com.airbnb.lottie.LottieAnimationView
 import com.example.beehive.api_config.ApiConfiguration
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -35,6 +37,7 @@ class NotificationFragment : Fragment() {
         val acti = activity as MainActivity
         acti.supportActionBar!!.show()
         acti.title = "Notifications"
+        var animLoading2:LottieAnimationView = view.findViewById(R.id.animLoading2)
 
         var listTransaction: ArrayList<TransactionStingData> = ArrayList()
         var daftarTransaction: LVTransactionAdapter
@@ -61,6 +64,8 @@ class NotificationFragment : Fragment() {
             }
             btnPendingNotif.setBackgroundColor(resources.getColor(R.color.primary))
 
+            animLoading2.visibility = View.VISIBLE
+
             val client = ApiConfiguration.getApiService().fetchTransactionStingByStatus(
                 "0",
                 remember_token = acti.userLogin!!.REMEMBER_TOKEN!!
@@ -71,6 +76,7 @@ class NotificationFragment : Fragment() {
                         val responseBody = response.body()
                         if(responseBody!=null){
                             if(responseBody.data!=null){
+                                animLoading2.visibility = View.GONE
                                 var data: List<TransactionStingData> = responseBody.data as List<TransactionStingData>
                                 listTransaction = responseBody.data as ArrayList<TransactionStingData>
                                 daftarTransaction = LVTransactionAdapter(requireActivity(), listTransaction, acti.userLogin!!, {
@@ -128,6 +134,7 @@ class NotificationFragment : Fragment() {
             }
             btnAcceptedNotif.setBackgroundColor(resources.getColor(R.color.primary))
 
+            animLoading2.visibility = View.VISIBLE
             val client = ApiConfiguration.getApiService().fetchTransactionStingByStatus(
                 "1",
                 remember_token = acti.userLogin!!.REMEMBER_TOKEN!!
@@ -138,6 +145,7 @@ class NotificationFragment : Fragment() {
                         val responseBody = response.body()
                         if(responseBody!=null){
                             if(responseBody.data!=null){
+                                animLoading2.visibility = View.GONE
                                 var data: List<TransactionStingData> = responseBody.data as List<TransactionStingData>
                                 listTransaction = responseBody.data as ArrayList<TransactionStingData>
                                 daftarTransaction = LVTransactionAdapter(requireActivity(), listTransaction, acti.userLogin!!, {
@@ -195,6 +203,7 @@ class NotificationFragment : Fragment() {
             }
             btnDoneNotif.setBackgroundColor(resources.getColor(R.color.primary))
 
+            animLoading2.visibility = View.VISIBLE
             val client = ApiConfiguration.getApiService().fetchTransactionStingByStatus(
                 "3",
                 remember_token = acti.userLogin!!.REMEMBER_TOKEN!!
@@ -205,6 +214,7 @@ class NotificationFragment : Fragment() {
                         val responseBody = response.body()
                         if(responseBody!=null){
                             if(responseBody.data!=null){
+                                animLoading2.visibility = View.GONE
                                 var data: List<TransactionStingData> = responseBody.data as List<TransactionStingData>
                                 listTransaction = responseBody.data as ArrayList<TransactionStingData>
                                 daftarTransaction = LVTransactionAdapter(requireActivity(), listTransaction, acti.userLogin!!, {
@@ -262,6 +272,7 @@ class NotificationFragment : Fragment() {
             }
             btnRevisionNotif.setBackgroundColor(resources.getColor(R.color.primary))
 
+            animLoading2.visibility = View.VISIBLE
             val client = ApiConfiguration.getApiService().fetchTransactionStingByStatus(
                 "2",
                 remember_token = acti.userLogin!!.REMEMBER_TOKEN!!
@@ -272,6 +283,7 @@ class NotificationFragment : Fragment() {
                         val responseBody = response.body()
                         if(responseBody!=null){
                             if(responseBody.data!=null){
+                                animLoading2.visibility = View.GONE
                                 var data: List<TransactionStingData> = responseBody.data as List<TransactionStingData>
                                 listTransaction = responseBody.data as ArrayList<TransactionStingData>
                                 daftarTransaction = LVTransactionAdapter(requireActivity(), listTransaction, acti.userLogin!!, {
@@ -327,6 +339,7 @@ class NotificationFragment : Fragment() {
             for (i in listButton){
                 i.setBackgroundColor(resources.getColor(R.color.light_gray))
             }
+            animLoading2.visibility = View.VISIBLE
             btnCanceledNotif.setBackgroundColor(resources.getColor(R.color.primary))
 
             val client = ApiConfiguration.getApiService().fetchTransactionStingByStatus(
@@ -339,6 +352,7 @@ class NotificationFragment : Fragment() {
                         val responseBody = response.body()
                         if(responseBody!=null){
                             if(responseBody.data!=null){
+                                animLoading2.visibility = View.GONE
                                 var data: List<TransactionStingData> = responseBody.data as List<TransactionStingData>
                                 listTransaction = responseBody.data as ArrayList<TransactionStingData>
                                 daftarTransaction = LVTransactionAdapter(requireActivity(), listTransaction, acti.userLogin!!, {
@@ -390,6 +404,7 @@ class NotificationFragment : Fragment() {
             })
         }
 
+        animLoading2.visibility = View.VISIBLE
         val client = ApiConfiguration.getApiService().fetchTransactionStingByStatus(
             "0",
             remember_token = acti.userLogin!!.REMEMBER_TOKEN!!
@@ -400,6 +415,7 @@ class NotificationFragment : Fragment() {
                     val responseBody = response.body()
                     if(responseBody!=null){
                         if(responseBody.data!=null){
+                            animLoading2.visibility = View.GONE
                             var data: List<TransactionStingData> = responseBody.data as List<TransactionStingData>
                             listTransaction = responseBody.data as ArrayList<TransactionStingData>
                             daftarTransaction = LVTransactionAdapter(acti, listTransaction, acti.userLogin!!, {

@@ -36,8 +36,9 @@ class DetailLelangStingFragment(
         super.onViewCreated(view, savedInstanceState)
 
         val acti = activity as MainActivity
-        acti.supportActionBar!!.hide()
+        acti.supportActionBar!!.show()
         acti.title = "Detail Lelang Sting"
+        setHasOptionsMenu(true)
 
         var btnBack: ImageButton = view.findViewById(R.id.btnBack)
         var lblBeeworkerName: TextView = view.findViewById(R.id.lblBeeworkerName)

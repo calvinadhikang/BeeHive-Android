@@ -47,13 +47,13 @@ class RVStingAdapter(
         //Set StingThumbnail
         Picasso.get()
             .load(env.URLIMAGE+"sting-thumbnails/${obj.NAMA_THUMBNAIL}")
-            .resize(50,50)
+            .resize(90,150)
+            .onlyScaleDown()
             .into(holder.imgThumbnail)
-
 //        holder.workerThumbnail.clipToOutline = true
 //        holder.workerThumbnail.setBackgroundResource(R.drawable.full_rounded_picture)
-//        holder.imgThumbnail.clipToOutline = true
-//        holder.imgThumbnail.setBackgroundResource(R.drawable.full_rounded_picture)
+        holder.imgThumbnail.clipToOutline = true
+        holder.imgThumbnail.setBackgroundResource(R.drawable.rounded_corner_picture_1)
     }
 
     override fun getItemCount(): Int {

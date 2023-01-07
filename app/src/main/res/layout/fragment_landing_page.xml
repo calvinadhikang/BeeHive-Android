@@ -25,15 +25,15 @@
         android:id="@+id/editTextTextPersonName"
         android:layout_width="354dp"
         android:layout_height="53dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:hint="Search For Stings"
         android:inputType="textPersonName"
         android:padding="10dp"
         android:radius="180dp"
         android:textColorHint="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,9 +42,9 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginEnd="10dp"
         android:src="@drawable/search"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

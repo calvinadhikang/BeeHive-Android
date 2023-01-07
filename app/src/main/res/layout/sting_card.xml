@@ -5,16 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
-    android:paddingBottom="8dp"
+    android:paddingBottom="15dp"
     android:background="@drawable/background_white_form">
 
     <ImageView
         android:id="@+id/stingThumbnail"
-        android:layout_width="100dp"
+        android:layout_width="90dp"
         android:layout_height="150dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/background_white_form"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -47,7 +46,7 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/workerThumbnail"
         android:layout_width="50dp"
-        android:layout_height="51dp"
+        android:layout_height="55dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/stingThumbnail"

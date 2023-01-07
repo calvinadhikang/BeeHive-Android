@@ -45,6 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="@color/primary"
                     android:text="Nama Beeworker" />
 
                 <TextView
@@ -53,6 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
+                    android:textColor="@color/primary"
                     android:text="10 - 12 - 2022" />
             </LinearLayout>
 
@@ -61,6 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:textColor="@color/primary"
                 android:text="Premium Plan" />
 
             <TextView
@@ -68,6 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:textColor="@color/primary"
                 android:text="TextView" />
         </LinearLayout>
     </LinearLayout>
