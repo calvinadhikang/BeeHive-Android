@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.example.beehive.activities.MainActivity
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.data.*
@@ -24,6 +25,7 @@ class LandingPageFragment(
     lateinit var rvSting: RecyclerView
     lateinit var adpt: RVCategoryAdapter
     lateinit var adptSting: RVStingAdapter
+    lateinit var animLoading1: LottieAnimationView
 
 //    var listCategory: List<Category> = listOf()
     var listSting: List<StingData> = arrayListOf()
@@ -48,7 +50,7 @@ class LandingPageFragment(
         val acti = activity as MainActivity
         acti.supportActionBar!!.show()
         acti.title = "Beehive"
-
+        animLoading1 = view.findViewById(R.id.animLoading1)
         //init components
         rv = view.findViewById(R.id.rvKategori)
         rvSting = view.findViewById(R.id.rvStingMost)
@@ -90,6 +92,7 @@ class LandingPageFragment(
                 if (response.isSuccessful){
                     val responseBody = response.body()
                     if (responseBody != null){
+                        animLoading1.visibility = View.GONE
                         var dataSting = responseBody.data as StingData
 //                        listSting.add(dataSting.data)
                         listSting = listOf(dataSting)

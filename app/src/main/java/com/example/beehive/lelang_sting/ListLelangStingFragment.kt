@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.example.beehive.activities.MainActivity
 import com.example.beehive.R
 import com.example.beehive.api_config.ApiConfiguration
@@ -45,6 +46,7 @@ class ListLelangStingFragment : Fragment() {
 
         val btnNavCreateLelangSting: Button = view.findViewById(R.id.btnNavCreateLelangSting)
         val rvListLelangSting: RecyclerView = view.findViewById(R.id.rvListLelangSting)
+        val animLoading: LottieAnimationView = view.findViewById(R.id.animLoading)
 
         lateinit var adapter: RVListLelangSting
 
@@ -57,6 +59,7 @@ class ListLelangStingFragment : Fragment() {
                     val responseBody = response.body()
                     if(responseBody!=null){
                         if(responseBody.data!=null){
+                            animLoading.visibility = View.GONE
                             val listLelang:List<LelangStingData> = (responseBody.data as List<LelangStingData>?)!!
                             adapter = RVListLelangSting(listLelang){
                                 parentFragmentManager.beginTransaction()
