@@ -274,4 +274,11 @@ class MainActivity : AppCompatActivity() {
 //        return super.onOptionsItemSelected(item)
     }
 
+    override fun onBackPressed() {
+//        super.onBackPressed()
+        showConfirmation("Apakah anda yakin untuk keluar?","Yes","No",
+            {
+                finish()
+            },{})
+    }
 }
