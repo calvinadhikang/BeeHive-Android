@@ -1,24 +1,27 @@
-package com.example.beehive
+package com.example.beehive.landing_page
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
+import com.example.beehive.R
+import com.example.beehive.RVCategoryAdapter
+import com.example.beehive.RVStingAdapter
 import com.example.beehive.activities.MainActivity
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.data.*
+import com.example.beehive.user_auth.UserBeforeLoginFragment
 import retrofit2.Call
 import retrofit2.Callback
 
 class LandingPageFragment(
     var listCategory: List<Category>
-
 ) : Fragment() {
 
     lateinit var rv: RecyclerView
@@ -26,6 +29,7 @@ class LandingPageFragment(
     lateinit var adpt: RVCategoryAdapter
     lateinit var adptSting: RVStingAdapter
     lateinit var animLoading1: LottieAnimationView
+    lateinit var lblToLogin: TextView
 
 //    var listCategory: List<Category> = listOf()
     var listSting: List<StingData> = arrayListOf()
@@ -50,7 +54,7 @@ class LandingPageFragment(
         val acti = activity as MainActivity
         acti.supportActionBar!!.hide()
 //        acti.title = "Beehive"
-
+        lblToLogin = view.findViewById(R.id.lblToLogin)
         acti.title = "Beehive"
         animLoading1 = view.findViewById(R.id.animLoading1)
         //init components
@@ -62,7 +66,11 @@ class LandingPageFragment(
             (activity as MainActivity).detailCategory(key,listCategory[pos].NAMA_CATEGORY)
         }
         rv.layoutManager = GridLayoutManager(view.context, 1, GridLayoutManager.HORIZONTAL, false)
-
+        lblToLogin.setOnClickListener{
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.frMain, UserBeforeLoginFragment())
+                .commit()
+        }
         //fetchCategory
 //        val categoryAPI = ApiConfiguration.getApiService().fetchCategoryNoAuth()
 //        categoryAPI.enqueue(object: Callback<ListCategoryDRO> {

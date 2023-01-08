@@ -122,6 +122,11 @@ interface ApiService {
         @Path("name") name:String,
     ): Call<ResponseBody>
 
+    @GET("sting/transaction/current")
+    fun getCurrentProject(
+        @Query("REMEMBER_TOKEN") remember_token:String,
+    ): Call<TransactionStingDRO>
+
     @GET("sting/transaction/{id}")
     fun getTransactionSting(
         @Path("id") id:String,

@@ -11,12 +11,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Parcelable
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.*
-import androidx.fragment.app.Fragment
-import com.example.beehive.LandingPageFragment
-import com.example.beehive.SearchFragment
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.api_config.UserDRO
 import com.example.beehive.api_config.UserData
@@ -24,12 +19,7 @@ import com.example.beehive.dao.AppDatabase
 import com.example.beehive.dao.User
 import com.example.beehive.data.Category
 import com.example.beehive.data.ListCategoryDRO
-import com.example.beehive.lelang_sting.CreateLelangStingFragment
 import com.example.beehive.observerConnectivity.ConnectivityObserver
-import com.example.beehive.observerConnectivity.NetworkConnectivityObserver
-import com.example.beehive.user_auth.UserBeforeLoginFragment
-import com.example.beehive.user_profile.UserProfileFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
