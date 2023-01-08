@@ -27,6 +27,7 @@ import com.example.beehive.observerConnectivity.ConnectivityObserver
 import com.example.beehive.observerConnectivity.NetworkConnectivityObserver
 import com.example.beehive.user_auth.UserBeforeLoginFragment
 import com.example.beehive.user_profile.UserProfileFragment
+import com.example.beehive.utils.DialogHelper
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -211,53 +212,16 @@ class MainActivity : AppCompatActivity() {
         btnOkText:String = "OK",
         callbackFun:()->Unit
     ){
-
-        val dialogBinding = this.layoutInflater
-            .inflate(R.layout.dialog_layout,null)
-        val myDialog = Dialog(this)
-        myDialog.setContentView(dialogBinding)
-        myDialog.setCancelable(true)
-        myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        myDialog.show()
-        val txtHeader: TextView = dialogBinding.findViewById(R.id.txtHeaderModal)
-        txtHeader.text = message
-
-        val btnOk: Button = dialogBinding.findViewById(R.id.btnOkModal)
-        btnOk.text = btnOkText
-        btnOk.setOnClickListener{
-            myDialog.dismiss()
-            callbackFun()
-        }
+         DialogHelper.showModal(this,message,btnOkText,callbackFun)
     }
     fun showConfirmation(
         message:String,
         btnSuccessText:String = "Yes",
         btnFailText:String = "No",
         callbackSuccess:()->Unit,
-        callbackFail:()->Unit,){
-
-        val dialogBinding = this.layoutInflater
-            .inflate(R.layout.dialog_confirmation_layout,null)
-        val myDialog = Dialog(this)
-        myDialog.setContentView(dialogBinding)
-        myDialog.setCancelable(true)
-        myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        myDialog.show()
-        val txtHeader: TextView = dialogBinding.findViewById(R.id.txtHeaderModal)
-        txtHeader.text = message
-
-        val btnYes: Button = dialogBinding.findViewById(R.id.btnYesModal)
-        btnYes.text = btnSuccessText
-        btnYes.setOnClickListener{
-            myDialog.dismiss()
-            callbackSuccess()
-        }
-        val btnNo: Button = dialogBinding.findViewById(R.id.btnNoModal)
-        btnNo.text = btnFailText
-        btnNo.setOnClickListener{
-            myDialog.dismiss()
-            callbackFail()
-        }
+        callbackFail:()->Unit,)
+    {
+        DialogHelper.showConfirmation(this,message, btnSuccessText, btnFailText, callbackSuccess, callbackFail)
     }
     fun reloadUser(REMEMBER_TOKEN:String, firstTime:Boolean = false){
         val client = ApiConfiguration.getApiService().getProfile(remember_token =

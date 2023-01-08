@@ -13,7 +13,9 @@ import com.example.beehive.CurrencyUtils.toRupiah
 import com.example.beehive.R
 import com.example.beehive.activities.MainActivity
 import com.example.beehive.data.LelangStingData
+import com.example.beehive.env
 import com.example.beehive.transaction_sting.DetailOrderedStingInProgressFragment
+import com.example.beehive.utils.DownloadHelper
 
 class DetailLelangStingFragment(
     var lelang: LelangStingData
@@ -36,7 +38,7 @@ class DetailLelangStingFragment(
         super.onViewCreated(view, savedInstanceState)
 
         val acti = activity as MainActivity
-        acti.supportActionBar!!.show()
+        acti.supportActionBar!!.hide()
         acti.title = "Detail Lelang Sting"
         setHasOptionsMenu(true)
 
@@ -88,6 +90,22 @@ class DetailLelangStingFragment(
         }
         btnCancel.setOnClickListener {
 
+        }
+        btnDownload.setOnClickListener {
+
+            var namafile:String = ""
+            var extension:String = ""
+            var outputName:String = ""
+            namafile = lelang!!.FILENAME_FINAL.toString()
+            outputName = "DownloadResult${lelang?.ID_LELANG_STING}"
+            try {
+                extension = namafile.split('.')[1]
+            }catch (e:Error){
+                extension = "jpeg"
+            }
+            DownloadHelper.download(requireActivity(),
+                env.URLIMAGE+"order-deliver/"+namafile, namafile,
+                outputName,extension)
         }
     }
 }

@@ -15,6 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.airbnb.lottie.LottieAnimationView
 import com.example.beehive.activities.MainActivity
 import com.example.beehive.R
 import com.example.beehive.api_config.ApiConfiguration
@@ -35,6 +36,7 @@ class UserChangePictureFragment : Fragment() {
     lateinit var  lblParamUpload: TextView
     lateinit var  btnBackUserProfile: ImageButton
     lateinit var  btnSavePicture: Button
+    lateinit var  animLoading4: LottieAnimationView
     lateinit var  imgUser: ImageView
     lateinit var  imgTemp: ImageView
     lateinit var selectedImageUri:Uri
@@ -60,6 +62,7 @@ class UserChangePictureFragment : Fragment() {
         acti.title = "Change Profile Picture"
         acti.supportActionBar!!.hide()
 
+        animLoading4 = view.findViewById(R.id.animLoading4)
         uploadFileZone = view.findViewById(R.id.uploadFileZone)
         lblParamUpload = view.findViewById(R.id.lblParamUpload)
         btnBackUserProfile = view.findViewById(R.id.btnBackUserProfile)
@@ -67,6 +70,7 @@ class UserChangePictureFragment : Fragment() {
         imgUser = view.findViewById(R.id.imgUser)
         imgTemp = view.findViewById(R.id.imgTemp)
 
+        animLoading4.visibility = View.GONE
         try {
             Picasso.get()
                 .load(env.URLIMAGE+"profile-pictures/${acti.userLogin!!.PICTURE}")
@@ -105,6 +109,7 @@ class UserChangePictureFragment : Fragment() {
                 acti.showModal("Anda harus memilih gambar!"){}
                 return@setOnClickListener
             }
+            animLoading4.visibility = View.VISIBLE
 
             try {
                 val client = ApiConfiguration.getApiService().changePicture(
@@ -127,6 +132,7 @@ class UserChangePictureFragment : Fragment() {
                                         imgUser.clipToOutline = true
                                         imgUser.setBackgroundResource(R.drawable.full_rounded_picture)
                                     acti.showModal("Sukses mengganti profile picture!"){}
+                                    animLoading4.visibility = View.GONE
                                 }
                             }
                         }

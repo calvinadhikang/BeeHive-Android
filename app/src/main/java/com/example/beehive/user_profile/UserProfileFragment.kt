@@ -32,7 +32,7 @@ class UserProfileFragment : Fragment() {
 
         val acti = activity as MainActivity
         acti.title = "User Profile"
-        acti.supportActionBar!!.show()
+        acti.supportActionBar!!.hide()
         acti.supportActionBar!!.setDisplayHomeAsUpEnabled(false)
 
         val lblNamaUserProfile:TextView = view.findViewById(R.id.lblNamaUserProfile)

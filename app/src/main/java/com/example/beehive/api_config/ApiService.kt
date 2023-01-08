@@ -2,7 +2,9 @@ package com.example.beehive.api_config
 
 import com.example.beehive.data.*
 import okhttp3.MultipartBody
+import okhttp3.ResponseBody
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -113,6 +115,12 @@ interface ApiService {
         @Query("REMEMBER_TOKEN") remember_token:String,
         @Body buyStingData: BuyStingDTO
     ): Call<BasicDRO>
+
+    @Streaming
+    @GET("download/{name}")
+    fun downloadSubmission(
+        @Path("name") name:String,
+    ): Call<ResponseBody>
 
     @GET("sting/transaction/{id}")
     fun getTransactionSting(

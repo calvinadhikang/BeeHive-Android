@@ -4,8 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +19,8 @@ import com.example.beehive.data.*
 import retrofit2.Call
 import retrofit2.Callback
 import com.example.beehive.activities.MainActivity
+import com.example.beehive.lelang_sting.ListLelangStingFragment
+import com.example.beehive.user_profile.UserChangePasswordFragment
 
 class DetailCategoryFragment(
     var key: String, var namaCategory:String
@@ -34,8 +40,17 @@ class DetailCategoryFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val acti = activity as MainActivity
-        acti.supportActionBar!!.show()
+        acti.supportActionBar!!.hide()
         acti.title = "Stings for $namaCategory"
+
+        var btnBack:ImageButton = view.findViewById(R.id.btnBack)
+        var lblTitle:TextView = view.findViewById(R.id.lblTitle)
+        lblTitle.text = "Stings for $namaCategory"
+        btnBack.setOnClickListener{
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.frMain, LandingPageFragment(acti.listCategory))
+                .commit()
+        }
         var animLoading3 = view.findViewById<LottieAnimationView>(R.id.animLoading3)
         rv = view.findViewById(R.id.rvStingByCategory)
 
@@ -62,4 +77,5 @@ class DetailCategoryFragment(
             }
         })
     }
+
 }

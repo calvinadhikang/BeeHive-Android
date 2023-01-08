@@ -48,7 +48,9 @@ class LandingPageFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val acti = activity as MainActivity
-        acti.supportActionBar!!.show()
+        acti.supportActionBar!!.hide()
+//        acti.title = "Beehive"
+
         acti.title = "Beehive"
         animLoading1 = view.findViewById(R.id.animLoading1)
         //init components

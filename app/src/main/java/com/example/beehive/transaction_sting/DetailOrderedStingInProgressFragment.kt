@@ -1,26 +1,44 @@
 package com.example.beehive.transaction_sting
 
+import android.Manifest;
+import android.app.AppOpsManager
+import android.content.pm.PackageManager;
+import android.os.Build;
+
 import android.app.Dialog
+import android.app.DownloadManager
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.getSystemService
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import com.example.beehive.NotificationFragment
-import com.example.beehive.activities.MainActivity
 import com.example.beehive.R
+import com.example.beehive.activities.MainActivity
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.data.*
+import com.example.beehive.env
 import com.example.beehive.lelang_sting.DetailLelangStingFragment
 import com.example.beehive.lelang_sting.ListLelangStingFragment
-import org.w3c.dom.Text
+import com.example.beehive.utils.DownloadHelper
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
+import java.io.FileOutputStream
+import java.io.InputStream
+
 
 class DetailOrderedStingInProgressFragment(
     var mode:String = "transaction", //transaction atau lelang
@@ -53,6 +71,8 @@ class DetailOrderedStingInProgressFragment(
         acti.title = "Detail $mode Sting"
         var lblNamaSting:TextView  = view.findViewById(R.id.lblNamaSting)
         lblNamaSting.text = "Detail $mode Sting"
+
+        val coroutine = CoroutineScope(Dispatchers.IO)
 
         val lblStatus:TextView = view.findViewById(R.id.lblStatus)
         val lblRevisionLeft:TextView = view.findViewById(R.id.lblRevisionLeft)
@@ -146,7 +166,23 @@ class DetailOrderedStingInProgressFragment(
             }
         }
         btnDownload.setOnClickListener {
-            //TODO DOWNLOAD
+            var namafile:String = ""
+            var extension:String = ""
+            var outputName:String = ""
+            if(mode=="transaction"){
+                namafile = transaction!!.FILENAME_FINAL.toString()
+                outputName = "DownloadResult${transaction?.ID_TRANSACTION}"
+            }else{
+                namafile = lelang!!.FILENAME_FINAL.toString()
+                outputName = "DownloadResult${lelang?.ID_LELANG_STING}"
+            }
+            try {
+                extension = namafile.split('.')[1]
+            }catch (e:Error){
+                extension = "jpeg"
+            }
+            DownloadHelper.download(requireActivity(),env.URLIMAGE+"order-deliver/"+namafile, namafile,
+                outputName,extension)
         }
         btnDecline.setOnClickListener {
 

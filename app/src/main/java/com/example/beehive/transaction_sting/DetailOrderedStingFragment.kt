@@ -12,6 +12,8 @@ import com.example.beehive.NotificationFragment
 import com.example.beehive.R
 import com.example.beehive.activities.MainActivity
 import com.example.beehive.data.TransactionStingData
+import com.example.beehive.env
+import com.example.beehive.utils.DownloadHelper
 
 class DetailOrderedStingFragment ( 
     var namaBeeworker: String, var requirement: String,
@@ -61,7 +63,19 @@ class DetailOrderedStingFragment (
                 .commit()
 
         }
-
+        btnDownload.setOnClickListener {
+            var namafile:String = ""
+            var extension:String = ""
+                namafile = trans.FILENAME_FINAL.toString()
+            try {
+                extension = namafile.split('.')[1]
+            }catch (e:Error){
+                extension = "jpeg"
+            }
+            DownloadHelper.download(requireActivity(),
+                env.URLIMAGE+"order-deliver/"+namafile, namafile,
+                "DownloadResult${trans.ID_TRANSACTION}",extension)
+        }
 
         btnDetail.setOnClickListener {
             parentFragmentManager.beginTransaction()
