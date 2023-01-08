@@ -23,4 +23,16 @@ class ApiConfiguration {
             return retrofit.create(ApiService::class.java)
         }
     }
+
+    fun getExternalApiService() : ExternalApiService {
+        val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        val client = OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
+        var retrofit:Retrofit? = null
+        //TODO ADD URL EXTERNAL API SERVICE
+        retrofit = Retrofit.Builder().baseUrl("")
+            .addConverterFactory(GsonConverterFactory.create()).client(client).build()
+
+        return retrofit.create(ExternalApiService::class.java)
+    }
+
 }

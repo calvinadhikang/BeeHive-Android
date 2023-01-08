@@ -32,7 +32,7 @@ class RVListLelangSting (
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var obj = data[position]
         when(obj.STATUS){
-           " -1"-> holder.itemView.setBackgroundResource(R.drawable.background_pink_curved_full)
+           "-1"-> holder.itemView.setBackgroundResource(R.drawable.background_pink_curved_full)
             "0"-> holder.itemView.setBackgroundResource(R.drawable.background_blue_curved_full)
             "1"-> holder.itemView.setBackgroundResource(R.drawable.background_orange_curved_full)
             "2"-> holder.itemView.setBackgroundResource(R.drawable.background_lightgreen_curved_full)

@@ -197,3 +197,13 @@ interface ApiService {
         @Query("REMEMBER_TOKEN") remember_token:String,
     ): Call<ListComplainDRO>
 }
+
+
+interface ExternalApiService {
+    //ini buat api external
+    @Headers("Content-Type: application/json")
+
+    @GET
+    fun fetchComplainLelangSting(
+    ): Call<BasicDRO>
+}

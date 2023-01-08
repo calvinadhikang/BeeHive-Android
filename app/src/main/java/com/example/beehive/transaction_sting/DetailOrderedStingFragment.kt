@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.beehive.CurrencyUtils.toRupiah
 import com.example.beehive.NotificationFragment
 import com.example.beehive.R
 import com.example.beehive.activities.MainActivity
@@ -53,8 +54,8 @@ class DetailOrderedStingFragment (
 //        lblNamaSting.text = trans.sting!!.TITLE_STING
         lblNamaSting.text = "Detail Ordered Sting"
         lblBeeworkerName.text = namaBeeworker
-        lblDeskripsi.text = trans.sting!!.DESKRIPSI
-        lvlharga.text = "Rp.$harga"
+        lblDeskripsi.text = trans.REQUIREMENT_PROJECT
+        lvlharga.text = harga.toInt().toRupiah()
         lblDateStarted.text = tglMulai
         lblDateEnded.text = tglSelesai
         btnBackn.setOnClickListener{
@@ -67,6 +68,10 @@ class DetailOrderedStingFragment (
             var namafile:String = ""
             var extension:String = ""
                 namafile = trans.FILENAME_FINAL.toString()
+            if(namafile==""){
+                acti.showModal("Belum ada submission!"){}
+                return@setOnClickListener
+            }
             try {
                 extension = namafile.split('.')[1]
             }catch (e:Error){

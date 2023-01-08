@@ -176,6 +176,10 @@ class DetailOrderedStingInProgressFragment(
                 namafile = lelang!!.FILENAME_FINAL.toString()
                 outputName = "DownloadResult${lelang?.ID_LELANG_STING}"
             }
+            if(namafile==""){
+                acti.showModal("Belum ada submission!"){}
+                return@setOnClickListener
+            }
             try {
                 extension = namafile.split('.')[1]
             }catch (e:Error){
