@@ -135,6 +135,10 @@ class MainActivity : AppCompatActivity() {
         swapToFrag(DetailCategoryFragment(key,namaCategory), Bundle())
     }
 
+    public fun detailSting(key: String){
+        swapToFrag(DetailStingFragment(key), Bundle())
+    }
+
     fun fetchCategory(){
         val client = ApiConfiguration.getApiService().fetchCategory()
         client.enqueue(object: Callback<ListCategoryDRO> {

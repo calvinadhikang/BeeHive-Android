@@ -4,13 +4,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
@@ -19,8 +16,7 @@ import com.example.beehive.data.*
 import retrofit2.Call
 import retrofit2.Callback
 import com.example.beehive.activities.MainActivity
-import com.example.beehive.lelang_sting.ListLelangStingFragment
-import com.example.beehive.user_profile.UserChangePasswordFragment
+import com.example.beehive.adapters.RVStingAdapter
 
 class DetailCategoryFragment(
     var key: String, var namaCategory:String
@@ -63,7 +59,10 @@ class DetailCategoryFragment(
                         animLoading3.visibility = View.GONE
                         listSting = responseBody.data as List<StingData>
 
-                        rv.adapter = RVStingAdapter(listSting)
+                        rv.adapter = RVStingAdapter(listSting, { pos ->
+                            var key = listSting[pos].ID_STING.toString()
+                            (activity as MainActivity).detailSting(key)
+                        })
                         rv.layoutManager = LinearLayoutManager(view.context)
                     }
                 }

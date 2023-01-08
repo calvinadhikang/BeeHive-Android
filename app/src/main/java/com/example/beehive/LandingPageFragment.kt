@@ -1,7 +1,6 @@
 package com.example.beehive
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.example.beehive.activities.MainActivity
+import com.example.beehive.adapters.RVCategoryAdapter
+import com.example.beehive.adapters.RVStingAdapter
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.data.*
 import retrofit2.Call
@@ -49,7 +50,6 @@ class LandingPageFragment(
         super.onViewCreated(view, savedInstanceState)
         val acti = activity as MainActivity
         acti.supportActionBar!!.hide()
-//        acti.title = "Beehive"
 
         acti.title = "Beehive"
         animLoading1 = view.findViewById(R.id.animLoading1)
@@ -99,7 +99,10 @@ class LandingPageFragment(
 //                        listSting.add(dataSting.data)
                         listSting = listOf(dataSting)
 
-                        rvSting.adapter = RVStingAdapter(listSting)
+                        rvSting.adapter = RVStingAdapter(listSting, {pos ->
+                            var key = listSting[pos].ID_STING.toString()
+                            (activity as MainActivity).detailSting(key)
+                        })
                         rvSting.layoutManager = LinearLayoutManager(view.context)
                     }
                 }

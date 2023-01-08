@@ -1,6 +1,5 @@
-package com.example.beehive
+package com.example.beehive.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +7,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beehive.CurrencyUtils.toRupiah
+import com.example.beehive.R
 import com.example.beehive.data.StingData
+import com.example.beehive.env
 import com.squareup.picasso.Picasso
 
 class RVStingAdapter(
-    var data: List<StingData>
+    var data: List<StingData>,
+    var cb: (pos: Int)->Unit
 ) : RecyclerView.Adapter<RVStingAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -40,16 +42,21 @@ class RVStingAdapter(
 
         //Set WorkerThumbnail
         Picasso.get()
-            .load(env.URLIMAGE+"profile-pictures/${obj.author!!.PICTURE}")
+            .load(env.URLIMAGE +"profile-pictures/${obj.author!!.PICTURE}")
             .resize(50,50)
             .into(holder.workerThumbnail)
 
         //Set StingThumbnail
         Picasso.get()
-            .load(env.URLIMAGE+"sting-thumbnails/${obj.NAMA_THUMBNAIL}")
+            .load(env.URLIMAGE +"sting-thumbnails/${obj.NAMA_THUMBNAIL}")
             .resize(90,150)
             .onlyScaleDown()
             .into(holder.imgThumbnail)
+
+        holder.itemView.setOnClickListener {
+            cb(position)
+        }
+
 //        holder.workerThumbnail.clipToOutline = true
 //        holder.workerThumbnail.setBackgroundResource(R.drawable.full_rounded_picture)
         holder.imgThumbnail.clipToOutline = true
