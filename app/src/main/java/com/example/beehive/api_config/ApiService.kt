@@ -27,6 +27,9 @@ interface ApiService {
     @POST("register")
     fun register(@Body userRegisterData: UserRegisterDTO): Call<UserDRO>
 
+    @GET("beeworker")
+    fun fetchBeeworker(
+    ): Call<ListUserDRO>
 
 //    USER SECTION
     @GET("user/get")
@@ -121,6 +124,11 @@ interface ApiService {
     fun downloadSubmission(
         @Path("name") name:String,
     ): Call<ResponseBody>
+
+    @GET("sting/transaction/current")
+    fun getCurrentProject(
+        @Query("REMEMBER_TOKEN") remember_token:String,
+    ): Call<TransactionStingDRO>
 
     @GET("sting/transaction/{id}")
     fun getTransactionSting(

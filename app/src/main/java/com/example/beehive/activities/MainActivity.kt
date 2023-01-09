@@ -1,8 +1,5 @@
 package com.example.beehive.activities
 
-import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -11,7 +8,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.beehive.*
-import com.example.beehive.LandingPageFragment
+import com.example.beehive.landing_page.LandingPageFragment
 import com.example.beehive.NotificationFragment
 import com.example.beehive.R
 import com.example.beehive.SearchFragment
@@ -22,6 +19,7 @@ import com.example.beehive.dao.AppDatabase
 import com.example.beehive.dao.User
 import com.example.beehive.data.Category
 import com.example.beehive.data.ListCategoryDRO
+import com.example.beehive.landing_page.LandingPageAfterLoginFragment
 import com.example.beehive.lelang_sting.CreateLelangStingFragment
 import com.example.beehive.observerConnectivity.ConnectivityObserver
 import com.example.beehive.observerConnectivity.NetworkConnectivityObserver
@@ -99,7 +97,11 @@ class MainActivity : AppCompatActivity() {
          navbar.setOnNavigationItemSelectedListener {
              return@setOnNavigationItemSelectedListener when(it.itemId){
                  R.id.menu_home ->{
-                     swapToFrag(LandingPageFragment(listCategory), Bundle())
+                     if(isLogin){
+                         swapToFrag(LandingPageAfterLoginFragment(listCategory), Bundle())
+                     }else{
+                         swapToFrag(LandingPageFragment(listCategory), Bundle())
+                     }
                      true
                  }
                  R.id.menu_search ->{
@@ -190,7 +192,7 @@ class MainActivity : AppCompatActivity() {
         val nav_Menu: Menu = navbar.menu
         nav_Menu.findItem(R.id.menu_add).isVisible = true
         nav_Menu.findItem(R.id.menu_notification).isVisible = true
-        swapToFrag(LandingPageFragment(listCategory), Bundle())
+        swapToFrag(LandingPageAfterLoginFragment(listCategory), Bundle())
     }
     fun login(user:UserData){
         updateLogin(user)

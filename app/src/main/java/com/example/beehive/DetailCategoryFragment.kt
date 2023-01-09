@@ -43,9 +43,15 @@ class DetailCategoryFragment(
         var lblTitle:TextView = view.findViewById(R.id.lblTitle)
         lblTitle.text = "Stings for $namaCategory"
         btnBack.setOnClickListener{
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.frMain, LandingPageFragment(acti.listCategory))
-                .commit()
+            if(acti.isLogin){
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.frMain, LandingPageAfterLoginFragment(acti.listCategory))
+                    .commit()
+            }else{
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.frMain, LandingPageFragment(acti.listCategory))
+                    .commit()
+            }
         }
         var animLoading3 = view.findViewById<LottieAnimationView>(R.id.animLoading3)
         rv = view.findViewById(R.id.rvStingByCategory)
