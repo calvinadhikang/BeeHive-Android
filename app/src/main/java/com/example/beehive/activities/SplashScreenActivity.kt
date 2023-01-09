@@ -13,6 +13,7 @@ import android.os.Parcelable
 import android.util.Log
 import android.widget.*
 import com.example.beehive.api_config.ApiConfiguration
+import com.example.beehive.api_config.ListUserDRO
 import com.example.beehive.api_config.UserDRO
 import com.example.beehive.api_config.UserData
 import com.example.beehive.dao.AppDatabase
@@ -37,6 +38,7 @@ class SplashScreenActivity : AppCompatActivity() {
     var userLogin:UserData? = null
 
     var listCategory:List<Category> = listOf()
+    var listBeeworker:List<UserData> = listOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
@@ -52,7 +54,7 @@ class SplashScreenActivity : AppCompatActivity() {
                 if(rememberMeCheck==null){
                     //tidak ada user yang lagi login
                     isLogin = false
-                    fetchCategoryWithoutUserLogin()
+                    fetchCategoryThenBeeworkerWithoutUserLogin()
                 }else{
                     //ada user loged in
                     isLogin = true
@@ -75,7 +77,7 @@ class SplashScreenActivity : AppCompatActivity() {
                             if(firstTime){
                                 userLogin = data
                                 isLogin = true
-                                fetchCategory()
+                                fetchCategoryThenBeeworker()
                             }else{
                                 userLogin!!.NAMA = data.NAMA
                                 userLogin!!.BALANCE = data.BALANCE!!
@@ -112,7 +114,7 @@ class SplashScreenActivity : AppCompatActivity() {
                         coroutine.launch {
                             db.userDAO.logout()
                             runOnUiThread{
-                                fetchCategoryWithoutUserLogin()
+                                fetchCategoryThenBeeworkerWithoutUserLogin()
                             }
                         }
                     }
@@ -126,7 +128,7 @@ class SplashScreenActivity : AppCompatActivity() {
         })
     }
 
-    fun fetchCategoryWithoutUserLogin(){
+    fun fetchCategoryThenBeeworkerWithoutUserLogin(){
         val client = ApiConfiguration.getApiService().fetchCategory()
         client.enqueue(object: Callback<ListCategoryDRO> {
             override fun onResponse(call: Call<ListCategoryDRO>, response: retrofit2.Response<ListCategoryDRO>){
@@ -134,13 +136,7 @@ class SplashScreenActivity : AppCompatActivity() {
                     val responseBody = response.body()
                     if(responseBody!=null){
                         listCategory = responseBody.data as List<Category>
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            val intent = Intent(this@SplashScreenActivity,MainActivity::class.java)
-                            intent.putExtra("is_login",isLogin)
-                            intent.putParcelableArrayListExtra("list_category",listCategory as ArrayList<out Parcelable>)
-                            startActivity(intent)
-                            finish()
-                        }, 1000)
+                        fetchBeeworkerWithoutLogin()
                     }
                 }
                 else{
@@ -155,8 +151,38 @@ class SplashScreenActivity : AppCompatActivity() {
 
         })
     }
+    fun fetchBeeworkerWithoutLogin(){
+        val client = ApiConfiguration.getApiService().fetchBeeworker()
+        client.enqueue(object: Callback<ListUserDRO> {
+            override fun onResponse(call: Call<ListUserDRO>, response: retrofit2.Response<ListUserDRO>){
+                if(response.isSuccessful){
+                    val responseBody = response.body()
+                    if(responseBody!=null){
+                        listBeeworker = responseBody.data as List<UserData>
 
-    fun fetchCategory(){
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            val intent = Intent(this@SplashScreenActivity,MainActivity::class.java)
+                            intent.putExtra("is_login",isLogin)
+                            intent.putParcelableArrayListExtra("list_category",listCategory as ArrayList<out Parcelable>)
+                            intent.putParcelableArrayListExtra("list_beeworker",listBeeworker as ArrayList<out Parcelable>)
+                            startActivity(intent)
+                            finish()
+                        }, 1000)
+                    }
+                }
+                else{
+                    val statusCode:Int = response.code()
+                    Log.e("ERROR FETCH beeworker", "Fail Access: $statusCode")
+                }
+            }
+
+            override fun onFailure(call: Call<ListUserDRO>, t: Throwable) {
+                Log.e("ERROR FETCH beeworker", "onFailure: ${t.message}")
+            }
+
+        })
+    }
+    fun fetchCategoryThenBeeworker(){
         val client = ApiConfiguration.getApiService().fetchCategory()
         client.enqueue(object: Callback<ListCategoryDRO> {
             override fun onResponse(call: Call<ListCategoryDRO>, response: retrofit2.Response<ListCategoryDRO>){
@@ -164,14 +190,7 @@ class SplashScreenActivity : AppCompatActivity() {
                     val responseBody = response.body()
                     if(responseBody!=null){
                         listCategory = responseBody.data as List<Category>
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            val intent = Intent(this@SplashScreenActivity,MainActivity::class.java)
-                            intent.putExtra("is_login",isLogin)
-                            intent.putParcelableArrayListExtra("list_category",listCategory as ArrayList<out Parcelable>)
-                            intent.putExtra("user_login",userLogin)
-                            startActivity(intent)
-                            finish()
-                        }, 1000)
+                        fetchBeeworker()
                     }
                 }
                 else{
@@ -182,6 +201,38 @@ class SplashScreenActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<ListCategoryDRO>, t: Throwable) {
                 Log.e("ERROR FETCH CATEGORY", "onFailure: ${t.message}")
+            }
+
+        })
+    }
+    fun fetchBeeworker(){
+        val client = ApiConfiguration.getApiService().fetchBeeworker()
+        client.enqueue(object: Callback<ListUserDRO> {
+            override fun onResponse(call: Call<ListUserDRO>, response: retrofit2.Response<ListUserDRO>){
+                if(response.isSuccessful){
+                    val responseBody = response.body()
+                    if(responseBody!=null){
+                        listBeeworker = responseBody.data as List<UserData>
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            Log.i("LISTBEEWORKER",listBeeworker.toString())
+                            val intent = Intent(this@SplashScreenActivity,MainActivity::class.java)
+                            intent.putExtra("is_login",isLogin)
+                            intent.putParcelableArrayListExtra("list_category",listCategory as ArrayList<out Parcelable>)
+                            intent.putParcelableArrayListExtra("list_beeworker",listBeeworker as ArrayList<out Parcelable>)
+                            intent.putExtra("user_login",userLogin)
+                            startActivity(intent)
+                            finish()
+                        }, 1000)
+                    }
+                }
+                else{
+                    val statusCode:Int = response.code()
+                    Log.e("ERROR FETCH beeworker", "Fail Access: $statusCode")
+                }
+            }
+
+            override fun onFailure(call: Call<ListUserDRO>, t: Throwable) {
+                Log.e("ERROR FETCH beeworker", "onFailure: ${t.message}")
             }
 
         })

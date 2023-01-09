@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.example.beehive.R
-import com.example.beehive.RVCategoryAdapter
-import com.example.beehive.RVStingAdapter
 import com.example.beehive.activities.MainActivity
+import com.example.beehive.adapters.RVBeeworkerAdapter
+import com.example.beehive.adapters.RVCategoryAdapter
+import com.example.beehive.adapters.RVStingAdapter
 import com.example.beehive.api_config.ApiConfiguration
+import com.example.beehive.api_config.UserData
 import com.example.beehive.data.Category
 import com.example.beehive.data.StingDRO
 import com.example.beehive.data.StingData
@@ -22,15 +24,16 @@ import retrofit2.Call
 import retrofit2.Callback
 
 class LandingPageAfterLoginFragment(
-    var listCategory: List<Category>
+    var listCategory: List<Category>,
+    var listBeeworker: List<UserData>
 ) : Fragment() {
 
     lateinit var rv: RecyclerView
     lateinit var rvSting: RecyclerView
+    lateinit var rvBeeworker: RecyclerView
     lateinit var adpt: RVCategoryAdapter
     lateinit var adptSting: RVStingAdapter
     lateinit var animLoading1: LottieAnimationView
-    lateinit var animLoadingBeeworker: LottieAnimationView
     lateinit var lblName: TextView
 
     var listSting: List<StingData> = arrayListOf()
@@ -57,16 +60,19 @@ class LandingPageAfterLoginFragment(
 
         lblName = view.findViewById(R.id.lblName)
         animLoading1 = view.findViewById(R.id.animLoading1)
-        animLoadingBeeworker = view.findViewById(R.id.animLoadingBeeworker)
         //init components
         rv = view.findViewById(R.id.rvKategori)
         rvSting = view.findViewById(R.id.rvStingMost)
+        rvBeeworker = view.findViewById(R.id.rvBeeworker)
 
         rv.adapter = RVCategoryAdapter(listCategory){ pos ->
             var key = listCategory[pos].ID_CATEGORY.toString()
             (activity as MainActivity).detailCategory(key,listCategory[pos].NAMA_CATEGORY)
         }
         rv.layoutManager = GridLayoutManager(view.context, 1, GridLayoutManager.HORIZONTAL, false)
+
+        rvBeeworker.adapter = RVBeeworkerAdapter(listBeeworker)
+        rvBeeworker.layoutManager = GridLayoutManager(view.context, 1, GridLayoutManager.VERTICAL, false)
 
         lblName.text = acti.userLogin!!.NAMA.toString()
         //fetch most sting
@@ -81,7 +87,7 @@ class LandingPageAfterLoginFragment(
 //                        listSting.add(dataSting.data)
                         listSting = listOf(dataSting)
 
-                        rvSting.adapter = RVStingAdapter(listSting)
+                        rvSting.adapter = RVStingAdapter(listSting){}
                         rvSting.layoutManager = LinearLayoutManager(view.context)
                     }
                 }

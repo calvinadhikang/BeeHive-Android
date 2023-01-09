@@ -189,19 +189,6 @@
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/loading" />
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/animLoadingBeeworker"
-                android:layout_width="231dp"
-                android:layout_height="158dp"
-                android:layout_marginStart="64dp"
-                android:layout_marginTop="600dp"
-                android:paddingStart="1dp"
-                android:paddingTop="1dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/loading" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvBeeworker"

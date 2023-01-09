@@ -1,20 +1,15 @@
-package com.example.beehive
+package com.example.beehive.adapters
 
 import android.app.Activity
-import android.content.Intent
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import com.example.beehive.R
 import com.example.beehive.activities.MainActivity
-import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.api_config.UserData
-import com.example.beehive.data.BasicDRO
-import com.example.beehive.data.ListTransactionStingDRO
 import com.example.beehive.data.TransactionStingData
+import com.example.beehive.env
 import com.squareup.picasso.Picasso
-import retrofit2.Call
-import retrofit2.Callback
 
 class LVTransactionAdapter (
     private val context: Activity,
@@ -39,7 +34,7 @@ class LVTransactionAdapter (
 
                 popUp.setOnMenuItemClickListener {
                     return@setOnMenuItemClickListener when(it.itemId){
-                        R.id.cancel_menu->{
+                        R.id.cancel_menu ->{
                             acti.showConfirmation("Apakah anda yakin untuk membatalkan order ini?","Yes",
                             "No",{
                                     cancelTrans(listTransaction[position].ID_TRANSACTION!!)
@@ -71,7 +66,7 @@ class LVTransactionAdapter (
 //        Log.e("ERROR AUTHOR GAN", "${listTransaction[position].sting.author.}")
 
         Picasso.get()
-            .load(env.URLIMAGE+"profile-pictures/${listTransaction[position].sting!!.author!!.PICTURE}")
+            .load(env.URLIMAGE +"profile-pictures/${listTransaction[position].sting!!.author!!.PICTURE}")
             .resize(250,250)
             .into(imgStingNotif)
 

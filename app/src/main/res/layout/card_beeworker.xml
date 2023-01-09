@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="15dp"
+    android:paddingBottom="15dp"
+    android:background="@drawable/background_white_form_lesscurved">
+
+    <TextView
+        android:id="@+id/lblFinished"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="48dp"
+        android:text="3"
+        android:textColor="@color/primary"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imgBeeworker"
+        app:layout_constraintTop_toBottomOf="@+id/lblDeskripsi" />
+
+    <TextView
+        android:id="@+id/textView2asd2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="115dp"
+        android:layout_marginTop="15dp"
+        android:textSize="14dp"
+        android:text="Finished Order(s)"
+        android:textColor="@color/primary"
+        app:layout_constraintStart_toEndOf="@+id/imgBeeworker"
+        app:layout_constraintTop_toBottomOf="@+id/lblDeskripsi" />
+
+    <ImageView
+        android:id="@+id/imgBeeworker"
+        android:layout_width="69dp"
+        android:layout_height="157dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/rounded_corner_picture_1"
+        android:clipToOutline="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/lblDeskripsi"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:text="Lorem Ipsum"
+        android:textColor="@color/primary"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/imgBeeworker"
+        app:layout_constraintTop_toBottomOf="@+id/lblNama" />
+
+    <TextView
+        android:id="@+id/lblNama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:text="Nama"
+        android:textColor="@color/primary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imgBeeworker"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2asd"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Total Rate"
+        android:textColor="@color/primary"
+        android:textSize="14dp"
+        app:layout_constraintStart_toEndOf="@+id/imgBeeworker"
+        app:layout_constraintTop_toBottomOf="@+id/lblDeskripsi" />
+
+    <TextView
+        android:id="@+id/lblRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="48dp"
+        android:text="3"
+        android:textColor="@color/primary"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imgBeeworker"
+        app:layout_constraintTop_toBottomOf="@+id/lblDeskripsi" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toEndOf="@+id/imgBeeworker"
+        app:layout_constraintTop_toBottomOf="@+id/textView2asd"
+        app:srcCompat="@drawable/ic_baseline_star_24" />
+</androidx.constraintlayout.widget.ConstraintLayout>

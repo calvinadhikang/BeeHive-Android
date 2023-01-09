@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.beehive.activities.MainActivity
+import com.example.beehive.data.Category
 
-class SearchFragment : Fragment() {
+class SearchFragment(
+    var listCategory: List<Category>
+) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beehive.activities.MainActivity
 import com.example.beehive.R
+import com.example.beehive.adapters.RVComplainAdapter
 import com.example.beehive.data.ComplainData
 import com.example.beehive.data.LelangStingData
 import com.example.beehive.data.TransactionStingData
@@ -41,7 +42,7 @@ class ListComplainsFragment(
         val acti = activity as MainActivity
         acti.supportActionBar!!.hide()
         acti.title = "List Complain Sting"
-        var adapter:RVComplainAdapter = RVComplainAdapter(complains)
+        var adapter: RVComplainAdapter = RVComplainAdapter(complains)
         rvComplain = view.findViewById(R.id.rvComplain)
         btnBack = view.findViewById(R.id.btnBack)
         rvComplain.adapter = adapter

@@ -8,15 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ListView
-import androidx.core.view.isVisible
 import com.airbnb.lottie.LottieAnimationView
 import com.example.beehive.api_config.ApiConfiguration
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import com.example.beehive.activities.MainActivity
+import com.example.beehive.adapters.LVTransactionAdapter
 import com.example.beehive.data.*
 import com.example.beehive.transaction_sting.DetailOrderedStingFragment
+import retrofit2.Response
 
 class NotificationFragment : Fragment() {
 
@@ -90,7 +90,7 @@ class NotificationFragment : Fragment() {
                                         remember_token = acti.userLogin!!.REMEMBER_TOKEN!!
                                     )
                                     cancelClient.enqueue(object: Callback<BasicDRO> {
-                                        override fun onResponse(call: Call<BasicDRO>, response: retrofit2.Response<BasicDRO>){
+                                        override fun onResponse(call: Call<BasicDRO>, response: Response<BasicDRO>){
                                             if(response.isSuccessful){
                                                 val responseBody = response.body()
                                                 if(responseBody!=null){
@@ -159,7 +159,7 @@ class NotificationFragment : Fragment() {
                                         remember_token = acti.userLogin!!.REMEMBER_TOKEN!!
                                     )
                                     cancelClient.enqueue(object: Callback<BasicDRO> {
-                                        override fun onResponse(call: Call<BasicDRO>, response: retrofit2.Response<BasicDRO>){
+                                        override fun onResponse(call: Call<BasicDRO>, response: Response<BasicDRO>){
                                             if(response.isSuccessful){
                                                 val responseBody = response.body()
                                                 if(responseBody!=null){
@@ -228,7 +228,7 @@ class NotificationFragment : Fragment() {
                                         remember_token = acti.userLogin!!.REMEMBER_TOKEN!!
                                     )
                                     cancelClient.enqueue(object: Callback<BasicDRO> {
-                                        override fun onResponse(call: Call<BasicDRO>, response: retrofit2.Response<BasicDRO>){
+                                        override fun onResponse(call: Call<BasicDRO>, response: Response<BasicDRO>){
                                             if(response.isSuccessful){
                                                 val responseBody = response.body()
                                                 if(responseBody!=null){
@@ -297,7 +297,7 @@ class NotificationFragment : Fragment() {
                                         remember_token = acti.userLogin!!.REMEMBER_TOKEN!!
                                     )
                                     cancelClient.enqueue(object: Callback<BasicDRO> {
-                                        override fun onResponse(call: Call<BasicDRO>, response: retrofit2.Response<BasicDRO>){
+                                        override fun onResponse(call: Call<BasicDRO>, response: Response<BasicDRO>){
                                             if(response.isSuccessful){
                                                 val responseBody = response.body()
                                                 if(responseBody!=null){
@@ -366,7 +366,7 @@ class NotificationFragment : Fragment() {
                                         remember_token = acti.userLogin!!.REMEMBER_TOKEN!!
                                     )
                                     cancelClient.enqueue(object: Callback<BasicDRO> {
-                                        override fun onResponse(call: Call<BasicDRO>, response: retrofit2.Response<BasicDRO>){
+                                        override fun onResponse(call: Call<BasicDRO>, response: Response<BasicDRO>){
                                             if(response.isSuccessful){
                                                 val responseBody = response.body()
                                                 if(responseBody!=null){
@@ -429,7 +429,7 @@ class NotificationFragment : Fragment() {
                                     remember_token = acti.userLogin!!.REMEMBER_TOKEN!!
                                 )
                                 cancelClient.enqueue(object: Callback<BasicDRO> {
-                                    override fun onResponse(call: Call<BasicDRO>, response: retrofit2.Response<BasicDRO>){
+                                    override fun onResponse(call: Call<BasicDRO>, response: Response<BasicDRO>){
                                         if(response.isSuccessful){
                                             val responseBody = response.body()
                                             if(responseBody!=null){

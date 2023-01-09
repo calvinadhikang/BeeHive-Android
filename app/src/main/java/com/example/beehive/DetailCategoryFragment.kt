@@ -17,6 +17,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import com.example.beehive.activities.MainActivity
 import com.example.beehive.adapters.RVStingAdapter
+import com.example.beehive.landing_page.LandingPageAfterLoginFragment
+import com.example.beehive.landing_page.LandingPageFragment
 
 class DetailCategoryFragment(
     var key: String, var namaCategory:String
@@ -45,11 +47,11 @@ class DetailCategoryFragment(
         btnBack.setOnClickListener{
             if(acti.isLogin){
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.frMain, LandingPageAfterLoginFragment(acti.listCategory))
+                    .replace(R.id.frMain, LandingPageAfterLoginFragment(acti.listCategory, acti.listBeeworker))
                     .commit()
             }else{
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.frMain, LandingPageFragment(acti.listCategory))
+                    .replace(R.id.frMain, LandingPageFragment(acti.listCategory,acti.listBeeworker))
                     .commit()
             }
         }

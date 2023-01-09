@@ -11,17 +11,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.example.beehive.R
-import com.example.beehive.RVCategoryAdapter
-import com.example.beehive.RVStingAdapter
 import com.example.beehive.activities.MainActivity
+import com.example.beehive.adapters.RVBeeworkerAdapter
+import com.example.beehive.adapters.RVCategoryAdapter
+import com.example.beehive.adapters.RVStingAdapter
 import com.example.beehive.api_config.ApiConfiguration
+import com.example.beehive.api_config.UserData
 import com.example.beehive.data.*
 import com.example.beehive.user_auth.UserBeforeLoginFragment
 import retrofit2.Call
 import retrofit2.Callback
 
 class LandingPageFragment(
-    var listCategory: List<Category>
+    var listCategory: List<Category>,
+    var listBeeworker: List<UserData>
 ) : Fragment() {
 
     lateinit var rv: RecyclerView
@@ -30,7 +33,7 @@ class LandingPageFragment(
     lateinit var adptSting: RVStingAdapter
     lateinit var animLoading1: LottieAnimationView
     lateinit var lblToLogin: TextView
-
+    lateinit var rvBeeworker: RecyclerView
 //    var listCategory: List<Category> = listOf()
     var listSting: List<StingData> = arrayListOf()
 
@@ -60,6 +63,10 @@ class LandingPageFragment(
         //init components
         rv = view.findViewById(R.id.rvKategori)
         rvSting = view.findViewById(R.id.rvStingMost)
+
+        rvBeeworker = view.findViewById(R.id.rvBeeworker)
+        rvBeeworker.adapter = RVBeeworkerAdapter(listBeeworker)
+        rvBeeworker.layoutManager = GridLayoutManager(view.context, 1, GridLayoutManager.VERTICAL, false)
 
         rv.adapter = RVCategoryAdapter(listCategory){ pos ->
             var key = listCategory[pos].ID_CATEGORY.toString()
@@ -107,7 +114,7 @@ class LandingPageFragment(
 //                        listSting.add(dataSting.data)
                         listSting = listOf(dataSting)
 
-                        rvSting.adapter = RVStingAdapter(listSting)
+                        rvSting.adapter = RVStingAdapter(listSting){}
                         rvSting.layoutManager = LinearLayoutManager(view.context)
                     }
                 }
@@ -119,3 +126,4 @@ class LandingPageFragment(
 
         })
     }
+}

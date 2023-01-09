@@ -1,4 +1,4 @@
-package com.example.beehive.transaction_sting
+package com.example.beehive.adapters
 
 import android.view.LayoutInflater
 import android.view.View

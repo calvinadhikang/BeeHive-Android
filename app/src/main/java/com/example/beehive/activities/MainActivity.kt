@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
     var userLogin:UserData? = null
 
     var listCategory:List<Category> = listOf()
+    var listBeeworker:List<UserData> = listOf()
 
      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,11 +57,12 @@ class MainActivity : AppCompatActivity() {
          try {
              isLogin = intent.getBooleanExtra("is_login",false)
              listCategory = intent.getParcelableArrayListExtra<Category>("list_category") as List<Category>
+             listBeeworker = intent.getParcelableArrayListExtra<UserData>("list_beeworker") as List<UserData>
              if(!isLogin){
                  val nav_Menu: Menu = navbar.menu
                  nav_Menu.findItem(R.id.menu_add).isVisible = false
                  nav_Menu.findItem(R.id.menu_notification).isVisible = false
-                 swapToFrag(LandingPageFragment(listCategory), Bundle())
+                 swapToFrag(LandingPageFragment(listCategory,listBeeworker), Bundle())
              }else{
                  userLogin = intent.getParcelableExtra("user_login")
                  afterFetchRememberMe()
@@ -98,14 +100,14 @@ class MainActivity : AppCompatActivity() {
              return@setOnNavigationItemSelectedListener when(it.itemId){
                  R.id.menu_home ->{
                      if(isLogin){
-                         swapToFrag(LandingPageAfterLoginFragment(listCategory), Bundle())
+                         swapToFrag(LandingPageAfterLoginFragment(listCategory,listBeeworker), Bundle())
                      }else{
-                         swapToFrag(LandingPageFragment(listCategory), Bundle())
+                         swapToFrag(LandingPageFragment(listCategory,listBeeworker), Bundle())
                      }
                      true
                  }
                  R.id.menu_search ->{
-                     swapToFrag(SearchFragment(), Bundle())
+                     swapToFrag(SearchFragment(listCategory), Bundle())
                      true
                  }
                  R.id.menu_add ->{
@@ -192,7 +194,7 @@ class MainActivity : AppCompatActivity() {
         val nav_Menu: Menu = navbar.menu
         nav_Menu.findItem(R.id.menu_add).isVisible = true
         nav_Menu.findItem(R.id.menu_notification).isVisible = true
-        swapToFrag(LandingPageAfterLoginFragment(listCategory), Bundle())
+        swapToFrag(LandingPageAfterLoginFragment(listCategory,listBeeworker), Bundle())
     }
     fun login(user:UserData){
         updateLogin(user)
