@@ -27,6 +27,9 @@ interface ApiService {
     @POST("register")
     fun register(@Body userRegisterData: UserRegisterDTO): Call<UserDRO>
 
+    @GET("beeworker")
+    fun fetchBeeworker(
+    ): Call<ListUserDRO>
 
 //    USER SECTION
     @GET("user/get")

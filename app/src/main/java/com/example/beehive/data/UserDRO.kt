@@ -1,8 +1,22 @@
 package com.example.beehive.api_config
 
 import android.os.Parcelable
+import com.example.beehive.data.TransactionStingData
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class ListUserDRO(
+
+	@field:SerializedName("data")
+	val data: List<UserData?>? = null,
+
+	@field:SerializedName("success")
+	val success: Boolean? = null,
+
+	@field:SerializedName("message")
+	val message: String? = null
+) : Parcelable
 
 @Parcelize
 data class UserDRO(
@@ -76,5 +90,11 @@ data class UserData(
 	var UPDATED_AT: String? = null,
 
 	@field:SerializedName("REMEMBER_TOKEN")
-	var REMEMBER_TOKEN: String? = null
+	var REMEMBER_TOKEN: String? = null,
+
+	@field:SerializedName("jumlahSting")
+	var jumlahSting: String? = null,
+
+	@field:SerializedName("jumlahOrderDone")
+	var jumlahOrderDone: String? = null
 ):	Parcelable
