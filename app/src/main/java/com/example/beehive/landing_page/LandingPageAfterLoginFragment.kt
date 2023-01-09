@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,9 +19,10 @@ import com.example.beehive.adapters.RVCategoryAdapter
 import com.example.beehive.adapters.RVStingAdapter
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.api_config.UserData
-import com.example.beehive.data.Category
-import com.example.beehive.data.StingDRO
-import com.example.beehive.data.StingData
+import com.example.beehive.data.*
+import com.example.beehive.env
+import com.example.beehive.transaction_sting.DetailOrderedStingFragment
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 
@@ -98,6 +101,65 @@ class LandingPageAfterLoginFragment(
             }
 
         })
+        //fetch project ongoing
+
+        val ongoing = ApiConfiguration.getApiService().getOngoingTransactionSting(
+            remember_token = acti.userLogin!!.REMEMBER_TOKEN.toString()
+        )
+        ongoing.enqueue(object: Callback<TransactionStingDRO>{
+            override fun onResponse(call: Call<TransactionStingDRO>, response: retrofit2.Response<TransactionStingDRO>) {
+                if (response.isSuccessful){
+                    val responseBody = response.body()
+                    if (responseBody != null){
+                        val data: TransactionStingData = responseBody.data!!
+                        var progressTotal:Int = responseBody.message.toString().toInt()
+                        if(progressTotal>90){
+                            progressTotal = 90
+                        }
+                        var imgOngoing:ImageView = view.findViewById(R.id.imgOngoing)
+                        var lblOngoingName:TextView = view.findViewById(R.id.lblOngoingName)
+                        var lblOngoingPercent:TextView = view.findViewById(R.id.lblOngoingPercent)
+                        var lblOngoingOpenDetail:TextView = view.findViewById(R.id.lblOngoingOpenDetail)
+                        var progressBar:ProgressBar = view.findViewById(R.id.progressBar)
+                        progressBar.progress = progressTotal
+                        lblOngoingPercent.text = "$progressTotal%"
+                        lblOngoingName.text = data.sting!!.TITLE_STING
+                        lblOngoingOpenDetail.setOnClickListener {
+                            parentFragmentManager.beginTransaction()
+                                .replace(R.id.frMain, DetailOrderedStingFragment(data.sting.EMAIL_BEEWORKER.toString(),
+                                    data.REQUIREMENT_PROJECT.toString(), data.COMMISION.toString(),
+                                    data.DATE_START.toString(), data.DATE_END.toString(), data))
+                                .commit()
+                        }
+                        Picasso.get()
+                            .load(env.URLIMAGE +"sting-thumbnails/${data.sting.NAMA_THUMBNAIL}")
+                            .resize(69,64)
+                            .onlyScaleDown()
+                            .into(imgOngoing)
+                        imgOngoing.clipToOutline = true
+                        imgOngoing.setBackgroundResource(R.drawable.rounded_corner_picture_1)
+                    }
+                }else{
+                    //tidak ada yang ongoing
+                    var imgOngoing:ImageView = view.findViewById(R.id.imgOngoing)
+                    var lblOngoingName:TextView = view.findViewById(R.id.lblOngoingName)
+                    var lblOngoingPercent:TextView = view.findViewById(R.id.lblOngoingPercent)
+                    var lblOngoingOpenDetail:TextView = view.findViewById(R.id.lblOngoingOpenDetail)
+                    var progressBar:ProgressBar = view.findViewById(R.id.progressBar)
+                    imgOngoing.visibility = View.GONE
+                    lblOngoingPercent.visibility = View.GONE
+                    lblOngoingOpenDetail.visibility = View.GONE
+                    progressBar.visibility = View.GONE
+                    lblOngoingName.text = "There is no ongoing projects"
+                }
+            }
+
+            override fun onFailure(call: Call<TransactionStingDRO>, t: Throwable) {
+
+            }
+
+        })
+
     }
 
 }

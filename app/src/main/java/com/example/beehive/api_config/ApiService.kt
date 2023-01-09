@@ -99,6 +99,12 @@ interface ApiService {
     ): Call<ListStingDRO>
 
     //SECTION TRANSACTION STING
+
+    @GET("sting/transaction/current")
+    fun getOngoingTransactionSting(
+        @Query("REMEMBER_TOKEN") remember_token:String,
+    ): Call<TransactionStingDRO>
+
     @GET("sting/transaction/fetch")
     fun fetchTransactionSting(
         @Query("REMEMBER_TOKEN") remember_token:String,
