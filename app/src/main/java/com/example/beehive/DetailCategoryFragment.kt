@@ -16,8 +16,7 @@ import com.example.beehive.data.*
 import retrofit2.Call
 import retrofit2.Callback
 import com.example.beehive.activities.MainActivity
-import com.example.beehive.landing_page.LandingPageAfterLoginFragment
-import com.example.beehive.landing_page.LandingPageFragment
+import com.example.beehive.adapters.RVStingAdapter
 
 class DetailCategoryFragment(
     var key: String, var namaCategory:String
@@ -66,7 +65,10 @@ class DetailCategoryFragment(
                         animLoading3.visibility = View.GONE
                         listSting = responseBody.data as List<StingData>
 
-                        rv.adapter = RVStingAdapter(listSting)
+                        rv.adapter = RVStingAdapter(listSting, { pos ->
+                            var key = listSting[pos].ID_STING.toString()
+                            (activity as MainActivity).detailSting(key)
+                        })
                         rv.layoutManager = LinearLayoutManager(view.context)
                     }
                 }

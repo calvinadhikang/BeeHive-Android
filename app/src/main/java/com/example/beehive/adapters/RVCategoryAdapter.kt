@@ -1,10 +1,11 @@
-package com.example.beehive
+package com.example.beehive.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.beehive.R
 import com.example.beehive.data.Category
 
 class RVCategoryAdapter(

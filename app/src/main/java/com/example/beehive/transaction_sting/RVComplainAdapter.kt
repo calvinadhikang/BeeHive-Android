@@ -3,16 +3,10 @@ package com.example.beehive.transaction_sting
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.beehive.CurrencyUtils.toRupiah
 import com.example.beehive.R
-import com.example.beehive.RVStingAdapter
 import com.example.beehive.data.ComplainData
-import com.example.beehive.data.StingData
-import com.example.beehive.env
-import com.squareup.picasso.Picasso
 
 class RVComplainAdapter (
     var data: List<ComplainData>
