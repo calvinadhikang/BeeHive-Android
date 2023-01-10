@@ -1,4 +1,4 @@
-package com.example.beehive
+package com.example.beehive.stings
 
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
+import com.example.beehive.R
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.data.*
 import retrofit2.Call

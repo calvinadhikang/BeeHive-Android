@@ -23,6 +23,7 @@ import com.example.beehive.landing_page.LandingPageAfterLoginFragment
 import com.example.beehive.lelang_sting.CreateLelangStingFragment
 import com.example.beehive.observerConnectivity.ConnectivityObserver
 import com.example.beehive.observerConnectivity.NetworkConnectivityObserver
+import com.example.beehive.stings.DetailCategoryFragment
 import com.example.beehive.user_auth.UserBeforeLoginFragment
 import com.example.beehive.user_profile.UserProfileFragment
 import com.example.beehive.utils.DialogHelper
@@ -240,7 +241,7 @@ class MainActivity : AppCompatActivity() {
                     val responseBody = response.body()
                     if(responseBody!=null){
                         if(responseBody.data!=null){
-                            var data:UserData = responseBody.data
+                            var data:UserData = responseBody.data!!
                             if(firstTime){
                                 userLogin = data
                                 afterFetchRememberMe()

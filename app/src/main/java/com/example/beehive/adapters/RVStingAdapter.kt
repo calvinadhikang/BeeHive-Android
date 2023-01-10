@@ -49,8 +49,8 @@ class RVStingAdapter(
         //Set StingThumbnail
         Picasso.get()
             .load(env.URLIMAGE +"sting-thumbnails/${obj.NAMA_THUMBNAIL}")
-            .resize(90,150)
-            .onlyScaleDown()
+            .fit()
+            .centerCrop()
             .into(holder.imgThumbnail)
 
         holder.itemView.setOnClickListener {

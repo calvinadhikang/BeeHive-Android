@@ -275,7 +275,7 @@
                     android:id="@+id/lblOngoingOpenDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="141dp"
                     android:text="Open Detail"
                     android:textSize="16dp"

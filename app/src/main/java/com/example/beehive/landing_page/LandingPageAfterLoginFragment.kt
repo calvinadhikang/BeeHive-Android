@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.view.marginStart
+import androidx.core.view.setPadding
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +23,7 @@ import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.api_config.UserData
 import com.example.beehive.data.*
 import com.example.beehive.env
+import com.example.beehive.stings.DetailBeeworkerFragment
 import com.example.beehive.transaction_sting.DetailOrderedStingFragment
 import com.squareup.picasso.Picasso
 import retrofit2.Call
@@ -74,7 +77,12 @@ class LandingPageAfterLoginFragment(
         }
         rv.layoutManager = GridLayoutManager(view.context, 1, GridLayoutManager.HORIZONTAL, false)
 
-        rvBeeworker.adapter = RVBeeworkerAdapter(listBeeworker)
+        rvBeeworker.adapter = RVBeeworkerAdapter(listBeeworker){
+            var beeworker:UserData = listBeeworker[it]
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.frMain, DetailBeeworkerFragment(beeworker))
+                .commit()
+        }
         rvBeeworker.layoutManager = GridLayoutManager(view.context, 1, GridLayoutManager.VERTICAL, false)
 
         lblName.text = acti.userLogin!!.NAMA.toString()
@@ -151,6 +159,8 @@ class LandingPageAfterLoginFragment(
                     lblOngoingOpenDetail.visibility = View.GONE
                     progressBar.visibility = View.GONE
                     lblOngoingName.text = "There is no ongoing projects"
+                    lblOngoingName.setPadding(100,0,0,0)
+
                 }
             }
 

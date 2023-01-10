@@ -2,6 +2,7 @@ package com.example.beehive.data
 
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
+import com.example.beehive.api_config.UserData
 import com.google.gson.annotations.SerializedName
 
 @Parcelize
@@ -49,7 +50,7 @@ data class StingData(
 	val DELETED_AT: String? = null,
 
 	@field:SerializedName("author")
-	val author: Author? = null,
+	var author: UserData? = null,
 
 	@field:SerializedName("NAMA_THUMBNAIL")
 	val NAMA_THUMBNAIL: String? = null,

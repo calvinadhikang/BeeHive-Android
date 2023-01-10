@@ -18,6 +18,7 @@ import com.example.beehive.adapters.RVStingAdapter
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.api_config.UserData
 import com.example.beehive.data.*
+import com.example.beehive.stings.DetailBeeworkerFragment
 import com.example.beehive.user_auth.UserBeforeLoginFragment
 import retrofit2.Call
 import retrofit2.Callback
@@ -65,7 +66,12 @@ class LandingPageFragment(
         rvSting = view.findViewById(R.id.rvStingMost)
 
         rvBeeworker = view.findViewById(R.id.rvBeeworker)
-        rvBeeworker.adapter = RVBeeworkerAdapter(listBeeworker)
+        rvBeeworker.adapter = RVBeeworkerAdapter(listBeeworker){
+            var beeworker:UserData = listBeeworker[it]
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.frMain, DetailBeeworkerFragment(beeworker))
+                .commit()
+        }
         rvBeeworker.layoutManager = GridLayoutManager(view.context, 1, GridLayoutManager.VERTICAL, false)
 
         rv.adapter = RVCategoryAdapter(listCategory){ pos ->

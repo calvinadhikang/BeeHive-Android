@@ -1,6 +1,7 @@
 package com.example.beehive.api_config
 
 import android.os.Parcelable
+import com.example.beehive.data.StingData
 import com.example.beehive.data.TransactionStingData
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
@@ -96,5 +97,8 @@ data class UserData(
 	var jumlahSting: String? = null,
 
 	@field:SerializedName("jumlahOrderDone")
-	var jumlahOrderDone: String? = null
+	var jumlahOrderDone: String? = null,
+
+	@field:SerializedName("stings")
+	var stings: List<StingData>? = null,
 ):	Parcelable

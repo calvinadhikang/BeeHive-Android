@@ -14,6 +14,8 @@ import com.squareup.picasso.Picasso
 
 class RVBeeworkerAdapter(
     var data: List<UserData>,
+    var onClick: (position:Int)->Unit
+
 ): RecyclerView.Adapter<RVBeeworkerAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -37,16 +39,20 @@ class RVBeeworkerAdapter(
         holder.lblDeskripsi.text = obj.BIO.toString()
         holder.lblRating.text = obj.RATING.toString()
         holder.lblFinished.text = obj.jumlahOrderDone.toString()
-
         Picasso.get()
             .load(env.URLIMAGE +"profile-pictures/${obj.PICTURE}")
-            .resize(69,157)
-            .onlyScaleDown()
+            .fit()
+            .centerCrop()
             .into(holder.imgBeeworker)
+
+//            .onlyScaleDown()
+
 
         holder.imgBeeworker.clipToOutline = true
         holder.imgBeeworker.setBackgroundResource(R.drawable.rounded_corner_picture_1)
-
+        holder.itemView.setOnClickListener {
+            onClick(position)
+        }
     }
 
     override fun getItemCount(): Int {
