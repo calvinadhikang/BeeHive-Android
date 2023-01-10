@@ -35,7 +35,7 @@ class NotificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val acti = activity as MainActivity
-        acti.supportActionBar!!.show()
+        acti.supportActionBar!!.hide()
         acti.title = "Notifications"
         var animLoading2:LottieAnimationView = view.findViewById(R.id.animLoading2)
 

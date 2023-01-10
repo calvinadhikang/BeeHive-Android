@@ -38,7 +38,7 @@ class ListLelangStingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val acti = activity as MainActivity
-        acti.supportActionBar!!.show()
+        acti.supportActionBar!!.hide()
         acti.title = "List Lelang Sting"
 
         val btnNavCreateLelangSting: Button = view.findViewById(R.id.btnNavCreateLelangSting)

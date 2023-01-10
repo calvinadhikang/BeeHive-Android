@@ -1,5 +1,7 @@
 package com.example.beehive.stings
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -73,6 +75,16 @@ class DetailBeeworkerFragment(
         }
         btnContactme.setOnClickListener {
             //intent email
+            val intent = Intent(
+                Intent.ACTION_SENDTO, Uri.fromParts("mailto",
+                    acti.userLogin!!.EMAIL,null))
+            val subject:String = "Beehive"
+            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(beeworker.EMAIL))
+            intent.putExtra(Intent.EXTRA_SUBJECT,subject)
+            val body:String = "Selamat pagi, saya mau bertanya..."
+            intent.putExtra(Intent.EXTRA_TEXT,body)
+            intent.type = "message/rfc822"
+            startActivity(Intent.createChooser(intent,"Open to email"))
         }
         lblBeeworkerName.text = beeworker.NAMA
         lblRatingReview.text = "${beeworker.RATING}(${beeworker.jumlahOrderDone} reviews)"

@@ -35,7 +35,7 @@ class CreateLelangStingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val acti = activity as MainActivity
-        acti.supportActionBar!!.show()
+        acti.supportActionBar!!.hide()
         acti.title = "Create Lelang Sting"
         val txtProjectRequirement: EditText = view.findViewById(R.id.txtProjectRequirement)
         val txtProjectTitle: EditText = view.findViewById(R.id.txtProjectTitle)

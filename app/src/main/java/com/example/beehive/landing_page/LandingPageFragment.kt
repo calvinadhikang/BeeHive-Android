@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
+import com.example.beehive.DetailStingFragment
 import com.example.beehive.R
 import com.example.beehive.activities.MainActivity
 import com.example.beehive.adapters.RVBeeworkerAdapter
@@ -99,7 +100,13 @@ class LandingPageFragment(
                         var dataSting = responseBody.data as StingData
                         listSting = listOf(dataSting)
 
-                        rvSting.adapter = RVStingAdapter(listSting){}
+                        rvSting.adapter = RVStingAdapter(listSting){
+                            var sting:StingData = listSting[it]
+                            parentFragmentManager.beginTransaction()
+                                .replace(R.id.frMain, DetailStingFragment(sting.ID_STING.toString(),sting,
+                                    LandingPageFragment(acti.listCategory,acti.listBeeworker)))
+                                .commit()
+                        }
                         rvSting.layoutManager = LinearLayoutManager(view.context)
                     }
                 }

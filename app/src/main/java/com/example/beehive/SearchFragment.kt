@@ -36,7 +36,7 @@ class SearchFragment(
         super.onViewCreated(view, savedInstanceState)
 
         val acti = activity as MainActivity
-        acti.supportActionBar!!.show()
+        acti.supportActionBar!!.hide()
         acti.title = "Categories Available"
 
         rv = view.findViewById(R.id.rvSearch)
