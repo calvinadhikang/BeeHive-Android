@@ -73,31 +73,6 @@ class MainActivity : AppCompatActivity() {
              Log.e("Failed_intent",e.message.toString())
          }
 
-//         val client = ApiConfiguration.getApiService().fetchTransactionStingByCategory(category = 5)
-//         client.enqueue(object: Callback<ListTransactionStingDRO> {
-//             override fun onResponse(call: Call<ListTransactionStingDRO>, response: retrofit2.Response<ListTransactionStingDRO>){
-//                 if(response.isSuccessful){
-//                     val responseBody = response.body()
-//                     if(responseBody!=null){
-//                         Log.i("ENRICOASD",responseBody.toString())
-//                         showModal("FETCH DONE"){}
-//
-//                     }
-//                 }
-//                 else{
-//                     val statusCode:Int = response.code()
-//                     val message:String = response.body()!!.message!!
-//                     Log.e("ERROR FETCH STING", "Fail Access: $statusCode")
-//                     Toast.makeText(this@MainActivity,
-//                         message.toString(), Toast.LENGTH_SHORT).show()
-//                 }
-//             }
-//
-//             override fun onFailure(call: Call<ListTransactionStingDRO>, t: Throwable) {
-//                 Log.e("ERROR FETCH", "onFailure: ${t.message}")
-//             }
-//
-//         })
          navbar.setOnNavigationItemSelectedListener {
              return@setOnNavigationItemSelectedListener when(it.itemId){
                  R.id.menu_home ->{
@@ -137,6 +112,10 @@ class MainActivity : AppCompatActivity() {
          }
     }
 
+    public fun search(key: String = ""){
+        swapToFrag(SearchFragment(listCategory, key), Bundle())
+    }
+
     public fun detailCategory(key: String, namaCategory:String){
         swapToFrag(DetailCategoryFragment(key,namaCategory), Bundle())
     }
@@ -153,7 +132,6 @@ class MainActivity : AppCompatActivity() {
                     val responseBody = response.body()
                     if(responseBody!=null){
                         listCategory = responseBody.data as List<Category>
-
                     }
                 }
                 else{

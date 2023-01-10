@@ -1,10 +1,12 @@
 package com.example.beehive.landing_page
 
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,6 +37,7 @@ class LandingPageFragment(
     lateinit var animLoading1: LottieAnimationView
     lateinit var lblToLogin: TextView
     lateinit var rvBeeworker: RecyclerView
+    lateinit var edtSearch: EditText
 //    var listCategory: List<Category> = listOf()
     var listSting: List<StingData> = arrayListOf()
 
@@ -84,29 +87,6 @@ class LandingPageFragment(
                 .replace(R.id.frMain, UserBeforeLoginFragment())
                 .commit()
         }
-        //fetchCategory
-//        val categoryAPI = ApiConfiguration.getApiService().fetchCategoryNoAuth()
-//        categoryAPI.enqueue(object: Callback<ListCategoryDRO> {
-//            override fun onResponse(call: Call<ListCategoryDRO>, response: retrofit2.Response<ListCategoryDRO>){
-//                if(response.isSuccessful){
-//                    val responseBody = response.body()
-//                    if(responseBody!=null){
-//                        listCategory = responseBody.data as List<Category>
-//
-//                        rv.adapter = RVCategoryAdapter(listCategory)
-//                        rv.layoutManager = GridLayoutManager(view.context, 1, GridLayoutManager.HORIZONTAL, false)
-//                    }
-//                }
-//                else{
-//
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<ListCategoryDRO>, t: Throwable) {
-//                Log.e("ERROR FETCH CATEGORY", "onFailure: ${t.message}")
-//            }
-//
-//        })
 
         //fetch most sting
         val stingMostAPI = ApiConfiguration.getApiService().fetchMostSting()
@@ -117,7 +97,6 @@ class LandingPageFragment(
                     if (responseBody != null){
                         animLoading1.visibility = View.GONE
                         var dataSting = responseBody.data as StingData
-//                        listSting.add(dataSting.data)
                         listSting = listOf(dataSting)
 
                         rvSting.adapter = RVStingAdapter(listSting){}
@@ -129,7 +108,17 @@ class LandingPageFragment(
             override fun onFailure(call: Call<StingDRO>, t: Throwable) {
 
             }
-
         })
+
+        //initialize edittext Search
+        edtSearch = view.findViewById(R.id.edtSearchLanding)
+        edtSearch.setOnKeyListener { view, i, keyEvent ->
+            if (i == KeyEvent.KEYCODE_ENTER){
+                var key = edtSearch.text.toString()
+                (activity as MainActivity).search(key)
+                return@setOnKeyListener true
+            }
+            false
+        }
     }
 }
