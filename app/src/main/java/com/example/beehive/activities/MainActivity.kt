@@ -248,8 +248,8 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    public fun test(){
-        val bottomsheet = BottomSheetFragment()
+    public fun bottomSheet(judul: String, tipe: String, harga: String, nama: String, tgl: String, stingId: String, req: String){
+        val bottomsheet = BottomSheetFragment(judul, tipe, harga, nama, tgl, stingId, req)
         bottomsheet.show(supportFragmentManager, "BottomSheetDialog")
     }
 

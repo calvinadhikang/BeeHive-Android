@@ -22,7 +22,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import com.example.beehive.activities.MainActivity
 
-class DetailBuyStingFragment : Fragment() {
+class DetailBuyStingFragment(
+    var stingId: String
+) : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +67,7 @@ class DetailBuyStingFragment : Fragment() {
 
         acti.coroutine.launch {
             acti.runOnUiThread{
-                val client = ApiConfiguration.getApiService().getStingDetail("S_0000001")
+                val client = ApiConfiguration.getApiService().getStingDetail(stingId)
                 client.enqueue(object: Callback<StingDRO> {
                     override fun onResponse(call: Call<StingDRO>, response: retrofit2.Response<StingDRO>){
                         if(response.isSuccessful){
@@ -77,17 +79,30 @@ class DetailBuyStingFragment : Fragment() {
                                     txtNamaAuthorDetail.text = data.author!!.NAMA
                                     txtRatingDetail.text = data.RATING
                                     txtDescProDetail.text = data.DESKRIPSI_PREMIUM
-                                    txtHargaProDetail.text = data.PRICE_PREMIUM
+                                    txtHargaProDetail.text = data.PRICE_PREMIUM!!.toInt().toRupiah()
                                     txtDescBasicDetail.text = data.DESKRIPSI_BASIC
-                                    txtHargaBasixDetail.text = data.PRICE_BASIC
+                                    txtHargaBasixDetail.text = data.PRICE_BASIC!!.toInt().toRupiah()
+                                    txtJumlahReviewDetail.text = "(${data.JUMLAH_ORDER} Orders)"
                                     btnBuyProDetail.setOnClickListener {
                                         parentFragmentManager.beginTransaction()
-                                            .replace(R.id.frMain, BuyStingFragment(data.TITLE_STING!!, "Pro", data.DESKRIPSI_PREMIUM!!, data.PRICE_PREMIUM!!))
+                                            .replace(R.id.frMain, BuyStingFragment(data.TITLE_STING!!,
+                                                "Pro",
+                                                data.DESKRIPSI_PREMIUM!!,
+                                                data.PRICE_PREMIUM!!,
+                                                data.author!!.NAMA.toString(),
+                                                stingId
+                                            ))
                                             .commit()
                                     }
                                     btnBuyBasicDetail.setOnClickListener {
                                         parentFragmentManager.beginTransaction()
-                                            .replace(R.id.frMain, BuyStingFragment(data.TITLE_STING!!, "Basic", data.DESKRIPSI_BASIC!!, data.PRICE_BASIC!!))
+                                            .replace(R.id.frMain, BuyStingFragment(data.TITLE_STING!!,
+                                                "Basic",
+                                                data.DESKRIPSI_BASIC!!,
+                                                data.PRICE_BASIC!!,
+                                                data.author!!.NAMA.toString(),
+                                                stingId
+                                            ))
                                             .commit()
                                     }
                                 }

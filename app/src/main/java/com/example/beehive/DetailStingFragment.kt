@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -31,6 +32,7 @@ class DetailStingFragment(
     lateinit var tvPrice: TextView
     lateinit var imgWorker: ImageView
     lateinit var imgSting: ImageView
+    lateinit var btnBuyDetail: Button
 //    lateinit var animLoading1: LottieAnimationView
 
     override fun onCreateView(
@@ -53,10 +55,16 @@ class DetailStingFragment(
         tvPrice = view.findViewById(R.id.tvPriceDetail)
         imgWorker = view.findViewById(R.id.imgWorkerDetail)
         imgSting = view.findViewById(R.id.imgStingDetail)
+        btnBuyDetail = view.findViewById(R.id.btnBuyDetail)
         var btnBack:ImageButton = view.findViewById(R.id.btnBack)
         btnBack.setOnClickListener{
             parentFragmentManager.beginTransaction()
                 .replace(R.id.frMain, fragmentBefore)
+                .commit()
+        }
+        btnBuyDetail.setOnClickListener(){
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.frMain, DetailBuyStingFragment(stingId))
                 .commit()
         }
         tvWorker.text = sting.author!!.NAMA
