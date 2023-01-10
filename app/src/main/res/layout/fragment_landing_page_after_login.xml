@@ -83,7 +83,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/edtSearchLanding"
                 android:layout_width="match_parent"
                 android:layout_height="53dp"
                 android:layout_marginStart="20dp"
@@ -107,8 +107,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:src="@drawable/search"
-                app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
-                app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName" />
+                app:layout_constraintEnd_toEndOf="@+id/edtSearchLanding"
+                app:layout_constraintTop_toTopOf="@+id/edtSearchLanding" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvKategori"
@@ -173,7 +173,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+                app:layout_constraintTop_toBottomOf="@+id/edtSearchLanding" />
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/animLoading1"
@@ -184,7 +184,7 @@
                 android:paddingStart="1dp"
                 android:paddingTop="1dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+                app:layout_constraintTop_toBottomOf="@+id/edtSearchLanding"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/loading" />
