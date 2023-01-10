@@ -19,6 +19,7 @@ import com.example.beehive.dao.AppDatabase
 import com.example.beehive.dao.User
 import com.example.beehive.data.Category
 import com.example.beehive.data.ListCategoryDRO
+import com.example.beehive.data.StingData
 import com.example.beehive.landing_page.LandingPageAfterLoginFragment
 import com.example.beehive.lelang_sting.CreateLelangStingFragment
 import com.example.beehive.observerConnectivity.ConnectivityObserver
@@ -140,8 +141,8 @@ class MainActivity : AppCompatActivity() {
         swapToFrag(DetailCategoryFragment(key,namaCategory), Bundle())
     }
 
-    public fun detailSting(key: String){
-        swapToFrag(DetailStingFragment(key), Bundle())
+    public fun detailSting(key: String, dataSting : StingData, fragmentBefore:Fragment){
+        swapToFrag(DetailStingFragment(key,dataSting,fragmentBefore), Bundle())
     }
 
     fun fetchCategory(){

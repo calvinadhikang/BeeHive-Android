@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,12 +15,15 @@ import com.example.beehive.adapters.RVStingAdapter
 import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.data.StingDRO
 import com.example.beehive.data.StingData
+import com.example.beehive.landing_page.LandingPageAfterLoginFragment
 import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 
 class DetailStingFragment(
-    var stingId: String
+    var stingId: String,
+    var sting:StingData,
+    var fragmentBefore:Fragment
 ) : Fragment() {
 
     lateinit var tvWorker: TextView
@@ -49,47 +53,69 @@ class DetailStingFragment(
         tvPrice = view.findViewById(R.id.tvPriceDetail)
         imgWorker = view.findViewById(R.id.imgWorkerDetail)
         imgSting = view.findViewById(R.id.imgStingDetail)
+        var btnBack:ImageButton = view.findViewById(R.id.btnBack)
+        btnBack.setOnClickListener{
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.frMain, fragmentBefore)
+                .commit()
+        }
+        tvWorker.text = sting.author!!.NAMA
+        tvDescription.text = sting.DESKRIPSI
+        tvPrice.text = "Rp. " + sting.PRICE_BASIC
+        //Set WorkerThumbnail
+        Picasso.get()
+            .load(env.URLIMAGE +"profile-pictures/${sting.author!!.PICTURE}")
+            .fit()
+            .into(imgWorker)
+
+        //Set StingThumbnail
+        Picasso.get()
+            .load(env.URLIMAGE +"sting-thumbnails/${sting.NAMA_THUMBNAIL}")
+            .fit()
+            .centerCrop()
+            .into(imgSting)
+        imgSting.clipToOutline = true
+        imgSting.setBackgroundResource(R.drawable.rounded_corner_picture_1)
 
         //run animation loading
 //        animLoading1 = view.findViewById(R.id.animLoading1)
 
         //fetch sting
-        val stingMostAPI = ApiConfiguration.getApiService().getStingDetail(stingId)
-        stingMostAPI.enqueue(object: Callback<StingDRO> {
-            override fun onResponse(call: Call<StingDRO>, response: retrofit2.Response<StingDRO>) {
-                if (response.isSuccessful){
-                    val responseBody = response.body()
-                    if (responseBody != null){
-//                        animLoading1.visibility = View.GONE
-                        var dataSting = responseBody.data as StingData
-
-                        acti.title = dataSting.TITLE_STING
-
-                        tvWorker.text = dataSting.author!!.NAMA
-                        tvDescription.text = dataSting.DESKRIPSI
-                        tvPrice.text = "Rp. " + dataSting.PRICE_BASIC
-
-                        //Set WorkerThumbnail
-                        Picasso.get()
-                            .load(env.URLIMAGE +"profile-pictures/${dataSting.author!!.PICTURE}")
-                            .resize(50,50)
-                            .into(imgWorker)
-
-                        //Set StingThumbnail
-                        Picasso.get()
-                            .load(env.URLIMAGE +"sting-thumbnails/${dataSting.NAMA_THUMBNAIL}")
-                            .resize(90,150)
-                            .onlyScaleDown()
-                            .into(imgSting)
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<StingDRO>, t: Throwable) {
-
-            }
-
-        })
+//        val stingMostAPI = ApiConfiguration.getApiService().getStingDetail(stingId)
+//        stingMostAPI.enqueue(object: Callback<StingDRO> {
+//            override fun onResponse(call: Call<StingDRO>, response: retrofit2.Response<StingDRO>) {
+//                if (response.isSuccessful){
+//                    val responseBody = response.body()
+//                    if (responseBody != null){
+////                        animLoading1.visibility = View.GONE
+//                        var dataSting = responseBody.data as StingData
+//
+//                        acti.title = dataSting.TITLE_STING
+//
+//                        tvWorker.text = dataSting.author!!.NAMA
+//                        tvDescription.text = dataSting.DESKRIPSI
+//                        tvPrice.text = "Rp. " + dataSting.PRICE_BASIC
+//
+//                        //Set WorkerThumbnail
+//                        Picasso.get()
+//                            .load(env.URLIMAGE +"profile-pictures/${dataSting.author!!.PICTURE}")
+//                            .fit()
+//                            .into(imgWorker)
+//
+//                        //Set StingThumbnail
+//                        Picasso.get()
+//                            .load(env.URLIMAGE +"sting-thumbnails/${dataSting.NAMA_THUMBNAIL}")
+//                            .fit()
+//                            .into(imgSting)
+//                    }
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<StingDRO>, t: Throwable) {
+//
+//            }
+//
+//        })
     }
 
 }

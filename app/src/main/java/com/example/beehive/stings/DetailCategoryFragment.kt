@@ -68,10 +68,10 @@ class DetailCategoryFragment(
                         animLoading3.visibility = View.GONE
                         listSting = responseBody.data as List<StingData>
 
-                        rv.adapter = RVStingAdapter(listSting, { pos ->
-                            var key = listSting[pos].ID_STING.toString()
-                            (activity as MainActivity).detailSting(key)
-                        })
+                        rv.adapter = RVStingAdapter(listSting) { pos ->
+                            var key_id_sting = listSting[pos].ID_STING.toString()
+                            acti.detailSting(key_id_sting,listSting[pos],DetailCategoryFragment(key, namaCategory))
+                        }
                         rv.layoutManager = LinearLayoutManager(view.context)
                     }
                 }

@@ -11,10 +11,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.beehive.DetailStingFragment
 import com.example.beehive.R
 import com.example.beehive.activities.MainActivity
 import com.example.beehive.adapters.RVStingAdapter
 import com.example.beehive.api_config.UserData
+import com.example.beehive.data.StingData
 import com.example.beehive.env
 import com.example.beehive.landing_page.LandingPageAfterLoginFragment
 import com.example.beehive.landing_page.LandingPageFragment
@@ -79,7 +81,12 @@ class DetailBeeworkerFragment(
         for (i in 0 until beeworker.stings!!.size){
             beeworker.stings!![i].author = beeworker
         }
-        rvStings.adapter = RVStingAdapter(beeworker.stings!!){}
+        rvStings.adapter = RVStingAdapter(beeworker.stings!!){
+            var sting:StingData = beeworker.stings!![it]
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.frMain, DetailStingFragment(sting.ID_STING.toString(),sting,DetailBeeworkerFragment(beeworker)))
+                .commit()
+        }
         rvStings.layoutManager = LinearLayoutManager(view.context)
     }
 }
