@@ -62,8 +62,11 @@ class DetailBuyStingFragment(
 
         Picasso.get()
             .load(env.URLIMAGE+"profile-pictures/${acti.userLogin!!.PICTURE}")
-            .resize(50,50)
+            .fit()
+            .centerCrop()
             .into(gmbrAuthorDetail)
+        gmbrAuthorDetail.clipToOutline = true
+        gmbrAuthorDetail.setBackgroundResource(R.drawable.rounded_corner_picture_1)
 
         acti.coroutine.launch {
             acti.runOnUiThread{

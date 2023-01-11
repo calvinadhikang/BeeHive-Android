@@ -63,9 +63,10 @@
 
             <ImageView
                 android:id="@+id/gmbrAuthorDetail"
-                android:layout_width="wrap_content"
-                android:layout_height="75dp"
+                android:layout_width="120dp"
+                android:layout_height="70dp"
                 android:layout_weight="1"
+                android:background="@drawable/rounded_corner_picture_1"
                 tools:src="@tools:sample/avatars" />
 
             <LinearLayout
