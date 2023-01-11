@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
     var listCategory:List<Category> = listOf()
     var listBeeworker:List<UserData> = listOf()
-
+    var isOnline:Boolean = true
      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
          db = AppDatabase.build(this)
          try {
              isLogin = intent.getBooleanExtra("is_login",false)
+             isOnline = intent.getBooleanExtra("is_online",false)
              listCategory = intent.getParcelableArrayListExtra<Category>("list_category") as List<Category>
              listBeeworker = intent.getParcelableArrayListExtra<UserData>("list_beeworker") as List<UserData>
              if(!isLogin){
@@ -178,7 +179,10 @@ class MainActivity : AppCompatActivity() {
     }
     fun login(user:UserData){
         updateLogin(user)
-        var rememberme: User = User(user.REMEMBER_TOKEN!!,user.EMAIL!!,user.NAMA!!)
+        var rememberme: User = User(user.REMEMBER_TOKEN!!,user.EMAIL!!,user.NAMA!!,user.STATUS.toString(),
+        user.TANGGAL_LAHIR.toString(),user.BALANCE.toString(),user.BIO.toString(),user.RATING.toString(),
+            user.PICTURE.toString(),user.SUBSCRIBED.toString(),user.EMAIL_VERIFIED_AT.toString(),
+        user.CREATED_AT.toString(),user.UPDATED_AT.toString())
         coroutine.launch {
             db.userDAO.insert(rememberme)  //ini untuk save isi user
         }

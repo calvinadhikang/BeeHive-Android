@@ -17,6 +17,7 @@ import com.example.beehive.api_config.ApiConfiguration
 import com.example.beehive.data.StingDRO
 import com.example.beehive.data.StingData
 import com.example.beehive.landing_page.LandingPageAfterLoginFragment
+import com.example.beehive.user_auth.UserBeforeLoginFragment
 import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
@@ -63,9 +64,17 @@ class DetailStingFragment(
                 .commit()
         }
         btnBuyDetail.setOnClickListener(){
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.frMain, DetailBuyStingFragment(stingId))
-                .commit()
+            if(acti.isLogin){
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.frMain, DetailBuyStingFragment(stingId))
+                    .commit()
+            }else{
+                acti.showModal("Anda harus login terlebih dahulu"){
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.frMain, UserBeforeLoginFragment())
+                        .commit()
+                }
+            }
         }
         tvWorker.text = sting.author!!.NAMA
         tvDescription.text = sting.DESKRIPSI

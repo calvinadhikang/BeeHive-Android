@@ -90,15 +90,17 @@ class DetailBeeworkerFragment(
         lblRatingReview.text = "${beeworker.RATING}(${beeworker.jumlahOrderDone} reviews)"
         lblBio.text = beeworker.BIO
 
-        for (i in 0 until beeworker.stings!!.size){
-            beeworker.stings!![i].author = beeworker
+        if (beeworker.stings!=null){
+            for (i in 0 until beeworker.stings!!.size){
+                beeworker.stings!![i].author = beeworker
+            }
+            rvStings.adapter = RVStingAdapter(beeworker.stings!!){
+                var sting:StingData = beeworker.stings!![it]
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.frMain, DetailStingFragment(sting.ID_STING.toString(),sting,DetailBeeworkerFragment(beeworker)))
+                    .commit()
+            }
+            rvStings.layoutManager = LinearLayoutManager(view.context)
         }
-        rvStings.adapter = RVStingAdapter(beeworker.stings!!){
-            var sting:StingData = beeworker.stings!![it]
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.frMain, DetailStingFragment(sting.ID_STING.toString(),sting,DetailBeeworkerFragment(beeworker)))
-                .commit()
-        }
-        rvStings.layoutManager = LinearLayoutManager(view.context)
     }
 }

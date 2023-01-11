@@ -28,7 +28,7 @@ class SearchFragment(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        // Inflate the layout for this fragment a
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
 

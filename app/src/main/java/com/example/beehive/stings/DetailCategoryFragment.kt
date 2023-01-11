@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
@@ -82,6 +83,8 @@ class DetailCategoryFragment(
 
             override fun onFailure(call: Call<ListStingDRO>, t: Throwable) {
                 Log.e("ERROR FETCH CATEGORY", "onFailure: ${t.message}")
+                Toast.makeText(requireContext(),
+                    "Anda sedang offline", Toast.LENGTH_SHORT).show()
             }
         })
     }

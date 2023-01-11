@@ -58,7 +58,7 @@ class DetailBuyStingFragment(
         var btnBuyBasicDetail: Button = view.findViewById(R.id.btnBuyBasicDetail)
         var gmbrAuthorDetail: ImageView = view.findViewById(R.id.gmbrAuthorDetail)
 
-        txtBalanceDetail.text = acti.userLogin!!.BALANCE!!.toBigDecimal().toInt().toRupiah()
+        txtBalanceDetail.text = acti.userLogin!!.BALANCE.toString().toInt().toRupiah()
 
         Picasso.get()
             .load(env.URLIMAGE+"profile-pictures/${acti.userLogin!!.PICTURE}")
