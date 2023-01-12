@@ -33,14 +33,16 @@
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/card_category.xml" value="0.4" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/card_category_with_logo.xml" value="0.4" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/card_complain.xml" value="0.176" />
+        <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/card_convert_currency.xml" value="0.264" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/card_list_lelang.xml" value="0.264" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/card_transacrtion.xml" value="0.264" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/dialog_confirmation_layout.xml" value="0.2" />
+        <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/dialog_convert_currency.xml" value="0.264" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/dialog_decline_transaction_sting.xml" value="0.264" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/dialog_layout.xml" value="0.264" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/dialog_pay_topup.xml" value="0.264" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/dialog_rate_transcation_sting.xml" value="0.264" />
-        <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/fragment_buy_sting.xml" value="0.2" />
+        <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/fragment_buy_sting.xml" value="0.264" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/fragment_create_lelang_sting.xml" value="0.264" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/fragment_detail_buy_sting.xml" value="0.264" />
         <entry key="..\:/1.KULIAH/SISTEM_INFORMASI_BISNIS_ENRICO/SEMESTER_5/MOCOMP/BeeHive-Android/BeeHive-Android/app/src/main/res/layout/fragment_detail_category.xml" value="0.264" />

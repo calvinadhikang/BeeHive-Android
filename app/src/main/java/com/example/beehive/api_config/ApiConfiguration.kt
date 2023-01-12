@@ -22,16 +22,16 @@ class ApiConfiguration {
             }
             return retrofit.create(ApiService::class.java)
         }
+        fun getExternalApiService() : ExternalApiService {
+            val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+            val client = OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
+            var retrofit:Retrofit? = null
+            retrofit = Retrofit.Builder().baseUrl("https://v6.exchangerate-api.com/v6/6340b99c60db0101a211154b/")
+                .addConverterFactory(GsonConverterFactory.create()).client(client).build()
+
+            return retrofit.create(ExternalApiService::class.java)
+        }
     }
 
-    fun getExternalApiService() : ExternalApiService {
-        val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-        val client = OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
-        var retrofit:Retrofit? = null
-        retrofit = Retrofit.Builder().baseUrl("https://v6.exchangerate-api.com/v6/6340b99c60db0101a211154b/latest/IDR")
-            .addConverterFactory(GsonConverterFactory.create()).client(client).build()
-
-        return retrofit.create(ExternalApiService::class.java)
-    }
 
 }

@@ -82,7 +82,7 @@ class BottomSheetFragment(
                         val statusCode:Int = response.code()
                         Log.e("ErrorLogin", "Fail Access: $statusCode")
                         if(statusCode==400){
-                            acti.showModal("Bad Request, requirement project not found"){}
+                            acti.showModal("Anda harus mengisi requirement project!"){}
                         }
                         else if(statusCode==412){
                             acti.showModal("Credit anda tidak cukup"){}

@@ -217,7 +217,6 @@ interface ExternalApiService {
     //ini buat api external
     @Headers("Content-Type: application/json")
 
-    @GET
-    fun fetchComplainLelangSting(
-    ): Call<BasicDRO>
+    @GET("latest/IDR")
+    fun fetchConversionRate( ): Call<ConvertionRatesDRO>
 }
