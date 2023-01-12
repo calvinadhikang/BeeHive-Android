@@ -140,6 +140,9 @@ class LandingPageAfterLoginFragment(
                         progressBar.progress = progressTotal
                         lblOngoingPercent.text = "$progressTotal%"
                         lblOngoingName.text = data.sting!!.TITLE_STING
+                        if(data.sting!!.TITLE_STING.toString().length>15){
+                            lblOngoingName.text = data.sting!!.TITLE_STING.toString().substring(0,14)+"..."
+                        }
                         lblOngoingOpenDetail.setOnClickListener {
                             parentFragmentManager.beginTransaction()
                                 .replace(R.id.frMain, DetailOrderedStingFragment(data.sting.EMAIL_BEEWORKER.toString(),
